@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nazio_LT.Core
+namespace Nazio_LT.Tools.Core
 {
     public static partial class NMath
     {

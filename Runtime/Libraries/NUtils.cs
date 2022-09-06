@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Nazio_LT.Core
+namespace Nazio_LT.Tools.Core
 {
     public static partial class NUtils
     {

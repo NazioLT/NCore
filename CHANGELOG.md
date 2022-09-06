@@ -7,6 +7,7 @@
 
 * Singleton Model. ([4bd47f9](https://github.com/NazioLT/NZCore/commit/4bd47f984792e7fdb75d74b28b530e73e3c865c3))
 * Child Monobehaviour. ([f29f2f1](https://github.com/NazioLT/NZCore/commit/f29f2f141f031dd9b24ee135425399ea1b110ce2))
+* Child. 
 * Adding Basic Maths library. ([32fe54a](https://github.com/NazioLT/NZCore/commit/f29f2f141f031dd9b24ee135425399ea1b110ce2))
 * Adding Heap sorting class. ([3457ed7](https://github.com/NazioLT/NZCore/commit/3457ed7b043af7675a5b5d885475539d34a691db))
 * Adding MinMax class. ([7e7645f](https://github.com/NazioLT/NZCore/commit/7e7645f1d7913cc0c4aec82334ab6d49cf01cf59))
@@ -21,4 +22,4 @@
 
 #### Utils Library
 
-* First and Last List Methods. 
+* First and Last List Methods. ([e579969](https://github.com/NazioLT/NZCore/commit/e57996964125c169d94f80462f7e23387e7b6a95))

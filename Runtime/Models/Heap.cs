@@ -1,6 +1,6 @@
 using System;
 
-namespace Nazio_LT.Core
+namespace Nazio_LT.Tools.Core
 {
     public interface IHeapableObject<T> : IComparable<T>
     {

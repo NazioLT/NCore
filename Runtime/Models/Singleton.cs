@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nazio_LT.Core
+namespace Nazio_LT.Tools.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {

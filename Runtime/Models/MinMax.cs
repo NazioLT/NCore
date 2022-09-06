@@ -1,4 +1,4 @@
-namespace Nazio_LT.Core
+namespace Nazio_LT.Tools.Core
 {
     [System.Serializable]
     public class MinMax
