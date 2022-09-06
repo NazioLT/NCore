@@ -9,7 +9,7 @@
 * Child Monobehaviour. ([f29f2f1](https://github.com/NazioLT/NZCore/commit/f29f2f141f031dd9b24ee135425399ea1b110ce2))
 * Adding Basic Maths library. ([32fe54a](https://github.com/NazioLT/NZCore/commit/f29f2f141f031dd9b24ee135425399ea1b110ce2))
 * Adding Heap sorting class. ([3457ed7](https://github.com/NazioLT/NZCore/commit/3457ed7b043af7675a5b5d885475539d34a691db))
-* Adding MinMax class. 
+* Adding MinMax class. ([7e7645f](https://github.com/NazioLT/NZCore/commit/7e7645f1d7913cc0c4aec82334ab6d49cf01cf59))
 
 #### Math Library
 
@@ -18,3 +18,7 @@
 * Average zero method. ([630829d](https://github.com/NazioLT/NZCore/commit/630829d3267bf617d7b0e349b061f5d9e2f008cb))
 * Check if Vector Axis values is beetwen 2 others. ([6daf5eb](https://github.com/NazioLT/NZCore/commit/6daf5ebce600e69b847e963a7a09701a1e2e54ad))
 * Color set alpha method. ([f8d247b](https://github.com/NazioLT/NZCore/commit/f8d247b91c5566ee6a3cb4f4f7e5ec7c7c9974e3))
+
+#### Utils Library
+
+* First and Last List Methods. 
