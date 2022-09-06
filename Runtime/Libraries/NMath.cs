@@ -84,8 +84,6 @@ namespace Nazio_LT.Core
 
         #endregion
 
-        #region Curves
-
-        #endregion
+        public static Color SetAlpha(Color _value, float _alpha) => new Color(_value.r, _value.g, _value.b, _alpha);
     }
 }

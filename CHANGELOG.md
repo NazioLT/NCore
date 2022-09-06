@@ -16,3 +16,4 @@
 * Epsilon Value. ([630829d](https://github.com/NazioLT/NZCore/commit/630829d3267bf617d7b0e349b061f5d9e2f008cb))
 * Average zero method. ([630829d](https://github.com/NazioLT/NZCore/commit/630829d3267bf617d7b0e349b061f5d9e2f008cb))
 * Check if Vector Axis values is beetwen 2 others. ([6daf5eb](https://github.com/NazioLT/NZCore/commit/6daf5ebce600e69b847e963a7a09701a1e2e54ad))
+* Color set alpha method.
