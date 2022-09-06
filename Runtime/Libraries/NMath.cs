@@ -4,6 +4,10 @@ namespace Nazio_LT.Core
 {
     public static partial class NMath
     {
+        public const float EPSILON = 0.03f;
+
+        public static bool AverageZero(float _value) => _value < EPSILON && _value > -EPSILON;
+
         public static Vector2 Vector2PerAxis(bool _firstX, float _value1, float _value2) => new Vector2(_firstX ? _value1 : _value2, _firstX ? _value2 : _value1);
 
         #region Angles
