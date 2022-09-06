@@ -4,11 +4,13 @@ namespace Nazio_LT.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        public static T instance { private set; get; }
+        public static T instance { protected set; get; }
 
         [SerializeField] private bool dontDestroyOnLoad = true;
 
-        protected virtual void Awake()
+        protected virtual void Awake() => TryMakeThisTheInstance();
+
+        protected void TryMakeThisTheInstance()
         {
             if (instance != null)
             {
