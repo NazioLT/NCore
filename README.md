@@ -1,2 +1,2 @@
 # NZCore
- Contains all Nazio's core libraries
+Contains all Nazio's core libraries

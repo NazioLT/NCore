@@ -1,0 +1,15 @@
+{
+    "name": "com.nazio_lt.ncore",
+    "version": "1.0.0",
+    "displayName": "Nazio_LT Core",
+    "description": "Nazio_LT's core package.",
+    "unity": "2021.3",
+    "author": 
+    {
+        "name": "Henno Théo",
+        "email": "theo.henno21@gmail.com",
+        "url": "https://twitter.com/HennoTheo"
+    },
+    "dependencies": {},
+    "keywords": ["tool", "core"]
+}
