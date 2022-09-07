@@ -1,0 +1,16 @@
+{
+    "name": "com.nazio_lt.ncore.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a99df13097c3db843bfa5021ba44cefc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

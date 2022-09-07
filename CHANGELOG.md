@@ -23,3 +23,7 @@
 #### Utils Library
 
 * First and Last List Methods. ([e579969](https://github.com/NazioLT/NZCore/commit/e57996964125c169d94f80462f7e23387e7b6a95))
+
+#### Editor
+
+* Adding CreateUtility class, let other class to add custom objects via hérarchy.
