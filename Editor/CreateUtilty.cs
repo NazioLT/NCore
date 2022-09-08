@@ -25,6 +25,7 @@ namespace Nazio_LT.Tools.Core.Internal
         {
             SceneView _lastView = SceneView.lastActiveSceneView;
             _obj.transform.position = _lastView ? _lastView.pivot : Vector3.zero;
+            _obj.transform.SetParent(Selection.activeTransform);
 
             StageUtility.PlaceGameObjectInCurrentStage(_obj);
             GameObjectUtility.EnsureUniqueNameForSibling(_obj);
@@ -33,6 +34,8 @@ namespace Nazio_LT.Tools.Core.Internal
             Selection.activeGameObject = _obj;
 
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+
+            _obj.transform.localScale = Vector3.one;
         }
     }
 }
