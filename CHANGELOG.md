@@ -13,7 +13,8 @@
 * Adding MinMax class. ([7e7645f](https://github.com/NazioLT/NZCore/commit/7e7645f1d7913cc0c4aec82334ab6d49cf01cf59))
 * Adding AudioManager. ([7e7dbcb](https://github.com/NazioLT/NZCore/commit/7e7dbcbcfcb0d7e9e28a56854bfb4e4ee2617fdc))
 * Adding NAudio. ([131d9ba](https://github.com/NazioLT/NZCore/commit/131d9ba1afec44192ed064e517fa6921485f226d))
-* Adding Music Manager.
+* Adding Music Manager. ([20d9ea7](https://github.com/NazioLT/NZCore/commit/20d9ea7d66514c7695e8bf08062dbdcd614c4dfc))
+* Fade in and out music in the music manager.
 
 #### Math Library
 

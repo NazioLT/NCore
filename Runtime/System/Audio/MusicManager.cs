@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace Nazio_LT.Tools.Core
@@ -55,14 +56,12 @@ namespace Nazio_LT.Tools.Core
             {
                 if (music[i].playlist == curPlaylist) curMusicsInPlaylist.Add(music[i]);
             }
-
-            curMusic = GetRandomMusicInPlaylist();
-            PlayMusic();
+            PlayNewMusic();
         }
 
         public int GetRandomMusicInPlaylist()
         {
-            if(curMusicsInPlaylist.Count <= 0)
+            if (curMusicsInPlaylist.Count <= 0)
             {
                 Debug.LogError("No musics in playlist.");
                 return 0;
@@ -70,7 +69,7 @@ namespace Nazio_LT.Tools.Core
             if (curMusicsInPlaylist.Count == 1) return 0;
 
             int _rndm = Random.Range(0, curMusicsInPlaylist.Count);
-            while(_rndm == curMusic)
+            while (_rndm == curMusic)
             {
                 _rndm = Random.Range(0, curMusicsInPlaylist.Count);
             }
@@ -78,9 +77,45 @@ namespace Nazio_LT.Tools.Core
             return _rndm;
         }
 
-        public void PlayMusic()
+        public void PlayNewMusic()
         {
-            source.PlayOneShot(curMusicsInPlaylist[curMusic].clip);
+            curMusic = GetRandomMusicInPlaylist();
+            StartCoroutine(PlayMusic(5f));
+        }
+
+        private IEnumerator PlayMusic(float _fadeDuration)
+        {
+            source.volume = 0f;
+            AudioClip _clip = curMusicsInPlaylist[curMusic].clip;
+            source.PlayOneShot(_clip);
+            float _time = _clip.length;
+
+            StartCoroutine(LerpVolume(0f, 1f, _fadeDuration));
+
+            yield return new WaitForSeconds(_time - _fadeDuration);
+
+            StartCoroutine(LerpVolume(1f, 0f, _fadeDuration));
+
+            yield return new WaitForSeconds(_fadeDuration);
+
+            PlayNewMusic();
+        }
+
+        private IEnumerator LerpVolume(float _start, float _end, float _duration)
+        {
+            float _t = 0f;
+            while (true)
+            {
+                _t += Time.deltaTime / _duration;
+
+                yield return null;
+
+                if (_t >= 1f) break;
+
+                source.volume = Mathf.Lerp(_start, _end, _t);
+            }
+
+            source.volume = _end;
         }
     }
 }
