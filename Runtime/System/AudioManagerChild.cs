@@ -8,13 +8,15 @@ namespace Nazio_LT.Tools.Core.Internal
     {
         private AudioSource source;
 
-        public void SetAudio(AudioClip _clip)
+        public void SetAudio(NAudio _clip)
         {
             source = GetComponent<AudioSource>();
 
-            source.PlayOneShot(_clip);
+            source.outputAudioMixerGroup = _clip.MixerGroup;
+            source.volume = _clip.Volume;
+            source.PlayOneShot(_clip.Clip);
 
-            StartCoroutine(WaitForDestroy(_clip.length));
+            StartCoroutine(WaitForDestroy(_clip.Length));
         }
 
         private IEnumerator WaitForDestroy(float _s)

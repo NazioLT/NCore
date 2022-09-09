@@ -5,7 +5,7 @@ namespace Nazio_LT.Tools.Core
 {
     public class AudioManager : Singleton<AudioManager>
     {
-        public void PlayAudio(AudioClip _clip) => CreateChild(_clip.name).SetAudio(_clip);
+        public void PlayAudio(NAudio _clip) => CreateChild(_clip.Name).SetAudio(_clip);
 
         private AudioManagerChild CreateChild(string _name)
         {

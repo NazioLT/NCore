@@ -11,7 +11,8 @@
 * Adding Basic Maths library. ([32fe54a](https://github.com/NazioLT/NZCore/commit/f29f2f141f031dd9b24ee135425399ea1b110ce2))
 * Adding Heap sorting class. ([3457ed7](https://github.com/NazioLT/NZCore/commit/3457ed7b043af7675a5b5d885475539d34a691db))
 * Adding MinMax class. ([7e7645f](https://github.com/NazioLT/NZCore/commit/7e7645f1d7913cc0c4aec82334ab6d49cf01cf59))
-* Adding AudioManager.
+* Adding AudioManager. ([7e7dbcb](https://github.com/NazioLT/NZCore/commit/7e7dbcbcfcb0d7e9e28a56854bfb4e4ee2617fdc))
+* Adding NAudio.
 
 #### Math Library
 
