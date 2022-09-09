@@ -12,7 +12,8 @@
 * Adding Heap sorting class. ([3457ed7](https://github.com/NazioLT/NZCore/commit/3457ed7b043af7675a5b5d885475539d34a691db))
 * Adding MinMax class. ([7e7645f](https://github.com/NazioLT/NZCore/commit/7e7645f1d7913cc0c4aec82334ab6d49cf01cf59))
 * Adding AudioManager. ([7e7dbcb](https://github.com/NazioLT/NZCore/commit/7e7dbcbcfcb0d7e9e28a56854bfb4e4ee2617fdc))
-* Adding NAudio.
+* Adding NAudio. ([131d9ba](https://github.com/NazioLT/NZCore/commit/131d9ba1afec44192ed064e517fa6921485f226d))
+* Adding Music Manager.
 
 #### Math Library
 
@@ -28,4 +29,4 @@
 
 #### Editor
 
-* Adding CreateUtility class, let other class to add custom objects via hérarchy.([15320da](https://github.com/NazioLT/NZCore/commit/15320dab33312f7fe242a9c3ae960056c5bc99bd))
+* Adding CreateUtility class, let other class to add custom objects via hérarchy. ([15320da](https://github.com/NazioLT/NZCore/commit/15320dab33312f7fe242a9c3ae960056c5bc99bd))
