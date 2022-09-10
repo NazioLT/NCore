@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nazio_LT.Tools.Core.Internal
+namespace Nazio_LT.Tools.Core
 {
     [CreateAssetMenu(fileName = "SceneGroup", menuName = "Nazio_LT/Tools/SceneGroup")]
     public class NSceneGroup : ScriptableObject
