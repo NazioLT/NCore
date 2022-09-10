@@ -3,7 +3,7 @@ using Nazio_LT.Tools.Core.Internal;
 
 namespace Nazio_LT.Tools.Core
 {
-    public class AudioManager : Singleton<AudioManager>
+    public class NAudioManager : Singleton<NAudioManager>
     {
         public void PlayAudio(NAudio _clip) => CreateChild(_clip.Name).SetAudio(_clip);
 

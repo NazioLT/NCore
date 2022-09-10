@@ -4,32 +4,9 @@ using UnityEngine.Audio;
 namespace Nazio_LT.Tools.Core
 {
     [System.Serializable]
-    public class NAudio
+    [CreateAssetMenu(fileName = "NAudio", menuName = "Nazio_LT/Tools/NAudio")]
+    public class NAudio : ScriptableObject
     {
-        #region Constructors
-
-        public NAudio(AudioClip _clip)
-        {
-            clip = _clip;
-            volume = 1f;
-        }
-
-        public NAudio(AudioClip _clip, AudioMixerGroup _mixerGroup)
-        {
-            clip = _clip;
-            mixerGroup = _mixerGroup;
-            volume = 1f;
-        }
-
-        public NAudio(AudioClip _clip, AudioMixerGroup _mixerGroup, float _volume)
-        {
-            clip = _clip;
-            mixerGroup = _mixerGroup;
-            volume = _volume;
-        }
-
-        #endregion
-
         //Serializable vars
         [SerializeField] private AudioClip clip;
         [SerializeField] private AudioMixerGroup mixerGroup;
