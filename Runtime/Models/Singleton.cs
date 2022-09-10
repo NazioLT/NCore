@@ -6,7 +6,7 @@ namespace Nazio_LT.Tools.Core
     {
         public static T instance { protected set; get; }
 
-        [SerializeField] private bool dontDestroyOnLoad = true;
+        [SerializeField] protected bool dontDestroyOnLoad = true;
 
         protected virtual void Awake() => TryMakeThisTheInstance();
 

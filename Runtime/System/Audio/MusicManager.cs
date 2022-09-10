@@ -11,7 +11,7 @@ namespace Nazio_LT.Tools.Core
         public int playlist;
     }
 
-    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(AudioSource))][AddComponentMenu("Nazio_LT/Core/MusicManager")]
     public class MusicManager : Singleton<MusicManager>
     {
         [SerializeField] private NMusic[] music;

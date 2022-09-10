@@ -6,25 +6,32 @@ using UnityEngine.SceneManagement;
 
 namespace Nazio_LT.Tools.Core
 {
+    [AddComponentMenu("Nazio_LT/Core/NSceneManager")]
     public class NSceneManager : Singleton<NSceneManager>
     {
-        [SerializeField]private NSceneGroup[] sceneGroups;
+        [SerializeField] private NSceneGroup[] sceneGroups;
+        [SerializeField] private float transitionDuration = 0.5f;
         private static Dictionary<string, NSceneGroup> sceneGroupDict = new Dictionary<string, NSceneGroup>();
 
         protected override void Awake()
         {
             base.Awake();
 
-            foreach (var _group in sceneGroups) 
+            InitSceneGroups();
+        }
+
+        protected void InitSceneGroups()
+        {
+            foreach (var _group in sceneGroups)
             {
-                if(sceneGroupDict.ContainsKey(_group.Key)) continue;
+                if (sceneGroupDict.ContainsKey(_group.Key)) continue;
                 sceneGroupDict.Add(_group.Key, _group);
             }
         }
 
         public static void LoadAdditiveSceneGroup(string _sceneGroupKeys)
         {
-            if(!sceneGroupDict.ContainsKey(_sceneGroupKeys))
+            if (!sceneGroupDict.ContainsKey(_sceneGroupKeys))
             {
                 Debug.LogError($"{_sceneGroupKeys} doesn't exist.");
                 return;
@@ -38,13 +45,14 @@ namespace Nazio_LT.Tools.Core
         {
             if (!sceneGroupDict.ContainsKey(_sceneGroupKeys)) return;
 
-            instance.StartCoroutine(instance.UnloadAndLoadNew(sceneGroupDict[_sceneGroupKeys].Scenes, 0.5f));
+            instance.StartCoroutine(instance.UnloadAndLoadNew(sceneGroupDict[_sceneGroupKeys].Scenes));
         }
 
         #region Customisable Methods
 
         protected virtual void BeforeLoading() { return; }
         protected virtual void AfterLoading() { return; }
+        protected virtual void SetLoadingPercent(float _loadingPercent) { return; }
 
         #endregion
 
@@ -55,18 +63,17 @@ namespace Nazio_LT.Tools.Core
             {
                 _ops[i] = SceneManager.LoadSceneAsync(_sceneKeys[i], (i == 0 && !_onlyAdditive) ? LoadSceneMode.Single : LoadSceneMode.Additive);
                 _ops[i].allowSceneActivation = _allowSceneActivation;
-                Debug.Log("Load " + _sceneKeys[i]);
             }
             return _ops;
         }
 
         #region Coroutines
 
-        private IEnumerator UnloadAndLoadNew(string[] _sceneKeys, float _waitingDuration)
+        private IEnumerator UnloadAndLoadNew(string[] _sceneKeys)
         {
             BeforeLoading();
 
-            yield return new WaitForSeconds(_waitingDuration);
+            yield return new WaitForSeconds(transitionDuration);
 
             AsyncOperation[] _loadingOps = PrepareLoading(_sceneKeys, false, false);
             yield return StartCoroutine(WaitAllOpsFinished(_loadingOps));
@@ -76,6 +83,8 @@ namespace Nazio_LT.Tools.Core
 
         private IEnumerator WaitAllOpsFinished(AsyncOperation[] _ops)
         {
+            float _loadingPercent = 0f;
+            float _factor = 1f / (float)_ops.Length;
             for (int i = 0; i < _ops.Length; i++) _ops[i].allowSceneActivation = true;
 
             for (int i = 0; i < _ops.Length; i++)
@@ -83,7 +92,9 @@ namespace Nazio_LT.Tools.Core
                 while (!_ops[i].isDone)
                 {
                     yield return null;
+                    SetLoadingPercent(_ops[i].progress * _factor + _loadingPercent);
                 }
+                _loadingPercent += _factor;
             }
         }
 
