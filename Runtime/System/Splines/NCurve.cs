@@ -10,6 +10,10 @@ namespace Nazio_LT.Tools.Core
         public Vector3 point;
         public Vector3 forwardHelper;
         public Vector3 backHelper;
+
+        public bool editing;
+        
+        public void EditPointPositions() => editing = !editing;
     }
 
     [System.Serializable]

@@ -7,8 +7,6 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomPropertyDrawer(typeof(NMusic))]
     public class NMusicEditor : PropertyDrawer
     {
-        // private SerializedProperty clip_Prop, playlist_Prop;
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
@@ -22,8 +20,6 @@ namespace Nazio_LT.Tools.Core.Internal
             EditorGUI.ObjectField(enumRect, clip_Prop, new GUIContent(clip_Prop.displayName));
             enumRect = new Rect(position.x, position.y +20f, position.width, EditorGUIUtility.singleLineHeight);
             playlist_Prop.intValue = EditorGUI.Popup(enumRect, playlist_Prop.displayName, playlist_Prop.intValue, MusicManager.playlistArray);
-
-            // EditorGUILayout.ObjectField(clip_Prop);
 
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
