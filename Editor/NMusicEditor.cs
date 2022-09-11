@@ -30,20 +30,6 @@ namespace Nazio_LT.Tools.Core.Internal
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 40f;
-
-        // private void OnEnable()
-        // {
-        //     clip_Prop = serializedObject.FindProperty("clip");
-        //     playlist_Prop = serializedObject.FindProperty("playlist");
-        // }
-
-        // public override void OnInspectorGUI()
-        // {
-        //     base.OnInspectorGUI();
-
-        // EditorGUILayout.ObjectField(clip_Prop);
-        //     playlist_Prop.intValue = EditorGUILayout.Popup(playlist_Prop.intValue, MusicManager.playlistArray);
-        // }
     }
 }
 #endif
