@@ -15,8 +15,9 @@
 * Adding NAudio. ([131d9ba](https://github.com/NazioLT/NZCore/commit/131d9ba1afec44192ed064e517fa6921485f226d))
 * Adding Music Manager. ([20d9ea7](https://github.com/NazioLT/NZCore/commit/20d9ea7d66514c7695e8bf08062dbdcd614c4dfc))
 * Fade in and out music in the music manager. ([be5922f](https://github.com/NazioLT/NZCore/commit/be5922ff8f4e5cb8d401e942fab158c93f6befc6))
-* Adding SceneManager ([5146d15](https://github.com/NazioLT/NZCore/commit/5146d15d42d3723849982c4645ea6af1dc94367f))
-* Scenegroup system ([]())
+* Adding SceneManager. ([5146d15](https://github.com/NazioLT/NZCore/commit/5146d15d42d3723849982c4645ea6af1dc94367f))
+* Scenegroup system. ([]())
+* Curve class. ([]())
 
 #### Math Library
 
