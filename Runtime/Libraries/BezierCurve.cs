@@ -15,5 +15,7 @@ namespace Nazio_LT.Tools.Core
 
             return Vector3.Lerp(_p1_2_3, _p2_3_4, _t);
         }
+
+        public static Vector3 BezierLerp(NHandle _hanlde1, NHandle _handle2, float _t) => BezierLerp(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
     }
 }

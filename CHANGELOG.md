@@ -16,8 +16,9 @@
 * Adding Music Manager. ([20d9ea7](https://github.com/NazioLT/NZCore/commit/20d9ea7d66514c7695e8bf08062dbdcd614c4dfc))
 * Fade in and out music in the music manager. ([be5922f](https://github.com/NazioLT/NZCore/commit/be5922ff8f4e5cb8d401e942fab158c93f6befc6))
 * Adding SceneManager. ([5146d15](https://github.com/NazioLT/NZCore/commit/5146d15d42d3723849982c4645ea6af1dc94367f))
-* Scenegroup system. ([]())
-* Curve class. ([]())
+* Scenegroup system. ([8861f88](https://github.com/NazioLT/NZCore/commit/8861f88247bcd581439f2ef9eceb3d2f0ad3aca1))
+* Curve class. ([b507ec7](https://github.com/NazioLT/NZCore/commit/b507ec7de772d79bbc840f6ae1bca69780a6d154))
+* Linear and Bezier curves ([]())
 
 #### Math Library
 
@@ -26,7 +27,7 @@
 * Average zero method. ([630829d](https://github.com/NazioLT/NZCore/commit/630829d3267bf617d7b0e349b061f5d9e2f008cb))
 * Check if Vector Axis values is beetwen 2 others. ([6daf5eb](https://github.com/NazioLT/NZCore/commit/6daf5ebce600e69b847e963a7a09701a1e2e54ad))
 * Color set alpha method. ([f8d247b](https://github.com/NazioLT/NZCore/commit/f8d247b91c5566ee6a3cb4f4f7e5ec7c7c9974e3))
-* Bezier curves. ([]())
+* Bezier curves. ([de20f9e](https://github.com/NazioLT/NZCore/commit/de20f9e6da5267583d03c9d35c55a0132c302175))
 
 #### Utils Library
 
