@@ -12,7 +12,7 @@ namespace Nazio_LT.Tools.Core
         public Vector3 backHelper;
 
         public bool editing;
-        
+
         public void EditPointPositions() => editing = !editing;
     }
 
@@ -22,6 +22,7 @@ namespace Nazio_LT.Tools.Core
         private enum CurveType { Linear = 0, Bezier = 1 }
         [SerializeField] private CurveType type;
         [SerializeField] private List<NHandle> handles = new List<NHandle>();
+        [SerializeField] private bool loop;
 
         public Vector3 ComputePoint(float _t)
         {
@@ -57,6 +58,18 @@ namespace Nazio_LT.Tools.Core
             return _value + 1;
         }
 
-        private float Factor => 1f / (float)handles.Count;
+        public Vector3[] Handles()
+        {
+            List<Vector3> _result = new List<Vector3>();
+            for (int i = 0; i < handles.Count; i++)
+            {
+                _result.Add(handles[i].point);
+                _result.Add(handles[i].forwardHelper);
+                _result.Add(handles[i].backHelper);
+            }
+            return _result.ToArray();
+        }
+
+        private float Factor => 1f / (float) (loop ? handles.Count : handles.Count -1);
     }
 }
