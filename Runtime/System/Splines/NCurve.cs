@@ -21,8 +21,9 @@ namespace Nazio_LT.Tools.Core
     {
         private enum CurveType { Linear = 0, Bezier = 1 }
         [SerializeField] private CurveType type;
-        [SerializeField] private List<NHandle> handles = new List<NHandle>();
         [SerializeField] private bool loop;
+        [SerializeField] private List<NHandle> handles = new List<NHandle>();
+        [SerializeField] private float inspectorHeight;
 
         public Vector3 ComputePoint(float _t)
         {
