@@ -18,9 +18,9 @@ namespace Nazio_LT.Tools.Core
     [System.Serializable]
     public sealed class NCurve
     {
-        private enum CurveType { Linear = 0, Bezier = 1 }
-        [SerializeField] private CurveType type;
-        [SerializeField] private bool loop;
+        public enum CurveType { Linear = 0, Bezier = 1 }
+        [SerializeField] public CurveType type;
+        [SerializeField] public bool loop;
         [SerializeField] public List<NHandle> handles = new List<NHandle>();
         [SerializeField] private float inspectorHeight;
 

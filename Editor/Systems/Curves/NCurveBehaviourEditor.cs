@@ -15,8 +15,6 @@ namespace Nazio_LT.Tools.Core.Internal
         private void OnEnable()
         {
             curve = (target as NCurveBehaviour).curve;
-
-            loop_Prop = serializedObject.FindProperty("loop");
         }
 
         public override void OnInspectorGUI()
@@ -39,13 +37,18 @@ namespace Nazio_LT.Tools.Core.Internal
                 if (i < curve.handles.Count - 1) DrawCurvePart(i, i + 1);
             }
 
-            // if(loop_Prop.boolValue) DrawCurvePart(handles.Count -1, 0);
+            if (curve.loop) DrawCurvePart(curve.handles.Count - 1, 0);
         }
 
         private void DisplayHandle(int i)
         {
-            //Handles
+            Handles.color = Color.white;
+            //Point
             curve.handles[i].point = Handles.DoPositionHandle(curve.handles[i].point, Quaternion.identity);
+
+            if((int)curve.type == 0) return;
+
+            //Handles
             curve.handles[i].forwardHelper = Handles.DoPositionHandle(curve.handles[i].forwardHelper, Quaternion.identity);
             curve.handles[i].backHelper = Handles.DoPositionHandle(curve.handles[i].backHelper, Quaternion.identity);
 
@@ -56,7 +59,16 @@ namespace Nazio_LT.Tools.Core.Internal
 
         private void DrawCurvePart(int _startI, int _endI)
         {
-            Handles.DrawBezier(curve.handles[_startI].point, curve.handles[_endI].point, curve.handles[_startI].forwardHelper, curve.handles[_endI].backHelper, Color.blue, new Texture2D(10,10), 2f);
+            Handles.color = Color.blue;
+            switch ((int)curve.type)
+            {
+                case 0:
+                    Handles.DrawLine(curve.handles[_startI].point, curve.handles[_endI].point, 2f);
+                    break;
+                case 1:
+                     Handles.DrawBezier(curve.handles[_startI].point, curve.handles[_endI].point, curve.handles[_startI].forwardHelper, curve.handles[_endI].backHelper, Color.blue, new Texture2D(10, 10), 2f);
+                    break;
+            }     
         }
 
         public NCurveBehaviour Target => target as NCurveBehaviour;
