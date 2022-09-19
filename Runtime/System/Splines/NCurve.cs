@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ namespace Nazio_LT.Tools.Core
         private enum CurveType { Linear = 0, Bezier = 1 }
         [SerializeField] private CurveType type;
         [SerializeField] private bool loop;
-        [SerializeField] private List<NHandle> handles = new List<NHandle>();
+        [SerializeField] public List<NHandle> handles = new List<NHandle>();
         [SerializeField] private float inspectorHeight;
 
         public Vector3 ComputePoint(float _t)
@@ -34,9 +33,22 @@ namespace Nazio_LT.Tools.Core
             return GetPointFunc()(handles[_curveID], handles[GetNextID(_curveID)], _computedT - _curveID);
         }
 
+        public Vector3[] GetPoints(int _pointNumber)
+        {
+            Vector3[] _results = new Vector3[_pointNumber];
+            float _factor = 1f / (float)_pointNumber;
+            for (int i = 0; i < _pointNumber; i++)
+            {
+                
+                float _t = _factor * i;
+                _results[i] = ComputePoint(_t);
+            }
+            return _results;
+        }
+
         private System.Func<NHandle, NHandle, float, Vector3> GetPointFunc()
         {
-            switch(type)
+            switch (type)
             {
                 case CurveType.Bezier:
                     return (_h1, _h2, _t) => NMath.BezierLerp(_h1, _h2, _t);
@@ -59,7 +71,7 @@ namespace Nazio_LT.Tools.Core
             return _value + 1;
         }
 
-        public Vector3[] Handles()
+        public Vector3[] HandlesAllPoints()
         {
             List<Vector3> _result = new List<Vector3>();
             for (int i = 0; i < handles.Count; i++)
@@ -71,6 +83,9 @@ namespace Nazio_LT.Tools.Core
             return _result.ToArray();
         }
 
-        private float Factor => 1f / (float) (loop ? handles.Count : handles.Count -1);
+        public void SetHandles(List<NHandle> _handles) => handles = _handles;
+
+        private float Factor => 1f / (float)(loop ? handles.Count : handles.Count - 1);
+        public List<NHandle> Handles => handles;
     }
 }
