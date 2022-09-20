@@ -36,3 +36,4 @@
 #### Editor
 
 * Adding CreateUtility class, let other class to add custom objects via hérarchy. ([15320da](https://github.com/NazioLT/NZCore/commit/15320dab33312f7fe242a9c3ae960056c5bc99bd))
+* Spline Editor with curve. ([]())

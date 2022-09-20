@@ -10,9 +10,25 @@ namespace Nazio_LT.Tools.Core
         public Vector3 forwardHelper;
         public Vector3 backHelper;
 
-        public bool editing;
+        public bool broken;
 
-        public void EditPointPositions() => editing = !editing;
+        public void UpdateHandle(bool _forward)
+        {
+            if(_forward)
+            {
+                UpdateHandle(ref forwardHelper, ref backHelper);
+                return;
+            }
+
+            UpdateHandle(ref backHelper, ref forwardHelper);
+        }
+        private void UpdateHandle(ref Vector3 _controlPoint, ref Vector3 _otherPoint)
+        {
+            if(broken) return;
+
+            Vector3 _controlDelta = _controlPoint - point;
+            _otherPoint = point - _controlDelta;
+        }
     }
 
     [System.Serializable]
@@ -70,20 +86,6 @@ namespace Nazio_LT.Tools.Core
 
             return _value + 1;
         }
-
-        public Vector3[] HandlesAllPoints()
-        {
-            List<Vector3> _result = new List<Vector3>();
-            for (int i = 0; i < handles.Count; i++)
-            {
-                _result.Add(handles[i].point);
-                _result.Add(handles[i].forwardHelper);
-                _result.Add(handles[i].backHelper);
-            }
-            return _result.ToArray();
-        }
-
-        public void SetHandles(List<NHandle> _handles) => handles = _handles;
 
         private float Factor => 1f / (float)(loop ? handles.Count : handles.Count - 1);
         public List<NHandle> Handles => handles;

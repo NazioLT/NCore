@@ -52,6 +52,8 @@ namespace Nazio_LT.Tools.Core.Internal
             curve.handles[i].forwardHelper = Handles.DoPositionHandle(curve.handles[i].forwardHelper, Quaternion.identity);
             curve.handles[i].backHelper = Handles.DoPositionHandle(curve.handles[i].backHelper, Quaternion.identity);
 
+            curve.handles[i].UpdateHandle(true);
+
             //Lines
             Handles.DrawLine(curve.handles[i].point, curve.handles[i].forwardHelper, 0.2f);
             Handles.DrawLine(curve.handles[i].point, curve.handles[i].backHelper, 0.2f);
