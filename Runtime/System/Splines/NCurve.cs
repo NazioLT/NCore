@@ -29,6 +29,16 @@ namespace Nazio_LT.Tools.Core
             Vector3 _controlDelta = _controlPoint - point;
             _otherPoint = point - _controlDelta;
         }
+
+        public void MoveCentralPoint(Vector3 _newPos)
+        {
+            Vector3 _deltaForward = forwardHelper - point;
+            Vector3 _deltaBackward = backHelper - point;
+
+            point = _newPos;
+            forwardHelper = point + _deltaForward;
+            backHelper = point + _deltaBackward;
+        }
     }
 
     [System.Serializable]

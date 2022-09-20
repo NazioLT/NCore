@@ -1,9 +1,6 @@
 #if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
 
 namespace Nazio_LT.Tools.Core.Internal
 {
@@ -16,6 +13,8 @@ namespace Nazio_LT.Tools.Core.Internal
             var _point = property.FindPropertyRelative("point");
             var _backHelper = property.FindPropertyRelative("backHelper");
 
+            var _break = property.FindPropertyRelative("broken");
+
             var _baseRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
             EditorGUI.BeginProperty(position, label, property);
@@ -26,7 +25,10 @@ namespace Nazio_LT.Tools.Core.Internal
 
             if (property.isExpanded)
             {
-                var _newRect = new Rect(position.x, position.y + 20f, position.width, EditorGUIUtility.singleLineHeight);
+                var _breakRect = new Rect(position.x, position.y + 20, position.width, EditorGUIUtility.singleLineHeight);
+                _break.boolValue = EditorGUI.Toggle(_breakRect, _break.displayName, _break.boolValue);
+
+                var _newRect = new Rect(position.x, position.y + 40f, position.width, EditorGUIUtility.singleLineHeight);
                 string[] _labels = new string[] { "Forward Helper", "Point", "Back Helper" };
                 SerializedProperty[] _props = new SerializedProperty[] { _forwardHelper, _point, _backHelper };
 
@@ -37,7 +39,7 @@ namespace Nazio_LT.Tools.Core.Internal
             EditorGUI.EndProperty();
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 20 + (property.isExpanded ? 60f : 0f);
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 20 + (property.isExpanded ? 80f : 0f);
     }
 }
 #endif
