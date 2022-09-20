@@ -29,11 +29,9 @@ namespace Nazio_LT.Tools.Core.Internal
 
         private void OnSceneGUI()
         {
-            if (!Target.editing) return;
-
             for (int i = 0; i < curve.handles.Count; i++)
             {
-                DisplayHandle(i);
+                if (Target.editing) DisplayHandle(i);
                 if (i < curve.handles.Count - 1) DrawCurvePart(i, i + 1);
             }
 
@@ -48,7 +46,7 @@ namespace Nazio_LT.Tools.Core.Internal
             //Point
             Vector3 _point = Handles.DoPositionHandle(_handle.point, Quaternion.identity);
 
-            if(_point != _handle.point) _handle.MoveCentralPoint(_point);
+            if (_point != _handle.point) _handle.MoveCentralPoint(_point);
 
             if ((int)curve.type == 0) return;
 
