@@ -36,12 +36,26 @@ namespace Nazio_LT.Tools.Core
         {
             float _tSquare = _t * _t;
 
-            Vector3 _p1P = (-3 * _tSquare + 6 * _t - 3) * _p1;
-            Vector3 _p2P = (9 * _tSquare - 12 * _t + 3) * _p2;
-            Vector3 _p3P = (-9f * _tSquare + 6 * _t) * _p3;
+            Vector3 _p1P = (-3f * _tSquare + 6f * _t - 3f) * _p1;
+            Vector3 _p2P = (9f * _tSquare - 12f * _t + 3f) * _p2;
+            Vector3 _p3P = (-9f * _tSquare + 6f * _t) * _p3;
             Vector3 _p4P = 3f * _tSquare * _p4;
 
             return _p1P + _p2P + _p3P + _p4P;
         }
+
+        public static Vector3 BezierDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => BezierDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
+
+        public static Vector3 Bezier2ndDerivative(Vector3 _p1, Vector3 _p2, Vector3 _p3, Vector3 _p4, float _t)
+        {
+            Vector3 _p1P = (-6f * _t) * _p1;
+            Vector3 _p2P = (18f * _t - 12f) * _p2;
+            Vector3 _p3P = (-18f * _t + 6f) * _p3;
+            Vector3 _p4P = 6f * _t * _p4;
+
+            return _p1P + _p2P + _p3P + _p4P;
+        }
+
+        public static Vector3 Bezier2ndDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => Bezier2ndDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
     }
 }
