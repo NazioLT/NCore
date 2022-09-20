@@ -36,6 +36,8 @@ namespace Nazio_LT.Tools.Core.Internal
             }
 
             if (curve.loop) DrawCurvePart(curve.handles.Count - 1, 0);
+
+            curve.Update();
         }
 
         private void DisplayHandle(int i)

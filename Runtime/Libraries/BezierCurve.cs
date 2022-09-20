@@ -57,5 +57,26 @@ namespace Nazio_LT.Tools.Core
         }
 
         public static Vector3 Bezier2ndDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => Bezier2ndDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
+
+
+        public static float CumulativeValuesToT(float[] _values, float _curValue)
+        {
+            int _length = _values.Length;
+            float _totalDst = _values[_length - 1];
+
+            _curValue = _curValue % _totalDst;
+
+            for (var i = 0; i < _length; i++)
+            {
+                if (!_curValue.IsIn(_values[i], _values[i + 1])) continue;
+
+                return Mathf.Lerp(i / (_length - 1f), (i + 1) / (_length - 1f),
+                                    Mathf.InverseLerp(_values[i], _values[i + 1], _curValue));
+            }
+
+            return 0;
+        }
     }
 }
+
+//Lerp( oMin, oMax, InverseLerp( iMin, iMax, value ) );

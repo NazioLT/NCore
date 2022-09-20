@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Nazio_LT.Tools.Core
 {
     [System.Serializable]
-    public class NHandle
+    public sealed class NHandle
     {
         public Vector3 point;
         public Vector3 forwardHelper;
@@ -14,7 +14,7 @@ namespace Nazio_LT.Tools.Core
 
         public void UpdateHandle(bool _forward)
         {
-            if(_forward)
+            if (_forward)
             {
                 UpdateHandle(ref forwardHelper, ref backHelper);
                 return;
@@ -24,7 +24,7 @@ namespace Nazio_LT.Tools.Core
         }
         private void UpdateHandle(ref Vector3 _controlPoint, ref Vector3 _otherPoint)
         {
-            if(broken) return;
+            if (broken) return;
 
             Vector3 _controlDelta = _controlPoint - point;
             _otherPoint = point - _controlDelta;
@@ -49,27 +49,49 @@ namespace Nazio_LT.Tools.Core
         [SerializeField] public bool loop;
         [SerializeField] public List<NHandle> handles = new List<NHandle>();
         [SerializeField] private float inspectorHeight;
+        public float[] simplifiedCurveDst;
+        public float curveLength { private set; get; }
+
+        private const int PARAMETERIZATION_PRECISION = 40;
 
         public Vector3 ComputePoint(float _t)
         {
-            if (_t == 0) _t = 0.001f;
+            if (_t == 0f || _t == 1f) _t = 0.001f;
             float _computedT = _t / Factor;
             int _curveID = (int)_computedT;
 
             return GetPointFunc()(handles[_curveID], handles[GetNextID(_curveID)], _computedT - _curveID);
         }
 
-        public Vector3[] GetPoints(int _pointNumber)
+        public Vector3 ComputePointDistance(float _distance)
         {
-            Vector3[] _results = new Vector3[_pointNumber];
-            float _factor = 1f / (float)_pointNumber;
-            for (int i = 0; i < _pointNumber; i++)
+            float _t = NMath.CumulativeValuesToT(simplifiedCurveDst, _distance);
+            return ComputePoint(_t);
+        }
+
+        public void Update()
+        {
+            SimplifyCurve();
+        }
+
+        private void SimplifyCurve()
+        {
+            simplifiedCurveDst = new float[Parameterization + 1];
+
+            float _factor = 1f / (float)Parameterization;
+            Vector3 _previousPoint = ComputePoint(0f);
+            simplifiedCurveDst[0] = 0;
+
+            for (var i = 1; i < Parameterization + 1; i++)
             {
-                
-                float _t = _factor * i;
-                _results[i] = ComputePoint(_t);
+                Vector3 _newPoint = ComputePoint(i * _factor);
+                float _relativeDst = Vector3.Distance(_previousPoint, _newPoint);
+                simplifiedCurveDst[i] = simplifiedCurveDst[i - 1] + _relativeDst;
+
+                _previousPoint = _newPoint;
             }
-            return _results;
+
+            curveLength = simplifiedCurveDst[Parameterization];
         }
 
         private System.Func<NHandle, NHandle, float, Vector3> GetPointFunc()
@@ -81,6 +103,17 @@ namespace Nazio_LT.Tools.Core
             }
 
             return (_h1, _h2, _t) => Vector3.Lerp(_h1.point, _h2.point, _t);
+        }
+
+        private System.Func<NHandle, NHandle, float, Vector3> GetPointDerivative()
+        {
+            switch (type)
+            {
+                case CurveType.Bezier:
+                    return (_h1, _h2, _t) => NMath.BezierDerivative(_h1, _h2, _t);
+            }
+
+            return (_h1, _h2, _t) => (_h1.point - _h1.point).normalized;
         }
 
         private int GetNextID(int _value)
@@ -98,6 +131,7 @@ namespace Nazio_LT.Tools.Core
         }
 
         private float Factor => 1f / (float)(loop ? handles.Count : handles.Count - 1);
+        private int Parameterization => PARAMETERIZATION_PRECISION * (loop ? handles.Count : handles.Count - 1);
         public List<NHandle> Handles => handles;
     }
 }
