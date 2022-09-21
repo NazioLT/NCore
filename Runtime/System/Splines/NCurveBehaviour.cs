@@ -72,15 +72,14 @@ namespace Nazio_LT.Tools.Core
             int _triIndex = 0;
             for (int i = 0; i < _patternCount; i++)
             {
-                Debug.Log(i + " : " + _patternCount);
                 int _verticesIndex = i * PointPerPattern;
                 float _t = (float)i / ((float)_patternCount - 1) - _loopDecrease;
                 if(_t < 0) _t = 0;
 
-                // curve.Direction(_t, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
+                curve.Direction(_t, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
 
                 Vector3 _origin = curve.ComputePoint(_t);
-                PointPattern(ref _vertices,_verticesIndex, _origin, Vector3.up, Vector3.right);
+                PointPattern(ref _vertices,_verticesIndex, _origin, _up, _right);
                 // SetUV(ref _uvs, _verticesIndex);
 
                 if (i == _patternCount - 1) break;

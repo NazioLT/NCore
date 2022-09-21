@@ -19,6 +19,7 @@
 * Scenegroup system. ([8861f88](https://github.com/NazioLT/NZCore/commit/8861f88247bcd581439f2ef9eceb3d2f0ad3aca1))
 * Curve class. ([b507ec7](https://github.com/NazioLT/NZCore/commit/b507ec7de772d79bbc840f6ae1bca69780a6d154))
 * Linear and Bezier curves ([e2b56f8](https://github.com/NazioLT/NZCore/commit/e2b56f874871b92a5f7fafda06e7c1fada5da106))
+* Spline Mesh ([]())
 
 #### Math Library
 

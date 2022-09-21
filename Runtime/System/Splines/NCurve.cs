@@ -78,9 +78,9 @@ namespace Nazio_LT.Tools.Core
 
         public void Direction(float _t, out Vector3 _forward, out Vector3 _up, out Vector3 _right)
         {
-            _forward = Forward(_t);
-            _up = Up(_t);
-            _right = Vector3.Cross(_forward, _up);
+            _forward = Forward(_t).normalized;
+            _up = Up(_t).normalized;
+            _right = Vector3.Cross(_forward, _up).normalized;
         }
 
         public Vector3 Forward(float _t)
