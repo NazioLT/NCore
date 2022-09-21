@@ -61,7 +61,7 @@ namespace Nazio_LT.Tools.Core
 
                 Vector3 _origin = curve.ComputePoint(_t);
                 PointPattern(ref _vertices, _verticesIndex, _origin, _up, _right);
-                // SetUV(ref _uvs, _verticesIndex);
+                UVPattern(ref _uvs, _verticesIndex, _patternCount);
 
                 if (i == _patternCount - 1) break;
 
@@ -71,6 +71,7 @@ namespace Nazio_LT.Tools.Core
 
         protected abstract void PointPattern(ref Vector3[] _vertices, int _index, Vector3 _origin, Vector3 _up, Vector3 _right);
         protected abstract void TrianglesPattern(ref int[] _triangles, int _verticesIndex, ref int _triIndex);
+        protected abstract void UVPattern(ref Vector2[] _uvs, int _uvIndex, int _patternCount);
 
         protected void AddTriangle(ref int[] _triArray, int _p1, int _p2, int _p3, ref int _triIndex)
         {

@@ -14,7 +14,15 @@ namespace Nazio_LT.Tools.Core
 
         protected override void TrianglesPattern(ref int[] _triangles, int _verticesIndex, ref int _triIndex)
         {
-            AddSquad(ref _triangles, _verticesIndex + 1, _verticesIndex + 3, _verticesIndex + 2,_verticesIndex, ref _triIndex);
+            AddSquad(ref _triangles, _verticesIndex + 1, _verticesIndex + 3, _verticesIndex + 2, _verticesIndex, ref _triIndex);
+        }
+
+        protected override void UVPattern(ref Vector2[] _uvs, int _uvIndex, int _patternCount)
+        {
+            Vector2 _uv = Vector2.Lerp(Vector2.zero, Vector2.one, (float)_uvIndex / _patternCount);
+            _uvs[_uvIndex] = _uv;
+            _uvs[_uvIndex + 1] = _uv;
+            _uvs[_uvIndex + 2] = _uv;
         }
 
         protected override int PointPerPattern => 2;

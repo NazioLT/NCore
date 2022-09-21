@@ -49,6 +49,19 @@ namespace Nazio_LT.Tools.Core
             AddSquad(ref _triangles, _verticesIndex + 6, _verticesIndex + formVertices + 6, _verticesIndex + formVertices + 2, _verticesIndex + 2, ref _triIndex);//Ext droite
         }
 
+        protected override void UVPattern(ref Vector2[] _uvs, int _uvIndex, int _patternCount)
+        {
+            _uvs[_uvIndex] = Vector3.zero;
+            _uvs[_uvIndex + 1] = Vector3.one;
+            _uvs[_uvIndex + 2] = Vector3.one;
+            _uvs[_uvIndex + 3] = Vector3.one;
+            _uvs[_uvIndex + 4] = Vector3.one;
+            _uvs[_uvIndex + 5] = Vector3.zero;
+            _uvs[_uvIndex + 6] = Vector3.one;
+            _uvs[_uvIndex + 7] = Vector3.one;
+            _uvs[_uvIndex + 8] = Vector3.zero;
+        }
+
         private float TotalWidth => sideWalkWidth + roadWitdh;
         protected override int PointPerPattern => 9;
         protected override int TrianglesPerPattern => 18;
