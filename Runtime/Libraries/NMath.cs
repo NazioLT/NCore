@@ -4,7 +4,11 @@ namespace Nazio_LT.Tools.Core
 {
     public static partial class NMath
     {
+        #region Constants
+
         public const float EPSILON = 0.03f;
+
+        #endregion
 
         public static bool AverageZero(float _value) => _value < EPSILON && _value > -EPSILON;
 

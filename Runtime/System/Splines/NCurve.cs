@@ -69,6 +69,8 @@ namespace Nazio_LT.Tools.Core
             return ComputePoint(_t);
         }
 
+        public Vector3 ComputePointUniform(float _t) => ComputePointDistance(_t * curveLength);
+
         public void Update()
         {
             SimplifyCurve();
