@@ -76,6 +76,24 @@ namespace Nazio_LT.Tools.Core
             SimplifyCurve();
         }
 
+        public void Direction(float _t, out Vector3 _forward, out Vector3 _up, out Vector3 _right)
+        {
+            _forward = Forward(_t);
+            _up = Up(_t);
+            _right = Vector3.Cross(_forward, _up);
+        }
+
+        public Vector3 Forward(float _t)
+        {
+            _t = _t - (int)_t;
+            float _computedT = _t / Factor;
+            int _curveID = (int)_computedT;
+
+            return NMath.BezierDerivative(handles[_curveID], handles[GetNextID(_curveID)], _computedT - _curveID);
+        }
+
+        public Vector3 Up(float _t) => Vector3.up;
+
         private void SimplifyCurve()
         {
             simplifiedCurveDst = new float[Parameterization + 1];

@@ -7,6 +7,7 @@ namespace Nazio_LT.Tools.Core
         #region Constants
 
         public const float EPSILON = 0.03f;
+        public const float SQUARE_EPSILON = EPSILON * EPSILON;
 
         #endregion
 
