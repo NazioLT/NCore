@@ -8,22 +8,34 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomEditor(typeof(NCurveBehaviour)), CanEditMultipleObjects]
     public class NCurveBehaviourEditor : Editor
     {
-        private NCurve curve;
+        private SerializedProperty editing_Prop;
+        private SerializedProperty meshType_Prop;
+        private SerializedProperty curve_Prop;
+        private SerializedProperty meshFilter_Prop;
 
-        private SerializedProperty loop_Prop;
+        private NCurve curve;
 
         private void OnEnable()
         {
             curve = (target as NCurveBehaviour).curve;
+
+            editing_Prop = serializedObject.FindProperty("editing");
+            meshType_Prop = serializedObject.FindProperty("meshType");
+            curve_Prop = serializedObject.FindProperty("curve");
+            meshFilter_Prop = serializedObject.FindProperty("meshFilter");
         }
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[]{ editing_Prop, meshType_Prop });
 
-            EditorGUILayout.BeginVertical();
+            if(GUILayout.Button("Generate Mesh")) Target.Gen();
 
-            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space();
+
+            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[]{ curve_Prop, meshFilter_Prop });
+
+            serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
         }
 

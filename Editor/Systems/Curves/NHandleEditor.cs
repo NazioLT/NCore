@@ -32,7 +32,7 @@ namespace Nazio_LT.Tools.Core.Internal
                 string[] _labels = new string[] { "Forward Helper", "Point", "Back Helper" };
                 SerializedProperty[] _props = new SerializedProperty[] { _forwardHelper, _point, _backHelper };
 
-                NEditor.SetMultiplesGUI(_newRect, 20f, _props, _labels, (_i, _rect, _prop, _label) => _prop.vector3Value = NEditor.Vector3Field(_rect, _prop.vector3Value, _label));
+                NEditor.DrawMultiplesGUI(_newRect, 20f, _props, _labels, (_i, _rect, _prop, _label) => _prop.vector3Value = NEditor.Vector3Field(_rect, _prop.vector3Value, _label));
             }
 
             EditorGUI.indentLevel = indent;

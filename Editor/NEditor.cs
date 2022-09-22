@@ -9,12 +9,20 @@ namespace Nazio_LT.Tools.Core.Internal
     {
         #region Globals
 
-        public static void SetMultiplesGUI(Rect _baseRect, float _sizeY, SerializedProperty[] _props, string[] _labels, Action<int, Rect, SerializedProperty, string> _callback)
+        public static void DrawMultiplesGUI(Rect _baseRect, float _sizeY, SerializedProperty[] _props, string[] _labels, Action<int, Rect, SerializedProperty, string> _callback)
         {
             for (int i = 0; i < _props.Length; i++)
             {
                 var _rect = new Rect(_baseRect.x, _baseRect.y + i * _sizeY, _baseRect.width, EditorGUIUtility.singleLineHeight);
                 _callback(i, _rect, _props[i], _labels[i]);
+            }
+        }
+
+        public static void DrawMultipleLayoutProperty(SerializedProperty[] _props)
+        {
+            foreach (var _prop in _props)
+            {
+                EditorGUILayout.PropertyField(_prop);
             }
         }
 
