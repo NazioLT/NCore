@@ -1,17 +1,13 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Nazio_LT.Tools.Core.Internal
 {
     [CustomEditor(typeof(NCurveBehaviour)), CanEditMultipleObjects]
     public class NCurveBehaviourEditor : Editor
     {
-        private SerializedProperty editing_Prop;
-        private SerializedProperty meshType_Prop;
-        private SerializedProperty curve_Prop;
-        private SerializedProperty meshFilter_Prop;
+        private SerializedProperty editing_Prop, meshToDeform_Prop, meshType_Prop, curve_Prop, meshFilter_Prop;
 
         private NCurve curve;
 
@@ -23,21 +19,33 @@ namespace Nazio_LT.Tools.Core.Internal
             meshType_Prop = serializedObject.FindProperty("meshType");
             curve_Prop = serializedObject.FindProperty("curve");
             meshFilter_Prop = serializedObject.FindProperty("meshFilter");
+            meshToDeform_Prop = serializedObject.FindProperty("meshToDeform");
         }
 
         public override void OnInspectorGUI()
         {
-            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[]{ editing_Prop, meshType_Prop });
-
-            if(GUILayout.Button("Generate Mesh")) Target.Gen();
+            GUIStyle _editButtonStyle = new GUIStyle(GUI.skin.button);
+            Texture2D _buttTexture = new Texture2D(1, 1);
+            _buttTexture.SetPixel(0, 0, Color.red);
+            _buttTexture.Apply();
+            _editButtonStyle.normal.background = editing_Prop.boolValue ? _buttTexture : GUI.skin.button.normal.background;
+            if (GUILayout.Button(editing_Prop.boolValue ? "Stop Editing Curve" : "Edit Curve", _editButtonStyle)) editing_Prop.boolValue = !editing_Prop.boolValue;
 
             EditorGUILayout.Space();
 
-            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[]{ curve_Prop, meshFilter_Prop });
+            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { meshToDeform_Prop, meshFilter_Prop, meshType_Prop });
+
+            if (GUILayout.Button("Generate Mesh")) Target.Gen();
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(curve_Prop);
 
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
         }
+
+        #region Scene
 
         private void OnSceneGUI()
         {
@@ -89,14 +97,16 @@ namespace Nazio_LT.Tools.Core.Internal
             Handles.color = Color.blue;
             switch ((int)curve.type)
             {
-                case 0:
+                case 0://Line Type
                     Handles.DrawLine(curve.handles[_startI].point, curve.handles[_endI].point, 2f);
                     break;
-                case 1:
+                case 1://Bezier Type
                     Handles.DrawBezier(curve.handles[_startI].point, curve.handles[_endI].point, curve.handles[_startI].forwardHelper, curve.handles[_endI].backHelper, Color.blue, new Texture2D(10, 10), 2f);
                     break;
             }
         }
+
+        #endregion
 
         public NCurveBehaviour Target => target as NCurveBehaviour;
     }

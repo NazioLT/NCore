@@ -6,6 +6,7 @@ namespace Nazio_LT.Tools.Core
     public class NCurveBehaviour : MonoBehaviour
     {
         //For Editor
+        [SerializeField] private Mesh meshToDeform;
         [SerializeField] public bool editing;
         [SerializeField] private CurveMesh.CurveMeshType meshType;
 
@@ -16,6 +17,12 @@ namespace Nazio_LT.Tools.Core
         {
             CurveMesh _mesh = CurveMesh.Factory(meshType, curve);
             meshFilter.sharedMesh = _mesh.GenerateMesh();
+        }
+
+        [ContextMenu("Mesh Gen")]
+        public void GenByMesh()
+        {
+
         }
     }
 }
