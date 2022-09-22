@@ -22,7 +22,6 @@ namespace Nazio_LT.Tools.Core
             Vector2 _uv = Vector2.Lerp(Vector2.zero, Vector2.one, (float)_uvIndex / _patternCount);
             _uvs[_uvIndex] = _uv;
             _uvs[_uvIndex + 1] = _uv;
-            _uvs[_uvIndex + 2] = _uv;
         }
 
         protected override int PointPerPattern => 2;
