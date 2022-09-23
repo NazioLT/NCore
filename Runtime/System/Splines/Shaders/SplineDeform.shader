@@ -23,11 +23,13 @@ Shader "Nazio_LT/SplineDeform"
         struct VertInput
         {
             float4 position : POSITION;
+            float2 uv : TEXCOORD0;
         };
 
         struct VertOutput
         {
             float4 position : SV_POSITION;
+            float2 uv : TEXCOORD0;
         };
 
         ENDHLSL
@@ -37,22 +39,33 @@ Shader "Nazio_LT/SplineDeform"
             HLSLPROGRAM
 
             #pragma vertex vert
-            #pragma fragment fragment
+            #pragma fragment frag
+            #pragma target 4.5
+
+            float4 GetColor(float2 uv)
+            {
+                // float scale = exp2(2);
+                return tex2Dgrad(sampler_DeformationTexture, uv, 1, 1);
+            }
 
             VertOutput vert(VertInput input)
             {
                 VertOutput output;
 
-                float4 variation = SAMPLE_TEXTURE2D(_DeformationTexture, sampler_DeformationTexture, (input.position.z,0));
+                float2 deformUV = input.position.zy  * 10;
 
-                float4 newPos = input.position + variation;
+                output.uv = input.position.zy  * 10;
 
-                output.position = TransformObjectToHClip(newPos.xyz);
+                float3 pos = input.position.xyz;
+
+                output.position = TransformObjectToHClip(pos);
+
+                return output;
             }
 
             float4 frag(VertOutput input) : SV_TARGET
             {
-                return _Color;
+                return SAMPLE_TEXTURE2D(_DeformationTexture, sampler_DeformationTexture, input.uv);
             }
 
             ENDHLSL

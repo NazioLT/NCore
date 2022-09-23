@@ -60,6 +60,9 @@ namespace Nazio_LT.Tools.Core
 
             splineVariations.SetPixels(_colours);
             splineVariations.Apply();
+
+            meshRenderer.material.SetTexture("_DeformationTexture", splineVariations);
+            meshRenderer.material.SetVector("_TextureSize", new Vector4(splineVariations.width, splineVariations.height, 0, 0));
         }
     }
 }
