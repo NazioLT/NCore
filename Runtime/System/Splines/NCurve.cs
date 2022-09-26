@@ -56,7 +56,7 @@ namespace Nazio_LT.Tools.Core
 
         public Vector3 ComputePoint(float _t)
         {
-            if (_t == 0f || _t == 1f) _t = 0.001f;
+            if (_t == 0f) _t = 0.001f;
             float _computedT = _t / Factor;
             int _curveID = (int)_computedT;
 

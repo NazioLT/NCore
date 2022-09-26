@@ -56,9 +56,10 @@ Shader "Nazio_LT/SplineDeform"
 
                 output.uv = input.position.zy  * 10;
 
-                float3 pos = input.position.xyz;
+                float4 pos = input.position;
+                float4 deform = SAMPLE_TEXTURE2D(_DeformationTexture, sampler_DeformationTexture, deformUV);
 
-                output.position = TransformObjectToHClip(pos);
+                output.position = TransformObjectToHClip(pos.xyz + deform.xyz);
 
                 return output;
             }

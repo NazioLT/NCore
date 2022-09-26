@@ -62,7 +62,9 @@ namespace Nazio_LT.Tools.Core
             splineVariations.Apply();
 
             meshRenderer.material.SetTexture("_DeformationTexture", splineVariations);
-            meshRenderer.material.SetVector("_TextureSize", new Vector4(splineVariations.width, splineVariations.height, 0, 0));
+            meshRenderer.material.SetFloat("_TextureWidth", splineVariations.width);
+            meshRenderer.material.SetFloat("_minZ", _splineBoundingBox.min.z);
+            meshRenderer.material.SetFloat("_maxZ", _splineBoundingBox.max.z);
         }
     }
 }
