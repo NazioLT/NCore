@@ -52,7 +52,7 @@ namespace Nazio_LT.Tools.Core
         public float[] simplifiedCurveDst;
         public float curveLength { private set; get; }
 
-        private const int PARAMETERIZATION_PRECISION = 40;
+        private const int PARAMETERIZATION_PRECISION = 300;
 
         public Vector3 ComputePoint(float _t, bool _loop)
         {

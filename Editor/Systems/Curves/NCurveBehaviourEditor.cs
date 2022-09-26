@@ -51,6 +51,8 @@ namespace Nazio_LT.Tools.Core.Internal
 
         private void OnSceneGUI()
         {
+            if(Target.editing) curve.Update();
+
             for (int i = 0; i < curve.handles.Count; i++)
             {
                 if (Target.editing) DisplayHandle(i);
@@ -58,8 +60,6 @@ namespace Nazio_LT.Tools.Core.Internal
             }
 
             if (curve.loop) DrawCurvePart(curve.handles.Count - 1, 0);
-
-            curve.Update();
         }
 
         private void DisplayHandle(int i)
