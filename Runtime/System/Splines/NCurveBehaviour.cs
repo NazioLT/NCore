@@ -88,9 +88,16 @@ namespace Nazio_LT.Tools.Core
             float _curveT = Mathf.Clamp(_startT + (_localT * _tPart), 0f, 1f);
 
             Vector3 _refPoint = Vector3.Lerp(_start, _end, _localT);
-            Vector3 _new = _vertex - _refPoint + curve.ComputePoint(_curveT, false);
+            Vector3 _deformationDelta = _vertex - _refPoint;
 
-            return _new;
+            curve.Direction(_curveT, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
+
+            Vector3 _orientedDelta = Vector3.zero;
+            _orientedDelta -= _forward * _deformationDelta.z;
+            _orientedDelta += _up * _deformationDelta.y;
+            _orientedDelta -= _right * _deformationDelta.x;
+
+            return _orientedDelta + curve.ComputePoint(_curveT, false);
         }
     }
 }
