@@ -90,14 +90,14 @@ namespace Nazio_LT.Tools.Core
             Vector3 _refPoint = Vector3.Lerp(_start, _end, _localT);
             Vector3 _deformationDelta = _vertex - _refPoint;
 
-            curve.Direction(_curveT, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
+            curve.DirectionUniform(_curveT, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
 
             Vector3 _orientedDelta = Vector3.zero;
             _orientedDelta -= _forward * _deformationDelta.z;
             _orientedDelta += _up * _deformationDelta.y;
             _orientedDelta -= _right * _deformationDelta.x;
 
-            return _orientedDelta + curve.ComputePoint(_curveT, false);
+            return _orientedDelta + curve.ComputePointUniform(_curveT);
         }
     }
 }
