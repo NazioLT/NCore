@@ -63,16 +63,15 @@ namespace Nazio_LT.Tools.Core
             return GetPointFunc()(handles[_curveID], handles[GetNextID(_curveID)], _computedT - _curveID);
         }
 
-        public Vector3 ComputePointDistance(float _distance) => ComputePoint(DistanceToT(_distance), true);
+        public Vector3 ComputePointDistance(float _distance, bool _loop)
+        {
+            float _t = _distance == curveLength ? 1f : DistanceToT(_distance);
+            return ComputePoint(_t, _loop);
+        }
 
         public float DistanceToT(float _distance) => NMath.CumulativeValuesToT(simplifiedCurveDst, _distance);
 
-        public Vector3 ComputePointUniform(float _t) => ComputePointDistance(_t * curveLength);
-
-        public void Update()
-        {
-            SimplifyCurve();
-        }
+        public Vector3 ComputePointUniform(float _t, bool _loop) => ComputePointDistance(_t * curveLength, _loop);
 
         public void DirectionUniform(float _t, out Vector3 _forward, out Vector3 _up, out Vector3 _right) => Direction(DistanceToT(_t * curveLength), out _forward, out _up, out _right);
 
@@ -81,6 +80,11 @@ namespace Nazio_LT.Tools.Core
             _forward = Forward(_t).normalized;
             _up = Up(_t).normalized;
             _right = Vector3.Cross(_forward, _up).normalized;
+        }
+
+        public void Update()
+        {
+            SimplifyCurve();
         }
 
         public Vector3 Forward(float _t)

@@ -97,7 +97,7 @@ namespace Nazio_LT.Tools.Core
             _orientedDelta += _up * _deformationDelta.y;
             _orientedDelta -= _right * _deformationDelta.x;
 
-            return _orientedDelta + curve.ComputePointUniform(_curveT);
+            return _orientedDelta + curve.ComputePointUniform(_curveT, false);
         }
     }
 }
