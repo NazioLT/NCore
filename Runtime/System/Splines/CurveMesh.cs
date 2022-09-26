@@ -4,7 +4,7 @@ namespace Nazio_LT.Tools.Core
 {
     public abstract class CurveMesh
     {
-        public enum CurveMeshType { Simple, Road,}
+        public enum CurveMeshType { CustomMesh, Simple, Road,}
 
         public static CurveMesh Factory(CurveMeshType _type, NCurve _curve)
         {
@@ -26,7 +26,7 @@ namespace Nazio_LT.Tools.Core
         private Mesh mesh;
         private NCurve curve;
 
-        private const float PATERNS_PER_UNIT = 1f;
+        private const float PATERNS_PER_UNIT = 2f;
 
         public Mesh GenerateMesh()
         {
@@ -59,7 +59,7 @@ namespace Nazio_LT.Tools.Core
 
                 curve.Direction(_t, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
 
-                Vector3 _origin = curve.ComputePoint(_t);
+                Vector3 _origin = curve.ComputePoint(_t, true);
                 PointPattern(ref _vertices, _verticesIndex, _origin, _up, _right);
                 UVPattern(ref _uvs, _verticesIndex, _patternCount);
 

@@ -7,6 +7,7 @@ namespace Nazio_LT.Tools.Core
     {
         //For Editor
         [SerializeField] private Mesh meshToDeform;
+        [SerializeField] private Material material;
         [SerializeField] public bool editing;
         [SerializeField] private CurveMesh.CurveMeshType meshType;
 
@@ -15,12 +16,30 @@ namespace Nazio_LT.Tools.Core
 
         public void Gen()
         {
+            DestroyChilds();
+            meshFilter.mesh = null;
+
+            if (meshType == CurveMesh.CurveMeshType.CustomMesh)
+            {
+                GenByMesh();
+                return;
+            }
+
             CurveMesh _mesh = CurveMesh.Factory(meshType, curve);
             meshFilter.sharedMesh = _mesh.GenerateMesh();
         }
 
-        [ContextMenu("Mesh Gen")]
-        public void GenByMesh()
+        private void DestroyChilds()
+        {
+            if (transform.childCount == 0) return;
+            
+            for (var i = transform.childCount - 1; i >= 0; i--)
+            {
+                DestroyImmediate(transform.GetChild(i).gameObject);
+            }
+        }
+
+        private void GenByMesh()
         {
             Bounds _meshBounds = meshToDeform.bounds;
             Vector3 _meshOrigin = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.min.z));
@@ -42,7 +61,7 @@ namespace Nazio_LT.Tools.Core
         {
             GameObject _sub = new GameObject("Spline Sub Mesh");
             _sub.transform.parent = transform;
-            _sub.AddComponent<MeshRenderer>();
+            MeshRenderer _mr = _sub.AddComponent<MeshRenderer>();
             MeshFilter _mf = _sub.AddComponent<MeshFilter>();
 
             Vector3[] _vertices = meshToDeform.vertices;
@@ -57,6 +76,8 @@ namespace Nazio_LT.Tools.Core
             objMesh.triangles = meshToDeform.triangles;
             objMesh.RecalculateNormals();
 
+            _mr.material = material;
+
             _mf.mesh = objMesh;
         }
 
@@ -64,9 +85,10 @@ namespace Nazio_LT.Tools.Core
         {
             float _vDst = Mathf.Abs(_vertex.z - _start.z);
             float _localT = _vDst / _zDst;
-            float _curveT = _startT + (_localT * _tPart);
+            float _curveT = Mathf.Clamp(_startT + (_localT * _tPart), 0f, 1f);
+
             Vector3 _refPoint = Vector3.Lerp(_start, _end, _localT);
-            Vector3 _new = _vertex - _refPoint + curve.ComputePoint(_curveT);
+            Vector3 _new = _vertex - _refPoint + curve.ComputePoint(_curveT, false);
 
             return _new;
         }

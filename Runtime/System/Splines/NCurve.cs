@@ -54,9 +54,9 @@ namespace Nazio_LT.Tools.Core
 
         private const int PARAMETERIZATION_PRECISION = 40;
 
-        public Vector3 ComputePoint(float _t)
+        public Vector3 ComputePoint(float _t, bool _loop)
         {
-            if (_t == 0f) _t = 0.001f;
+            if (_t == 0f || (_t == 1f && _loop)) _t = 0.001f;
             float _computedT = _t / Factor;
             int _curveID = (int)_computedT;
 
@@ -66,7 +66,7 @@ namespace Nazio_LT.Tools.Core
         public Vector3 ComputePointDistance(float _distance)
         {
             float _t = NMath.CumulativeValuesToT(simplifiedCurveDst, _distance);
-            return ComputePoint(_t);
+            return ComputePoint(_t, true);
         }
 
         public Vector3 ComputePointUniform(float _t) => ComputePointDistance(_t * curveLength);
@@ -99,12 +99,12 @@ namespace Nazio_LT.Tools.Core
             simplifiedCurveDst = new float[Parameterization + 1];
 
             float _factor = 1f / (float)Parameterization;
-            Vector3 _previousPoint = ComputePoint(0f);
+            Vector3 _previousPoint = ComputePoint(0f, true);
             simplifiedCurveDst[0] = 0;
 
             for (var i = 1; i < Parameterization + 1; i++)
             {
-                Vector3 _newPoint = ComputePoint(i * _factor);
+                Vector3 _newPoint = ComputePoint(i * _factor, true);
                 float _relativeDst = Vector3.Distance(_previousPoint, _newPoint);
                 simplifiedCurveDst[i] = simplifiedCurveDst[i - 1] + _relativeDst;
 
