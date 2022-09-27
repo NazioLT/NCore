@@ -33,7 +33,7 @@ namespace Nazio_LT.Tools.Core
             splineVariations = new Texture2D(PRECISION, 1);
 
             //Get spline deltas
-            Vector3 _origin = spline.curve.ComputePointUniform(0f, true);
+            Vector3 _origin = spline.Curve.ComputePointUniform(0f, true);
             Vector3[] _delta = new Vector3[PRECISION];
             Bounds _splineBoundingBox = new Bounds();
 
@@ -42,7 +42,7 @@ namespace Nazio_LT.Tools.Core
             {
                 float _t = _factor * i;
 
-                Vector3 _point = spline.curve.ComputePointUniform(_t, true);
+                Vector3 _point = spline.Curve.ComputePointUniform(_t, true);
                 _delta[i] = _point - _origin;
 
                 _splineBoundingBox.Encapsulate(_delta[i]);

@@ -13,7 +13,7 @@ namespace Nazio_LT.Tools.Core.Internal
 
         private void OnEnable()
         {
-            curve = (target as NCurveBehaviour).curve;
+            curve = (target as NCurveBehaviour).Curve;
 
             editing_Prop = serializedObject.FindProperty("editing");
             meshType_Prop = serializedObject.FindProperty("meshType");
