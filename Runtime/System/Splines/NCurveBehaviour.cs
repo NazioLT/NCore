@@ -9,7 +9,8 @@ namespace Nazio_LT.Tools.Core
         [SerializeField] private Mesh meshToDeform;
         [SerializeField] private Material material;
         [SerializeField] public bool editing;
-        [SerializeField] private CurveMesh.CurveMeshType meshType;
+        [SerializeField] private CurveMeshType meshType;
+        [SerializeField] private CurveMeshDeformerPointSettings meshPlacementSettings;
 
         [SerializeField] private NCurve curve;
         [SerializeField] private MeshFilter meshFilter;
@@ -18,15 +19,9 @@ namespace Nazio_LT.Tools.Core
         {
             DeleteMeshes();
 
-            if (meshType == CurveMesh.CurveMeshType.CustomMesh)
-            {
-                CurveMeshDeformer _deformer = new CurveMeshDeformerAlong(new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material));
-                _deformer.Generate();
-                return;
-            }
-
-            CurveMesh _mesh = CurveMesh.Factory(meshType, curve);
-            meshFilter.sharedMesh = _mesh.GenerateMesh();
+            CurveMeshDeformerMainSettings _mainSettings = new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material);
+            CurveMeshDeformer _deformer = CurveMeshDeformer.Factory(meshType, _mainSettings, meshPlacementSettings);
+            _deformer.Generate();
         }
 
         public void DeleteMeshes()

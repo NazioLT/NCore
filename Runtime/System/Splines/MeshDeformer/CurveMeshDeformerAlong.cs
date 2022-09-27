@@ -9,12 +9,12 @@ namespace Nazio_LT.Tools.Core
         public override void Generate()
         {
             //Analyse le Mesh
-            Bounds _meshBounds = settings.meshToDeform.bounds;
-            Vector3 _meshOrigin = settings.transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.min.z));
-            Vector3 _meshEnd = settings.transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.max.z));
+            Bounds _meshBounds = Mesh.bounds;
+            Vector3 _meshOrigin = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.min.z));
+            Vector3 _meshEnd = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.max.z));
 
             float _zDst = Mathf.Abs(_meshEnd.z - _meshOrigin.z);
-            int _objNumber = (int)(settings.curve.curveLength / _zDst);
+            int _objNumber = (int)(Curve.curveLength / _zDst);
 
             float _tPart = 1f / (float)_objNumber;
             float _startT = 0f;
@@ -29,12 +29,9 @@ namespace Nazio_LT.Tools.Core
 
         private bool CreateChildMesh(Vector3 _origin, Vector3 _end, float _zDst, float _startT, float _tPart)
         {
-            GameObject _sub = new GameObject("Spline Sub Mesh");
-            _sub.transform.parent = settings.transform;
-            MeshRenderer _mr = _sub.AddComponent<MeshRenderer>();
-            MeshFilter _mf = _sub.AddComponent<MeshFilter>();
+            GameObject _sub = CreateSubMesh(transform, out MeshRenderer _mr, out MeshFilter _mf);
 
-            Vector3[] _vertices = settings.meshToDeform.vertices;
+            Vector3[] _vertices = Mesh.vertices;
             Mesh objMesh = new Mesh();
             for (var i = 0; i < _vertices.Length; i++)
             {
@@ -42,8 +39,8 @@ namespace Nazio_LT.Tools.Core
             }
 
             objMesh.vertices = _vertices;
-            objMesh.uv = settings.meshToDeform.uv;
-            objMesh.triangles = settings.meshToDeform.triangles;
+            objMesh.uv = Mesh.uv;
+            objMesh.triangles = Mesh.triangles;
             objMesh.RecalculateNormals();
             objMesh.RecalculateBounds();
 
@@ -53,7 +50,7 @@ namespace Nazio_LT.Tools.Core
                 return false;
             }
 
-            _mr.material = settings.material;
+            _mr.material = Material;
             _mf.mesh = objMesh;
 
             return true;
@@ -75,7 +72,7 @@ namespace Nazio_LT.Tools.Core
             _orientedDelta += _up * _deformationDelta.y;
             _orientedDelta -= _right * _deformationDelta.x;
 
-            return _orientedDelta + settings.curve.ComputePointUniform(_curveT, false);
+            return _orientedDelta + Curve.ComputePointUniform(_curveT, false);
         }
     }
 }

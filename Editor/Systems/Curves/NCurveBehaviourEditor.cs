@@ -7,7 +7,8 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomEditor(typeof(NCurveBehaviour)), CanEditMultipleObjects]
     public class NCurveBehaviourEditor : Editor
     {
-        private SerializedProperty editing_Prop, meshToDeform_Prop, mesh_Prop, meshType_Prop, curve_Prop, meshFilter_Prop, material_Prop;
+        private SerializedProperty editing_Prop, meshToDeform_Prop, meshType_Prop, curve_Prop, material_Prop, 
+                                meshPlacementSettings_Prop;
 
         private NCurve curve;
 
@@ -18,9 +19,9 @@ namespace Nazio_LT.Tools.Core.Internal
             editing_Prop = serializedObject.FindProperty("editing");
             meshType_Prop = serializedObject.FindProperty("meshType");
             curve_Prop = serializedObject.FindProperty("curve");
-            meshFilter_Prop = serializedObject.FindProperty("meshFilter");
             meshToDeform_Prop = serializedObject.FindProperty("meshToDeform");
             material_Prop = serializedObject.FindProperty("material");
+            meshPlacementSettings_Prop = serializedObject.FindProperty("meshPlacementSettings");
         }
 
         public override void OnInspectorGUI()
@@ -34,7 +35,9 @@ namespace Nazio_LT.Tools.Core.Internal
 
             EditorGUILayout.Space();
 
-            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { meshType_Prop.intValue == 0 ? meshToDeform_Prop : meshFilter_Prop, material_Prop, meshType_Prop });
+            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { meshToDeform_Prop, material_Prop, meshType_Prop });
+
+            if(meshType_Prop.intValue == 1) EditorGUILayout.PropertyField(meshPlacementSettings_Prop);
 
             EditorGUILayout.Space();
 
