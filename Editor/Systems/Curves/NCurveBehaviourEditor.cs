@@ -36,8 +36,10 @@ namespace Nazio_LT.Tools.Core.Internal
 
             NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { meshType_Prop.intValue == 0 ? meshToDeform_Prop : meshFilter_Prop, material_Prop, meshType_Prop });
 
+            EditorGUILayout.Space();
 
             if (GUILayout.Button("Generate Mesh")) Target.Gen();
+            if (GUILayout.Button("Delete Meshs")) Target.DeleteMeshes();
 
             EditorGUILayout.Space();
 

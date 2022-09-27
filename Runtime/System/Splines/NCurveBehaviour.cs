@@ -16,9 +16,8 @@ namespace Nazio_LT.Tools.Core
 
         public void Gen()
         {
-            DestroyChilds();
-            meshFilter.mesh = null;
-
+            DeleteMeshes();
+            
             if (meshType == CurveMesh.CurveMeshType.CustomMesh)
             {
                 GenByMesh();
@@ -29,8 +28,9 @@ namespace Nazio_LT.Tools.Core
             meshFilter.sharedMesh = _mesh.GenerateMesh();
         }
 
-        private void DestroyChilds()
+        public void DeleteMeshes()
         {
+            meshFilter.mesh = null;
             if (transform.childCount == 0) return;
             
             for (var i = transform.childCount - 1; i >= 0; i--)
@@ -41,6 +41,7 @@ namespace Nazio_LT.Tools.Core
 
         private void GenByMesh()
         {
+            //Analyse le Mesh
             Bounds _meshBounds = meshToDeform.bounds;
             Vector3 _meshOrigin = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.min.z));
             Vector3 _meshEnd = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.max.z));
@@ -50,14 +51,16 @@ namespace Nazio_LT.Tools.Core
 
             float _tPart = 1f / (float)_objNumber;
             float _startT = 0f;
+
+            //Crée les meshs
             for (var j = 0; j < _objNumber; j++)
             {
-                CreateChildMesh(_meshOrigin, _meshEnd, _zDst, _startT, _tPart);
+                if(!CreateChildMesh(_meshOrigin, _meshEnd, _zDst, _startT, _tPart)) break;
                 _startT += _tPart;
             }
         }
 
-        private void CreateChildMesh(Vector3 _origin, Vector3 _end, float _zDst, float _startT, float _tPart)
+        private bool CreateChildMesh(Vector3 _origin, Vector3 _end, float _zDst, float _startT, float _tPart)
         {
             GameObject _sub = new GameObject("Spline Sub Mesh");
             _sub.transform.parent = transform;
@@ -75,10 +78,18 @@ namespace Nazio_LT.Tools.Core
             objMesh.uv = meshToDeform.uv;
             objMesh.triangles = meshToDeform.triangles;
             objMesh.RecalculateNormals();
+            objMesh.RecalculateBounds();
+
+            if(objMesh.bounds.size.magnitude < _zDst / 1.5f)//Vrmt petit puisque si deformé normalement la taille augmente
+            {
+                DestroyImmediate(_sub);
+                return false;
+            }
 
             _mr.material = material;
-
             _mf.mesh = objMesh;
+
+            return true;
         }
 
         private Vector3 DeformVertex(Vector3 _vertex, Vector3 _start, Vector3 _end, float _zDst, float _startT, float _tPart)
