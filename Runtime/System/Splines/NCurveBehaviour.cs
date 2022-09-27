@@ -20,7 +20,7 @@ namespace Nazio_LT.Tools.Core
 
             if (meshType == CurveMesh.CurveMeshType.CustomMesh)
             {
-                CurveMeshDeformer _deformer = new CurveMeshDeformer(new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material));
+                CurveMeshDeformer _deformer = new CurveMeshDeformerAlong(new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material));
                 _deformer.Generate();
                 return;
             }

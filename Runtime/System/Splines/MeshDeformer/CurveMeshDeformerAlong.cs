@@ -2,32 +2,11 @@ using UnityEngine;
 
 namespace Nazio_LT.Tools.Core
 {
-    public struct CurveMeshDeformerMainSettings
+    public class CurveMeshDeformerAlong : CurveMeshDeformer
     {
-        public CurveMeshDeformerMainSettings(Mesh _meshToDeform, Transform _parent, NCurve _curve, Material _material)
-        {
-            meshToDeform = _meshToDeform;
-            transform = _parent;
-            curve = _curve;
-            material = _material;
-        }
+        public CurveMeshDeformerAlong(CurveMeshDeformerMainSettings _mainSettings) : base(_mainSettings) { }
 
-        public readonly Mesh meshToDeform;
-        public readonly Transform transform;
-        public readonly NCurve curve;
-        public readonly Material material;
-    }
-
-    public class CurveMeshDeformer
-    {
-        public CurveMeshDeformer(CurveMeshDeformerMainSettings _mainSettings)
-        {
-            settings = _mainSettings;
-        }
-
-        protected CurveMeshDeformerMainSettings settings;
-
-        public void Generate()
+        public override void Generate()
         {
             //Analyse le Mesh
             Bounds _meshBounds = settings.meshToDeform.bounds;
