@@ -11,6 +11,7 @@ namespace Nazio_LT.Tools.Core
         [SerializeField] private AudioClip clip;
         [SerializeField] private AudioMixerGroup mixerGroup;
         [SerializeField] private float volume = 1f;
+        [SerializeField] private float maxPitchDelta = 0;
 
         //Outputs
         public AudioClip Clip => clip;
@@ -18,5 +19,6 @@ namespace Nazio_LT.Tools.Core
         public float Length => Clip.length;
         public string Name => Clip.name;
         public float Volume => volume;
+        public float MaxPitchDelta => maxPitchDelta;
     }
 }
