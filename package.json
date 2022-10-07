@@ -11,5 +11,7 @@
         "url": "https://twitter.com/HennoTheo"
     },
     "dependencies": {},
+    "changelogUrl": "https://github.com/NazioLT/NZCore/blob/main/CHANGELOG.md",
+    "documentationUrl": "https://github.com/NazioLT/NZCore/blob/main/Documentation/NCore.md",
     "keywords": ["tool", "core"]
 }
