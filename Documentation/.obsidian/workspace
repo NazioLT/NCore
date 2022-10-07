@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "NMath.md",
+            "file": "Runtime/Systems/Spline/Spline.md",
             "mode": "source",
             "source": false
           }
@@ -77,13 +77,13 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NMath.md",
+                "file": "Runtime/Systems/Spline/Spline.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
               }
             }
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NMath.md",
+                "file": "Runtime/Systems/Spline/Spline.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NMath.md"
+                "file": "Runtime/Systems/Spline/Spline.md"
               }
             }
           }
@@ -125,18 +125,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "active": "55e4d4e4e8526ec0",
   "lastOpenFiles": [
-    "Library.md",
-    "NMath.md",
-    "Runtime/Models/Singleton.md",
+    "2022-10-08.md",
+    "Runtime/Systems/Spline/NCurveBehaviour.md",
+    "Runtime/Systems/Spline/NCurve.md",
+    "Runtime/Systems/Spline/NHandle.md",
+    "Runtime/Systems/Spline/Spline.md",
     "NCore.md",
-    "Runtime/Models/ChildMonobehaviour.md",
-    "Runtime/Models.md",
+    "Runtime/Systems/Spline/Untitled.md",
     "Runtime/Models/Child.md",
-    "Henno Théo.md"
+    "Runtime/Models/ChildMonobehaviour.md",
+    "Runtime/Models/Models.md"
   ]
 }

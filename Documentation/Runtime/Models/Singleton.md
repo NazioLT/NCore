@@ -1,6 +1,5 @@
 MOC : [[Models]]
-Source :  
-Projets : 
+Dependancies : 
 Tags : #Core
 Date : 07/10/2022
 
@@ -18,15 +17,13 @@ Date : 07/10/2022
 
 
 ### Protected Methods :
-* **virtual void Awake**() : Execute TryMakeThisTheInstance.
+* **virtual void Awake** : Execute TryMakeThisTheInstance.
 
-* **void TryMakeThisTheInstance**() : Try make the object who is executing method the instance. If another instance already exist, the object will destroy itself.
+* **void TryMakeThisTheInstance** : Try make the object who is executing method the instance. If another instance already exist, the object will destroy itself.
 
 
 ### Public Methods : 
-* **static void DestroyInstance**() : Will destroy the instance GameObject's if is existing.
-
-***
+* **static void DestroyInstance** : Will destroy the instance GameObject's if is existing.
 
 # Properties
 ### Serialized Properties : 

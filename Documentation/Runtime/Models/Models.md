@@ -1,6 +1,5 @@
 MOC : [[NCore]] 
-Source :  
-Projets : 
+Dependancies : 
 Tags : #Core
 Date : 07/10/2022
 

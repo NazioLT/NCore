@@ -1,6 +1,5 @@
 MOC : [[Models]]
-Source :  
-Projets : 
+Dependancies : 
 Tags : #Core
 Date : 07/10/2022
 
@@ -17,7 +16,7 @@ Date : 07/10/2022
 *T* : Parent of the child.
 
 ### Public Methods :
-* **virtual void Init**(T parent) : Set the Parent property.
+* **virtual void Init** : Set the Parent property.
 
 # Properties
 ### Other Properties : 
