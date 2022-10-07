@@ -7,11 +7,11 @@ Date : 07/10/2022
 # Behaviour 
 ### Description :
 
-**Typeof** : [[Child]]
+**Typeof** : [[ChildMonobehaviour]]
 **Type** : Abstract Class
-**Inheritage** : None
+**Inheritage** : Monobehaviour
 
-**Description** : [[Child]] is an object who has a reference of another. 
+**Description** : [[ChildMonobehaviour]] is an object who has a reference of another and who inherite of Monobehaviour. 
 
 **Parameters** : 
 *T* : Parent of the child.

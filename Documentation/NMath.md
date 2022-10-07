@@ -1,4 +1,4 @@
-MOC : [[Models]]
+MOC : [[Library]]
 Source :  
 Projets : 
 Tags : #Core
@@ -7,7 +7,7 @@ Date : 07/10/2022
 # Behaviour 
 ### Description :
 
-**Typeof** : [[Singleton]]
+**Typeof** : [[NMath]]
 **Type** : Abstract Class
 **Inheritage** : Monobehaviour
 
@@ -29,16 +29,9 @@ Date : 07/10/2022
 ***
 
 # Properties
-### Serialized Properties : 
+### Constant Properties : 
 
 ##### **bool dontDestroyOnLoad** : 
 Set : Protected
 Get : Protected
 Description : Define if the instance GameObject's will be destroy if the scene is unload.
-
-### Other Properties : 
-
-##### **T instance** :
-**Set** : Protected
-**Get** : Public
-**Description** : Current instance.

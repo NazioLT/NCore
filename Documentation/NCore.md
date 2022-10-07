@@ -1,4 +1,3 @@
-[[Note permanente]] 
 MOC : [[Henno Théo]] 
 Source :  
 Projets : 
@@ -14,12 +13,8 @@ Date : 07/10/2022
  * [[Scene Management]]
  * [[Spline Tool]]
 
-### Script Models : 
-* [[Child]]
-* [[ChildMonobehaviour]]
-* [[Heap]]
-* [[MinMax]]
-* [[Singleton]]
+### Runtime.[[Models]] : 
+A model is an abstract class that can be reused to inherite of some methods and behaviours.
 
 ### Library : 
 * [[NMath]]
