@@ -14,9 +14,12 @@ namespace Nazio_LT.Tools.Core.Internal
 
             source.outputAudioMixerGroup = _clip.MixerGroup;
             source.volume = _clip.Volume;
-            source.pitch = source.pitch + Random.Range(-_clip.MaxPitchDelta, _clip.MaxPitchDelta);
-            source.PlayOneShot(_clip.Clip);
+            source.pitch = _clip.Pitch + Random.Range(-_clip.MaxPitchDelta, _clip.MaxPitchDelta);
+            source.panStereo = _clip.StereoPan;
+            source.reverbZoneMix = _clip.ReverbZoneMix;
+            source.dopplerLevel = _clip.DopplerLevel;
 
+            source.PlayOneShot(_clip.Clip);
             StartCoroutine(WaitForDestroy(_clip.Length));
         }
 
