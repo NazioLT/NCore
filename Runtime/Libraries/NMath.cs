@@ -6,6 +6,8 @@ namespace Nazio_LT.Tools.Core
     {
         #region Constants
 
+        public const float GOLDEN_NUMB = 1.618033988749894f;
+
         public const float EPSILON = 0.03f;
         public const float SQUARE_EPSILON = EPSILON * EPSILON;
 
@@ -90,5 +92,7 @@ namespace Nazio_LT.Tools.Core
         #endregion
 
         public static Color SetAlpha(Color _value, float _alpha) => new Color(_value.r, _value.g, _value.b, _alpha);
+
+        public static float Remap(float _value, float _inputMin, float _inputMax, float _outputMin, float _outputMax) => Mathf.Lerp(_outputMin, _outputMax, Mathf.InverseLerp(_inputMin, _inputMax, _value));
     }
 }
