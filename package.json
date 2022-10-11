@@ -12,6 +12,6 @@
     },
     "dependencies": {},
     "changelogUrl": "https://github.com/NazioLT/NZCore/blob/main/CHANGELOG.md",
-    "documentationUrl": "https://github.com/NazioLT/NZCore/blob/main/Documentation/NCore.md",
+    "documentationUrl": "https://github.com/NazioLT/Tools-Documentation/blob/main/NCore.md",
     "keywords": ["tool", "core"]
 }

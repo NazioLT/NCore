@@ -27,5 +27,12 @@ namespace Nazio_LT.Tools.Core
             Destroy(instance);
             instance = null;
         }
+
+        protected static void ExecuteIfInstance(System.Action _callback)
+        {
+            if (!instance) throw new System.Exception("No Music Manager instance.");
+
+            _callback();
+        }
     }
 }

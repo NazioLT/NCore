@@ -127,17 +127,10 @@ namespace Nazio_LT.Tools.Core
 
         #endregion
 
-        #region Static Methods
+        #region Public Static Methods
 
-        public static void ChangePlaylist(int _playlistID) => CheckIfInstanceAndExecute(() => instance.SwitchPlaylist(_playlistID));
-        public static void ChangeMusic() => CheckIfInstanceAndExecute(() => instance.PlayNewMusic());
-
-        private static void CheckIfInstanceAndExecute(System.Action _callback)
-        {
-            if (!instance) throw new System.Exception("No Music Manager instance.");
-
-            _callback();
-        }
+        public static void ChangePlaylist(int _playlistID) => ExecuteIfInstance(() => instance.SwitchPlaylist(_playlistID));
+        public static void ChangeMusic() => ExecuteIfInstance(() => instance.PlayNewMusic());
 
         #endregion
     }
