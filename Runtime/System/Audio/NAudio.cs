@@ -3,7 +3,6 @@ using UnityEngine.Audio;
 
 namespace Nazio_LT.Tools.Core
 {
-    [System.Serializable]
     [CreateAssetMenu(fileName = "NAudio", menuName = "Nazio_LT/Tools/NAudio")]
     public class NAudio : ScriptableObject
     {

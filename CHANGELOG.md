@@ -27,14 +27,19 @@
 * Epsilon Value. ([630829d](https://github.com/NazioLT/NZCore/commit/630829d3267bf617d7b0e349b061f5d9e2f008cb))
 * Average zero method. ([630829d](https://github.com/NazioLT/NZCore/commit/630829d3267bf617d7b0e349b061f5d9e2f008cb))
 * Check if Vector Axis values is beetwen 2 others. ([6daf5eb](https://github.com/NazioLT/NZCore/commit/6daf5ebce600e69b847e963a7a09701a1e2e54ad))
-* Color set alpha method. ([f8d247b](https://github.com/NazioLT/NZCore/commit/f8d247b91c5566ee6a3cb4f4f7e5ec7c7c9974e3))
 * Bezier curves. ([de20f9e](https://github.com/NazioLT/NZCore/commit/de20f9e6da5267583d03c9d35c55a0132c302175))
 * Bezier Derivative. ([f60ab1d](https://github.com/NazioLT/NZCore/commit/f60ab1dc6894555bf036b584d3be0cc8d2a31ae6))
 * Bezier 2nd Derivative. ([dc738de](https://github.com/NazioLT/NZCore/commit/dc738de682a9671853509366bfbd0f6d0ef45325))
+* Adding Remap ([6c495db](https://github.com/NazioLT/NZCore/commit/6c495db4f8839c58301403882514566ea37b7c74))
 
 #### Utils Library
 
 * First and Last List Methods. ([e579969](https://github.com/NazioLT/NZCore/commit/e57996964125c169d94f80462f7e23387e7b6a95))
+* Color set alpha method. ([f8d247b](https://github.com/NazioLT/NZCore/commit/f8d247b91c5566ee6a3cb4f4f7e5ec7c7c9974e3))
+
+#### Instantiate Library
+
+* InstantiateVFX. ([]())
 
 #### Editor
 
