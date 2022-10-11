@@ -8,6 +8,7 @@ namespace Nazio_LT.Tools.Core
         [SerializeField] private string key;
         [SerializeField] private string mainScene;
         [SerializeField] private string[] additivesScenes;
+        [SerializeField] private int scenePlayList;
 
         public string[] Scenes
         {
@@ -25,5 +26,6 @@ namespace Nazio_LT.Tools.Core
         }
 
         public string Key => key;
+        public int ScenePlayList => scenePlayList;
     }
 }

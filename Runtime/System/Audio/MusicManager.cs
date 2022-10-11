@@ -11,12 +11,13 @@ namespace Nazio_LT.Tools.Core
         public int playlist;
     }
 
-    [RequireComponent(typeof(AudioSource))][AddComponentMenu("Nazio_LT/Core/MusicManager")]
+    [RequireComponent(typeof(AudioSource))]
+    [AddComponentMenu("Nazio_LT/Core/MusicManager")]
     public class MusicManager : Singleton<MusicManager>
     {
         [SerializeField] private NMusic[] music;
         [SerializeField] private List<string> playlists = new List<string>();
-        public static string[] playlistArray;
+        public static string[] playlistArray = new string[1] { "No Musics" };
 
         private List<NMusic> curMusicsInPlaylist;
 
@@ -30,7 +31,7 @@ namespace Nazio_LT.Tools.Core
             base.Awake();
 
             source = GetComponent<AudioSource>();
-            ChangePlaylist(playlists[0]);
+            ChangePlaylist(0);
         }
 
         private void OnValidate()
@@ -41,16 +42,20 @@ namespace Nazio_LT.Tools.Core
                 if (!_corrected.Contains(playlists[i])) _corrected.Add(playlists[i]);
             }
 
-            playlistArray = new string[_corrected.Count];
-            for (int i = 0; i < _corrected.Count; i++)
+            playlistArray = new string[_corrected.Count + 1];
+            playlistArray[0] = "No Musics";
+            for (int i = 1; i < _corrected.Count; i++)
             {
-                playlistArray[i] = _corrected[i];
+                playlistArray[i] = _corrected[i - 1];
             }
         }
 
-        public void ChangePlaylist(string _playlist)
+        private void SwitchPlaylist(int _playlistID)
         {
-            curPlaylist = playlists.IndexOf(_playlist);
+            if (_playlistID == curPlaylist || _playlistID == 0) return;
+
+            curPlaylist = _playlistID;
+
             curMusicsInPlaylist = new List<NMusic>();
             for (int i = 0; i < music.Length; i++)
             {
@@ -59,7 +64,7 @@ namespace Nazio_LT.Tools.Core
             PlayNewMusic();
         }
 
-        public int GetRandomMusicInPlaylist()
+        private int GetRandomMusicInPlaylist()
         {
             if (curMusicsInPlaylist.Count <= 0)
             {
@@ -77,11 +82,13 @@ namespace Nazio_LT.Tools.Core
             return _rndm;
         }
 
-        public void PlayNewMusic()
+        private void PlayNewMusic()
         {
             curMusic = GetRandomMusicInPlaylist();
             StartCoroutine(PlayMusic(5f));
         }
+
+        #region Coroutines
 
         private IEnumerator PlayMusic(float _fadeDuration)
         {
@@ -117,5 +124,21 @@ namespace Nazio_LT.Tools.Core
 
             source.volume = _end;
         }
+
+        #endregion
+
+        #region Static Methods
+
+        public static void ChangePlaylist(int _playlistID) => CheckIfInstanceAndExecute(() => instance.SwitchPlaylist(_playlistID));
+        public static void ChangeMusic() => CheckIfInstanceAndExecute(() => instance.PlayNewMusic());
+
+        private static void CheckIfInstanceAndExecute(System.Action _callback)
+        {
+            if (!instance) throw new System.Exception("No Music Manager instance.");
+
+            _callback();
+        }
+
+        #endregion
     }
 }

@@ -26,6 +26,8 @@ namespace Nazio_LT.Tools.Core.Internal
             }
         }
 
+        public static void DrawMultipleGUIClassic(Rect _baseRect, float _sizeY, SerializedProperty[] _props) => DrawMultiplesGUI(_baseRect, _sizeY, _props, GetPropLabels(_props), (_i, _rect, _prop, _label) => EditorGUI.PropertyField(_rect, _prop));
+
         #endregion
 
         #region NewFields
@@ -39,6 +41,15 @@ namespace Nazio_LT.Tools.Core.Internal
         }
 
         #endregion
+
+        public static string[] GetPropLabels(SerializedProperty[] _props)
+        {
+            string[] _result = new string[_props.Length];
+
+            for (var i = 0; i < _props.Length; i++)_result[i] = _props[i].displayName;
+
+            return _result;
+        }
     }
 }
 #endif

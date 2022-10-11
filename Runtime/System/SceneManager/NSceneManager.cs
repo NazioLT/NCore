@@ -45,14 +45,15 @@ namespace Nazio_LT.Tools.Core
         {
             if (!sceneGroupDict.ContainsKey(_sceneGroupKeys)) return;
 
-            instance.StartCoroutine(instance.UnloadAndLoadNew(sceneGroupDict[_sceneGroupKeys].Scenes));
+            instance.StartCoroutine(instance.UnloadAndLoadNew(sceneGroupDict[_sceneGroupKeys]));
         }
 
         #region Customisable Methods
 
-        protected virtual void BeforeLoading() { return; }
-        protected virtual void AfterLoading() { return; }
+        protected virtual void BeforeLoading(NSceneGroup _sceneGroup) { return; }
         protected virtual void SetLoadingPercent(float _loadingPercent) { return; }
+        protected virtual void AfterLoading(NSceneGroup _sceneGroup) => MusicManager.ChangePlaylist(_sceneGroup.ScenePlayList);
+
 
         #endregion
 
@@ -69,16 +70,18 @@ namespace Nazio_LT.Tools.Core
 
         #region Coroutines
 
-        private IEnumerator UnloadAndLoadNew(string[] _sceneKeys)
+        private IEnumerator UnloadAndLoadNew(NSceneGroup _sceneGroup)
         {
-            BeforeLoading();
+            string[] _scenes = _sceneGroup.Scenes;
+
+            BeforeLoading(_sceneGroup);
 
             yield return new WaitForSeconds(transitionDuration);
 
-            AsyncOperation[] _loadingOps = PrepareLoading(_sceneKeys, false, false);
+            AsyncOperation[] _loadingOps = PrepareLoading(_scenes, false, false);
             yield return StartCoroutine(WaitAllOpsFinished(_loadingOps));
 
-            AfterLoading();
+            AfterLoading(_sceneGroup);
         }
 
         private IEnumerator WaitAllOpsFinished(AsyncOperation[] _ops)
