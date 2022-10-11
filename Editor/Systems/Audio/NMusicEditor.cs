@@ -18,6 +18,7 @@ namespace Nazio_LT.Tools.Core.Internal
 
             var enumRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.ObjectField(enumRect, clip_Prop, new GUIContent(clip_Prop.displayName));
+            
             enumRect = new Rect(position.x, position.y +20f, position.width, EditorGUIUtility.singleLineHeight);
             playlist_Prop.intValue = EditorGUI.Popup(enumRect, playlist_Prop.displayName, playlist_Prop.intValue, MusicManager.playlistArray);
 

@@ -39,10 +39,10 @@
 
 #### Instantiate Library
 
-* InstantiateVFX. ([]())
+* InstantiateVFX. ([ca2b4e4](https://github.com/NazioLT/NZCore/commit/ca2b4e4304fd4b4152750328198c88580185b6a7))
 
 #### Editor
 
 * Adding CreateUtility class, let other class to add custom objects via hérarchy. ([15320da](https://github.com/NazioLT/NZCore/commit/15320dab33312f7fe242a9c3ae960056c5bc99bd))
-* Spline Editor with curve. ([]())
-* Object Creator ([]())
+* Spline Editor with curve. ([d8efec8](https://github.com/NazioLT/NZCore/commit/d8efec863114862a67f6d16bc3f8cde3fedf4390))
+* Object Creator ([bd90629](https://github.com/NazioLT/NZCore/commit/bd906298006917216eb84456afcc93146f61758c))
