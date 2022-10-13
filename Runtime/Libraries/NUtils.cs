@@ -5,7 +5,8 @@ namespace Nazio_LT.Tools.Core
 {
     public static partial class NUtils
     {
-        public static bool IsIn(this float _value, float _min, float _max) => _value >= _min && _value < _max;
+        /// <summary> Return if value is between higher or equals than min and lower than max.</summary>
+        public static bool IsIn(this float _value, float _min, float _maxExclusive) => _value >= _min && _value < _maxExclusive;
 
         /// <summary> Set the alpha of a color.</summary>
         public static Color SetAlpha(Color _value, float _alpha)

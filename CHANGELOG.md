@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/NazioLT/NZCore) (2022-10-11)
+
+#### Math Library
+* Adding Flat Vectors ([]())
+
+
+
 ## [1.0.0](https://github.com/NazioLT/NZCore) (2022-10-11)
 
 

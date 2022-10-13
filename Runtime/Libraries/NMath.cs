@@ -87,6 +87,8 @@ namespace Nazio_LT.Tools.Core
 
         #endregion
 
+        public static Vector2 Flat(Vector3 _v) => new Vector2(_v.x, _v.z);
+
         public static float Remap(float _value, float _inputMin, float _inputMax, float _outputMin, float _outputMax) => Mathf.Lerp(_outputMin, _outputMax, Mathf.InverseLerp(_inputMin, _inputMax, _value));
     }
 }
