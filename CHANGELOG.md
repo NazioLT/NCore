@@ -3,6 +3,8 @@
 #### Math Library
 * Adding Flat Vectors ([]())
 
+#### Main
+* InputManager. ([]())
 
 
 ## [1.0.0](https://github.com/NazioLT/NZCore) (2022-10-11)

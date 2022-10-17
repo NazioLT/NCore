@@ -18,5 +18,7 @@ namespace Nazio_LT.Tools.Core
         public float GetFloat(string _actionName) => playerInput.actions.FindAction(_actionName).ReadValue<float>();
         public Vector2 GetVector2(string _actionName) => playerInput.actions.FindAction(_actionName).ReadValue<Vector2>();
         public bool GetInput(string _actionName) => playerInput.actions.FindAction(_actionName).IsPressed();
+
+        // public void Register() => 
     }
 }
