@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace Nazio_LT.Tools.Core
 {
+    public enum VectorAxis { X, Y, Z }
+
     public static partial class NMath
     {
         #region Constants
@@ -57,8 +59,6 @@ namespace Nazio_LT.Tools.Core
             return true;
         }
 
-        public enum VectorAxis { X, Y, Z }
-
         public static bool VectorAxisInBounds(Vector2 _value, Vector2 _minBounds, Vector2 _maxBounds, VectorAxis _axis) => VectorAxisInBounds((Vector3)_value, (Vector3)_minBounds, (Vector3)_maxBounds, _axis);
 
         public static bool VectorAxisInBounds(Vector3 _value, Vector3 _minBounds, Vector3 _maxBounds, VectorAxis _axis)
@@ -87,7 +87,12 @@ namespace Nazio_LT.Tools.Core
 
         #endregion
 
-        public static Vector2 Flat(Vector3 _v) => new Vector2(_v.x, _v.z);
+        public static Vector2 Flat(Vector3 _v, VectorAxis _deletedAxis)
+        {
+            if (_deletedAxis == VectorAxis.X) return new Vector2(_v.z, _v.y);
+            if (_deletedAxis == VectorAxis.Y) return new Vector2(_v.x, _v.z);
+            return new Vector2(_v.x, _v.y);
+        }
 
         public static float Remap(float _value, float _inputMin, float _inputMax, float _outputMin, float _outputMax) => Mathf.Lerp(_outputMin, _outputMax, Mathf.InverseLerp(_inputMin, _inputMax, _value));
     }
