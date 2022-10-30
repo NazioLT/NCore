@@ -23,6 +23,7 @@ NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) w
 * Audio Management
 * Spline System with mesh deformation
 * SceneManager
+* Input Manager
 
 ## Documentation :
 

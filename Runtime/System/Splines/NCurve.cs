@@ -76,6 +76,7 @@ namespace Nazio_LT.Tools.Core
         public float DistanceToT(float _distance) => NMath.CumulativeValuesToT(simplifiedCurveDst, _distance);
 
         public Vector3 ComputePointUniform(float _t, bool _loop) => ComputePointDistance(_t * curveLength, _loop);
+        public Vector3 ComputePointUniform(float _t) => ComputePointDistance(_t * curveLength, loop);
 
         public void DirectionUniform(float _t, out Vector3 _forward, out Vector3 _up, out Vector3 _right) => Direction(DistanceToT(_t * curveLength), out _forward, out _up, out _right);
 

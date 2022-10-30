@@ -14,6 +14,11 @@ namespace Nazio_LT.Tools.Core
 
         [SerializeField] private NCurve curve;
 
+        private void Awake()
+        {
+            curve.Update();
+        }
+
         public void Gen()
         {
             DeleteMeshes();

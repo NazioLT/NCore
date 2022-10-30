@@ -5,14 +5,11 @@ using UnityEngine.InputSystem;
 namespace Nazio_LT.Tools.Core
 {
     /// <summary>
-    /// Envoie des inputs
+    /// Envoie des inputs, doit etre enregistré dans l'input manager pour fonctionner.
     /// </summary>
     public interface IInputEventReceiver
     {
         public abstract GameObject Object { get; }
-
-        public void Register() => InputManager.instance.Register(this);
-        public void UnRegister() => InputManager.instance.UnRegister(this);
     }
 
     [AddComponentMenu("Nazio_LT/Core/InputManager"), RequireComponent(typeof(PlayerInput))]
@@ -34,7 +31,14 @@ namespace Nazio_LT.Tools.Core
         public void Register(IInputEventReceiver _receiver) => receivers.Add(_receiver);
         public void UnRegister(IInputEventReceiver _receiver) => receivers.Remove(_receiver);
 
+        #region Registered Inputs
+
         public void OnMove() => SendMessages("OnMove");
+        public void OnInventoryInput() => SendMessages("OnInventoryInput");
+        public void OnJump() => SendMessages("OnJump");
+
+        #endregion
+
         protected void SendMessages(string _methodName)
         {
             foreach (var _receiver in receivers)
