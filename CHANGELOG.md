@@ -4,6 +4,7 @@
 
 * NCurveBehaviour scene blocking. ([]())
 * NCurveBehaviour mesh generation errors. ([]())
+* NCurve Parameterization Fixing. ([]())
 
 ### New Features :
 

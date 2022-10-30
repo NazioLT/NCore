@@ -17,6 +17,7 @@ namespace Nazio_LT.Tools.Core
         public void Gen()
         {
             DeleteMeshes();
+            transform.position = Vector3.zero;
 
             if (curve.handles.Count == 0) throw new System.Exception("Cannot Generate the mesh. No handles.");
 
