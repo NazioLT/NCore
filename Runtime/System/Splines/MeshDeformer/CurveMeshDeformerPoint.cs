@@ -28,11 +28,8 @@ namespace Nazio_LT.Tools.Core
             int _objToPlace = (int)(settings.curve.curveLength / placementSettings.Distance) + 1;
             float _factor = 1f / (float)(_objToPlace - 1);
 
-            Debug.Log(settings.curve.curveLength + " : " + _objToPlace);
-
             for (var i = 0; i < _objToPlace; i++)
             {
-                Debug.Log(i * placementSettings.Distance + " : " + i);
                 PlaceMesh(i * placementSettings.Distance);
             }
 

@@ -23,7 +23,6 @@ namespace Nazio_LT.Tools.Core
 
             if (meshToDeform == null) throw new System.Exception("Cannot Generate the mesh. No mesh to deform.");
 
-
             CurveMeshDeformerMainSettings _mainSettings = new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material);
             CurveMeshDeformer _deformer = CurveMeshDeformer.Factory(meshType, _mainSettings, meshPlacementSettings);
             _deformer.Generate();

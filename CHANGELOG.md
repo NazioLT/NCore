@@ -2,17 +2,17 @@
 
 ### Bug solving :
 
-* NCurveBehaviour scene blocking. ([]())
-* NCurveBehaviour mesh generation errors. ([]())
-* NCurve Parameterization Fixing. ([]())
+* NCurveBehaviour scene blocking. ([ea414e6](https://github.com/NazioLT/NZCore/commit/ea414e640570124c5aa807dcfd6d13a7986a7557))
+* NCurveBehaviour mesh generation errors. ([ea414e6](https://github.com/NazioLT/NZCore/commit/ea414e640570124c5aa807dcfd6d13a7986a7557))
+* NCurve Parameterization Fixing. ([f14604e](https://github.com/NazioLT/NZCore/commit/f14604ef336d064123c34d92f2d2fe3e259a88ee))
 
 ### New Features :
 
 #### Math Library
-* Adding Flat Vectors ([]())
+* Adding Flat Vectors ([f5ab9e4](https://github.com/NazioLT/NZCore/commit/f5ab9e48eedbe82d8b64bc3ee460ee69a3973804))
 
 #### Main
-* InputManager. ([]())
+* InputManager. ([3dad156](https://github.com/NazioLT/NZCore/commit/3dad156e143c8905aa97fb40090283913870f9ee))
 
 
 ## [1.0.0](https://github.com/NazioLT/NZCore) (2022-10-11)
