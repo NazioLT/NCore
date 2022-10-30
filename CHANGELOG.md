@@ -1,5 +1,12 @@
 ## [1.1.0](https://github.com/NazioLT/NZCore) (2022-10-11)
 
+### Bug solving :
+
+* NCurveBehaviour scene blocking. ([]())
+* NCurveBehaviour mesh generation errors. ([]())
+
+### New Features :
+
 #### Math Library
 * Adding Flat Vectors ([]())
 

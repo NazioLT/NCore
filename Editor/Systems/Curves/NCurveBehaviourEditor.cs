@@ -7,7 +7,7 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomEditor(typeof(NCurveBehaviour)), CanEditMultipleObjects]
     public class NCurveBehaviourEditor : Editor
     {
-        private SerializedProperty editing_Prop, meshToDeform_Prop, meshType_Prop, curve_Prop, material_Prop, 
+        private SerializedProperty editing_Prop, meshToDeform_Prop, meshType_Prop, curve_Prop, material_Prop,
                                 meshPlacementSettings_Prop;
 
         private NCurve curve;
@@ -37,7 +37,7 @@ namespace Nazio_LT.Tools.Core.Internal
 
             NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { meshToDeform_Prop, material_Prop, meshType_Prop });
 
-            if(meshType_Prop.intValue == 1) EditorGUILayout.PropertyField(meshPlacementSettings_Prop);
+            if (meshType_Prop.intValue == 1) EditorGUILayout.PropertyField(meshPlacementSettings_Prop);
 
             EditorGUILayout.Space();
 
@@ -56,7 +56,13 @@ namespace Nazio_LT.Tools.Core.Internal
 
         private void OnSceneGUI()
         {
-            if(Target.editing) curve.Update();
+            if (curve == null)
+            {
+                Debug.LogError("PUTE");
+                return;
+            }
+
+            if (Target.editing) curve.Update();
 
             for (int i = 0; i < curve.handles.Count; i++)
             {

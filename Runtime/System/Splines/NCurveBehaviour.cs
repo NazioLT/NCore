@@ -13,11 +13,15 @@ namespace Nazio_LT.Tools.Core
         [SerializeField] private CurveMeshDeformerPointSettings meshPlacementSettings;
 
         [SerializeField] private NCurve curve;
-        [SerializeField] private MeshFilter meshFilter;
 
         public void Gen()
         {
             DeleteMeshes();
+
+            if (curve.handles.Count == 0) throw new System.Exception("Cannot Generate the mesh. No handles.");
+
+            if (meshToDeform == null) throw new System.Exception("Cannot Generate the mesh. No mesh to deform.");
+
 
             CurveMeshDeformerMainSettings _mainSettings = new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material);
             CurveMeshDeformer _deformer = CurveMeshDeformer.Factory(meshType, _mainSettings, meshPlacementSettings);
@@ -26,7 +30,6 @@ namespace Nazio_LT.Tools.Core
 
         public void DeleteMeshes()
         {
-            meshFilter.mesh = null;
             if (transform.childCount == 0) return;
 
             for (var i = transform.childCount - 1; i >= 0; i--)
