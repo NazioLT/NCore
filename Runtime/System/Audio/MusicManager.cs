@@ -30,7 +30,7 @@ namespace Nazio_LT.Tools.Core
             base.Awake();
 
             source = GetComponent<AudioSource>();
-            ChangePlaylist(0);
+            ChangePlaylist(1);
         }
 
         private void OnValidate()

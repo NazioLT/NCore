@@ -11,6 +11,9 @@
 #### Math Library
 * Adding Flat Vectors ([f5ab9e4](https://github.com/NazioLT/NZCore/commit/f5ab9e48eedbe82d8b64bc3ee460ee69a3973804))
 
+#### Reflection
+* GetMethod by reflection. ([]())
+
 #### Main
 * InputManager. ([3dad156](https://github.com/NazioLT/NZCore/commit/3dad156e143c8905aa97fb40090283913870f9ee))
 
