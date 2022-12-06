@@ -17,6 +17,10 @@
 #### Main
 * InputManager. ([3dad156](https://github.com/NazioLT/NZCore/commit/3dad156e143c8905aa97fb40090283913870f9ee))
 
+### Moving to NAdvanced :
+
+* Music Manager ([]())
+* NScene Manager ([]())
 
 ## [1.0.0](https://github.com/NazioLT/NZCore) (2022-10-11)
 
