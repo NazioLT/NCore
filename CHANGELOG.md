@@ -5,6 +5,7 @@
 * NCurveBehaviour scene blocking. ([ea414e6](https://github.com/NazioLT/NZCore/commit/ea414e640570124c5aa807dcfd6d13a7986a7557))
 * NCurveBehaviour mesh generation errors. ([ea414e6](https://github.com/NazioLT/NZCore/commit/ea414e640570124c5aa807dcfd6d13a7986a7557))
 * NCurve Parameterization Fixing. ([f14604e](https://github.com/NazioLT/NZCore/commit/f14604ef336d064123c34d92f2d2fe3e259a88ee))
+* NAudio null reference ([0742284](https://github.com/NazioLT/NZCore/commit/07422847b208b25a1aa6a38a1ebdeb810bece3cf))
 
 ### New Features :
 
@@ -12,15 +13,15 @@
 * Adding Flat Vectors ([f5ab9e4](https://github.com/NazioLT/NZCore/commit/f5ab9e48eedbe82d8b64bc3ee460ee69a3973804))
 
 #### Reflection
-* GetMethod by reflection. ([]())
+* GetMethod by reflection. ([f452534](https://github.com/NazioLT/NZCore/commit/f452534f49c42339b4a4b431b74aae497f8f2816))
 
 #### Main
 * InputManager. ([3dad156](https://github.com/NazioLT/NZCore/commit/3dad156e143c8905aa97fb40090283913870f9ee))
 
 ### Moving to NAdvanced :
 
-* Music Manager ([]())
-* NScene Manager ([]())
+* Music Manager ([52a143f](https://github.com/NazioLT/NZCore/commit/52a143f162743bf9b4cd2e2eb2c7bcb446963009))
+* NScene Manager ([52a143f](https://github.com/NazioLT/NZCore/commit/52a143f162743bf9b4cd2e2eb2c7bcb446963009))
 
 ## [1.0.0](https://github.com/NazioLT/NZCore) (2022-10-11)
 
