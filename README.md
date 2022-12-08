@@ -1,4 +1,4 @@
-# NZCore 1.0.0
+# NZCore 1.1.0
 
 NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) wich contains some usefull features for Unity3D.
 
@@ -22,8 +22,6 @@ NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) w
 
 * Audio Management
 * Spline System with mesh deformation
-* SceneManager
-* Input Manager
 
 ## Documentation :
 
