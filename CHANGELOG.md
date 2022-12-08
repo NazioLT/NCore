@@ -1,4 +1,6 @@
-## [1.1.0](https://github.com/NazioLT/NZCore) (2022-10-30)
+## [1.2.0](https://github.com/NazioLT/NZCore) (2022-12-8)
+
+## [1.1.0](https://github.com/NazioLT/NZCore) (2022-12-8)
 
 ### Bug solving :
 
