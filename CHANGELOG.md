@@ -1,6 +1,11 @@
 ## [1.2.0](https://github.com/NazioLT/NZCore) (2022-12-8)
 
-## [1.1.0](https://github.com/NazioLT/NZCore) (2022-12-8)
+### New Features :
+
+#### Models
+* Input Buffer. ([]())
+
+## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 
 ### Bug solving :
 
@@ -25,7 +30,7 @@
 * Music Manager ([52a143f](https://github.com/NazioLT/NZCore/commit/52a143f162743bf9b4cd2e2eb2c7bcb446963009))
 * NScene Manager ([52a143f](https://github.com/NazioLT/NZCore/commit/52a143f162743bf9b4cd2e2eb2c7bcb446963009))
 
-## [1.0.0](https://github.com/NazioLT/NZCore) (2022-10-11)
+## [1.0.0](https://github.com/NazioLT/NZCore/releases/tag/1.0.0) (2022-10-11)
 
 
 ### New Features :
