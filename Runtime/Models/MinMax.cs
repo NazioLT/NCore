@@ -1,11 +1,12 @@
 namespace Nazio_LT.Tools.Core
 {
     [System.Serializable]
-    public class MinMax
+    public struct MinMax
     {
-        public MinMax()
+        public MinMax(float _min, float _max)
         {
-            Reset();
+            min = _min;
+            max = _max;
         }
 
         [UnityEngine.SerializeField] private float min;

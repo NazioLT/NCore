@@ -68,7 +68,7 @@ namespace Nazio_LT.Tools.Core
             {
                 if (!_curValue.IsIn(_values[i], _values[i + 1])) continue;
 
-                return Remap(_curValue, _values[i], _values[i + 1], i / (_length - 1f), (i + 1) / (_length - 1f)); 
+                return Remap(_curValue, _values[i], _values[i + 1], i / (_length - 1f), (i + 1) / (_length - 1f));
                 // Mathf.Lerp(i / (_length - 1f), (i + 1) / (_length - 1f), Mathf.InverseLerp(_values[i], _values[i + 1], _curValue));
             }
 

@@ -3,7 +3,10 @@
 ### New Features :
 
 #### Models
-* Input Buffer. ([]())
+* Input Buffer. ([f029f49](https://github.com/NazioLT/NZCore/commit/f029f491b25145e0681a03b13cd115bbbfd1dc2b))
+
+#### Libraries
+* Game Layers. ([]())
 
 ## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 

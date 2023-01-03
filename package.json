@@ -10,7 +10,7 @@
         "email": "theo.henno21@gmail.com",
         "url": "https://linktr.ee/hennotheo"
     },
-    "dependencies": { "com.unity.inputsystem": "1.4.3" },
+    "dependencies": { },
     "changelogUrl": "https://github.com/NazioLT/NZCore/blob/main/CHANGELOG.md",
     "documentationUrl": "https://github.com/NazioLT/Tools-Documentation/blob/main/NCore.md",
     "keywords": ["tool", "core"]
