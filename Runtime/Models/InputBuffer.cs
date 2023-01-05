@@ -1,13 +1,21 @@
 using UnityEngine;
+using System;
 
 namespace Nazio_LT.Tools.Core
 {
     /// <summary>Save inputs.</summary>
-    public struct InputBuffer<T>
+    public class InputBuffer<T>
     {
-        private T value;
-        private float lastPressedTime;
-        private bool canConsumme, consummed;
+        public InputBuffer(Func<T, bool> _linkedAction)
+        {
+            linkedAction = _linkedAction;
+        }
+
+        private readonly Func<T, bool> linkedAction;
+
+        private T value = default;
+        private float lastPressedTime = 999f;
+        private bool canConsumme = false, consummed = true;
 
         private const float TIME_TO_SAVE = 0.2f;
 
@@ -32,12 +40,15 @@ namespace Nazio_LT.Tools.Core
             consummed = false;
         }
 
-        public void ExecuteIfInputIsAvailable(System.Func<T, bool> _callback)
+        /// <summary>Consume input if it's available and if the callback return true.</summary>
+        public void ExecuteIfInputIsAvailable(Func<T, bool> _callback)
         {
             if (!available) return;
 
             if (_callback(value)) consummed = true;
         }
+
+        public void TryExecute() => ExecuteIfInputIsAvailable(linkedAction);
 
         private bool available => !consummed && (canConsumme || (Time.time - lastPressedTime) < TIME_TO_SAVE);
     }

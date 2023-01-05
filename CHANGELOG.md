@@ -6,7 +6,7 @@
 * Input Buffer. ([f029f49](https://github.com/NazioLT/NZCore/commit/f029f491b25145e0681a03b13cd115bbbfd1dc2b))
 
 #### Libraries
-* Game Layers. ([]())
+* Game Layers. ([304ee4c](https://github.com/NazioLT/NZCore/commit/304ee4cdee432c429569da9cfb8b2245b8fce5da))
 
 ## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 
