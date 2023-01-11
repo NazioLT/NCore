@@ -25,8 +25,8 @@ namespace Nazio_LT.Tools.Core.Internal
             EditorGUI.EndProperty();
         }
 
-        protected abstract void DefineProps(SerializedProperty property);
-        protected abstract void DrawGUI(Rect position, SerializedProperty property, GUIContent label, ref float _height, ref Rect _baseRect);
+        protected abstract void DefineProps(SerializedProperty _property);
+        protected abstract void DrawGUI(Rect _position, SerializedProperty _property, GUIContent _label, ref float _propertyHeight, ref Rect _baseRect);
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => propertyHeight;
     }

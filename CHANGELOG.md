@@ -12,6 +12,7 @@
 * Custom NPropertyDrawer. ([]())
 * Display If. ([]())
 * Adapt GUI. ([]())
+* Draw Header. ([]())
 
 ## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 
