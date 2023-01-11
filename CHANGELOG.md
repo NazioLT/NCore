@@ -8,6 +8,10 @@
 #### Libraries
 * Game Layers. ([304ee4c](https://github.com/NazioLT/NZCore/commit/304ee4cdee432c429569da9cfb8b2245b8fce5da))
 
+#### Editor
+* Display If. ([]())
+* Adapt GUI. ([]())
+
 ## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 
 ### Bug solving :

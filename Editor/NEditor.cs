@@ -40,13 +40,43 @@ namespace Nazio_LT.Tools.Core.Internal
             return EditorGUI.Vector3Field(_pointRect, GUIContent.none, _value);
         }
 
+        /// <summary>Draw bool property, and then display properties only if bool property is true.</summary>
+        public static void DrawDisplayIf(SerializedProperty _conditionProperty, SerializedProperty[] _otherProperties, ref Rect _baseRect, ref float _propertyHeight, bool _spaceAtTheEnd)
+        {
+            _conditionProperty.boolValue = EditorGUI.Toggle(_baseRect, _conditionProperty.displayName, _conditionProperty.boolValue);
+            AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+
+            DisplayIf(() => _conditionProperty.boolValue, _otherProperties, ref _baseRect, ref _propertyHeight, _spaceAtTheEnd);
+        }
+
+        /// <summary>Display properties only if condition is true.</summary>
+        public static void DisplayIf(Func<bool> _condition, SerializedProperty[] _otherProperties, ref Rect _baseRect, ref float _propertyHeight, bool _spaceAtTheEnd)
+        {
+            if (!_condition()) return;
+
+            foreach (var _prop in _otherProperties)
+            {
+                EditorGUI.PropertyField(_baseRect, _prop);
+                AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+            }
+            
+            if(_spaceAtTheEnd) AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+        }
+
+        /// <summary>Recalculate rect size and property total height with property height.</summary>
+        public static void AdaptGUI(ref Rect _baseRect, ref float _propertyHeight, float _rectHeight)
+        {
+            _propertyHeight += _rectHeight;
+            _baseRect.y += _rectHeight;
+        }
+
         #endregion
 
         public static string[] GetPropLabels(SerializedProperty[] _props)
         {
             string[] _result = new string[_props.Length];
 
-            for (var i = 0; i < _props.Length; i++)_result[i] = _props[i].displayName;
+            for (var i = 0; i < _props.Length; i++) _result[i] = _props[i].displayName;
 
             return _result;
         }
