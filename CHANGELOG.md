@@ -7,6 +7,7 @@
 
 #### Libraries
 * Game Layers. ([304ee4c](https://github.com/NazioLT/NZCore/commit/304ee4cdee432c429569da9cfb8b2245b8fce5da))
+* Computing. ([]())
 
 #### Editor
 * Custom NPropertyDrawer. ([]())
