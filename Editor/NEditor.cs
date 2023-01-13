@@ -86,6 +86,26 @@ namespace Nazio_LT.Tools.Core.Internal
 
             return _result;
         }
+
+        /// <summary>Will draw a scriptable object fold out settings.</summary>
+        public static void DrawScriptableObjectSettingsEditor(UnityEngine.Object _settings, System.Action _onSettingUpdated, ref bool _foldOut, ref Editor _settingsEditor)
+        {
+            if (_settings == null) return;
+
+            _foldOut = EditorGUILayout.InspectorTitlebar(_foldOut, _settings);
+
+            using (var _check = new EditorGUI.ChangeCheckScope())
+            {
+                if (!_foldOut) return;
+
+                Editor.CreateCachedEditor(_settings, null, ref _settingsEditor);
+                _settingsEditor.OnInspectorGUI();
+
+                if (!_check.changed) return;
+
+                if (_onSettingUpdated != null) _onSettingUpdated();
+            }
+        }
     }
 }
 #endif
