@@ -1,4 +1,4 @@
-## [1.2.0](https://github.com/NazioLT/NZCore) (2022-12-8)
+## [1.2.0](https://github.com/NazioLT/NZCore) (2023-01-16)
 
 ### New Features :
 
@@ -7,14 +7,14 @@
 
 #### Libraries
 * Game Layers. ([304ee4c](https://github.com/NazioLT/NZCore/commit/304ee4cdee432c429569da9cfb8b2245b8fce5da))
-* Computing. ([]())
+* Computing. ([25529b8](https://github.com/NazioLT/NZCore/commit/25529b885a89c01ea9c4d1479ba3ef4b1602f336))
 
 #### Editor
-* Custom NPropertyDrawer. ([]())
-* Display If. ([]())
-* Adapt GUI. ([]())
-* Draw Header. ([]())
-* FoldableOutScriptableObject ([]())
+* Custom NPropertyDrawer. ([1ba5046](https://github.com/NazioLT/NZCore/commit/1ba5046b3c88d3dd36bfe1f2cb4a37df39a41d64))
+* Display If. ([eaaf2d6](https://github.com/NazioLT/NZCore/commit/eaaf2d6cdbfefca52604c76c918f9dc5e07e777f))
+* Adapt GUI. ([eaaf2d6](https://github.com/NazioLT/NZCore/commit/eaaf2d6cdbfefca52604c76c918f9dc5e07e777f))
+* Draw Header. ([7e76955](https://github.com/NazioLT/NZCore/commit/7e76955258261e170526913ab7e942e9838dae11))
+* FoldableOutScriptableObject ([1ba5046](https://github.com/NazioLT/NZCore/commit/1ba5046b3c88d3dd36bfe1f2cb4a37df39a41d64))
 
 ## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 
