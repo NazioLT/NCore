@@ -1,4 +1,4 @@
-# NZCore 1.1.0
+# NZCore 1.2.0
 
 NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) wich contains some usefull features for Unity3D.
 
