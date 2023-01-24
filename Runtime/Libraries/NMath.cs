@@ -94,6 +94,15 @@ namespace Nazio_LT.Tools.Core
             return new Vector2(_v.x, _v.y);
         }
 
+        public static Vector3 GetPositionAround(int i, int _count, float _radius, Vector3 _center)
+        {
+            float _angleI = 360f;
+            _angleI /= _count;
+
+            float _currentAngle = _angleI * i;
+            return new Vector3(_radius * Mathf.Sin(_currentAngle * Mathf.PI / 180), 0, _radius * Mathf.Cos(_currentAngle * Mathf.PI / 180)) + _center;
+        }
+
         public static float Remap(float _value, float _inputMin, float _inputMax, float _outputMin, float _outputMax) => Mathf.Lerp(_outputMin, _outputMax, Mathf.InverseLerp(_inputMin, _inputMax, _value));
     }
 }
