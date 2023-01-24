@@ -1,9 +1,9 @@
-## [1.2.1](https://github.com/NazioLT/NZCore) (2023-01-16)
+## [1.2.1](https://github.com/NazioLT/NZCore) (2023-01-24)
 
 ### New Features :
 
 #### Math Library
-* Place Around circle. ([]())
+* Place Around circle. ([0087e14](https://github.com/NazioLT/NZCore/commit/0087e14408e890e19461c8a41ae2d7a03bdaecca))
 
 ## [1.2.0](https://github.com/NazioLT/NZCore) (2023-01-16)
 
