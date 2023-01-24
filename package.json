@@ -4,14 +4,18 @@
     "displayName": "Nazio_LT Core",
     "description": "Nazio_LT's core package.",
     "unity": "2021.3",
-    "author": 
-    {
+    "author": {
         "name": "Henno Théo",
         "email": "theo.henno21@gmail.com",
         "url": "https://linktr.ee/hennotheo"
     },
-    "dependencies": { },
+    "dependencies": {
+        "com.unity.inputsystem": "1.4.3"
+    },
     "changelogUrl": "https://github.com/NazioLT/NZCore/blob/main/CHANGELOG.md",
     "documentationUrl": "https://github.com/NazioLT/Tools-Documentation/blob/main/NCore.md",
-    "keywords": ["tool", "core"]
+    "keywords": [
+        "tool",
+        "core"
+    ]
 }
