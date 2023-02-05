@@ -10,6 +10,7 @@ NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) w
 * Utils Library
 * Instantiator Library
 * Editor Library
+* HLSL Libraries
 
 ### Models : 
 

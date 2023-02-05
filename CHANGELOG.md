@@ -1,11 +1,18 @@
-## [1.2.1](https://github.com/NazioLT/NZCore) (2023-01-24)
+## [1.2.2](https://github.com/NazioLT/NZCore) ()
+
+### New Features : 
+
+#### HLSL Library
+* Bezier Library. ([]())
+
+## [1.2.1](https://github.com/NazioLT/NZCore/releases/tag/1.2.1) (2023-01-24)
 
 ### New Features :
 
 #### Math Library
 * Place Around circle. ([0087e14](https://github.com/NazioLT/NZCore/commit/0087e14408e890e19461c8a41ae2d7a03bdaecca))
 
-## [1.2.0](https://github.com/NazioLT/NZCore) (2023-01-16)
+## [1.2.0](https://github.com/NazioLT/NZCore/releases/tag/1.2.0) (2023-01-16)
 
 ### New Features :
 
