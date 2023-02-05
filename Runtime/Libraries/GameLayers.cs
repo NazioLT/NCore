@@ -11,4 +11,3 @@ namespace Nazio_LT.Tools.Core
         public static LayerMask Environement => LayerMask.GetMask("Default");
     }
 }
-

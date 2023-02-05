@@ -4,9 +4,9 @@ namespace Nazio_LT.Tools.Core
 {
     public static partial class NMath
     {
-        /// <summary>
-        /// Compute squared Bezier curve point at t value.
-        /// </summary>
+        #region Core
+
+        /// <summary>Compute squared Bezier curve point at t value.</summary>
         public static Vector3 BezierLerp(Vector3 _p1, Vector3 _p2, Vector3 _p3, Vector3 _p4, float _t)
         {
             float _tCube = Mathf.Pow(_t, 3f);
@@ -20,11 +20,7 @@ namespace Nazio_LT.Tools.Core
             return _p1P + _p2P + _p3P + _p4P;
         }
 
-        public static Vector3 BezierLerp(NHandle _hanlde1, NHandle _handle2, float _t) => BezierLerp(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
-
-        /// <summary>
-        /// Compute squared Bezier derivative at t value.
-        /// </summary>
+        /// <summary>Compute squared Bezier derivative at t value.</summary>
         public static Vector3 BezierDerivative(Vector3 _p1, Vector3 _p2, Vector3 _p3, Vector3 _p4, float _t)
         {
             float _tSquare = _t * _t;
@@ -37,11 +33,7 @@ namespace Nazio_LT.Tools.Core
             return _p1P + _p2P + _p3P + _p4P;
         }
 
-        public static Vector3 BezierDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => BezierDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
-
-        /// <summary>
-        /// Compute squared Bezier second derivative at t value.
-        /// </summary>
+        /// <summary>Compute squared Bezier second derivative at t value.</summary>
         public static Vector3 Bezier2ndDerivative(Vector3 _p1, Vector3 _p2, Vector3 _p3, Vector3 _p4, float _t)
         {
             Vector3 _p1P = (-6f * _t) * _p1;
@@ -52,11 +44,7 @@ namespace Nazio_LT.Tools.Core
             return _p1P + _p2P + _p3P + _p4P;
         }
 
-        public static Vector3 Bezier2ndDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => Bezier2ndDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
-
-        /// <summary>
-        /// Compute squared Bezier total distance with parameterization.
-        /// </summary>
+        /// <summary>Compute squared Bezier total distance with parameterization.</summary>
         public static float CumulativeValuesToT(float[] _values, float _curValue)
         {
             int _length = _values.Length;
@@ -74,6 +62,20 @@ namespace Nazio_LT.Tools.Core
 
             return 0;
         }
+
+        #endregion
+
+        #region Variants
+
+        /// <inheritdoc cref="BezierLerp(Vector3, Vector3, Vector3, Vector3, float)"/>
+        public static Vector3 BezierLerp(NHandle _hanlde1, NHandle _handle2, float _t) => BezierLerp(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
+
+        /// <inheritdoc cref="BezierDerivative(Vector3, Vector3, Vector3, Vector3, float)"/>
+        public static Vector3 BezierDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => BezierDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
+
+        /// <inheritdoc cref="Bezier2ndDerivative(Vector3, Vector3, Vector3, Vector3, float)"/>
+        public static Vector3 Bezier2ndDerivative(NHandle _hanlde1, NHandle _handle2, float _t) => Bezier2ndDerivative(_hanlde1.point, _hanlde1.forwardHelper, _handle2.backHelper, _handle2.point, _t);
+
+        #endregion
     }
 }
-
