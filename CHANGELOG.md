@@ -1,4 +1,4 @@
-## [1.2.2](https://github.com/NazioLT/NZCore) ()
+## [1.2.2](https://github.com/NazioLT/NZCore) (2023-02-06)
 
 ### New Features : 
 
