@@ -1,11 +1,24 @@
-## [1.2.1](https://github.com/NazioLT/NZCore) (2023-01-24)
+## [1.2.2](https://github.com/NazioLT/NZCore) (2023-02-06)
+
+### New Features : 
+
+#### HLSL Library
+* Bezier Library. ([02d2bb9](https://github.com/NazioLT/NZCore/commit/02d2bb97e581ca29d9a4d987394d3a32e747debd))
+
+#### Other : 
+* Libraries Cleaning.
+
+#### Removings : 
+* Instantiator Library.
+
+## [1.2.1](https://github.com/NazioLT/NZCore/releases/tag/1.2.1) (2023-01-24)
 
 ### New Features :
 
 #### Math Library
 * Place Around circle. ([0087e14](https://github.com/NazioLT/NZCore/commit/0087e14408e890e19461c8a41ae2d7a03bdaecca))
 
-## [1.2.0](https://github.com/NazioLT/NZCore) (2023-01-16)
+## [1.2.0](https://github.com/NazioLT/NZCore/releases/tag/1.2.0) (2023-01-16)
 
 ### New Features :
 
@@ -25,7 +38,7 @@
 
 ## [1.1.0](https://github.com/NazioLT/NZCore/releases/tag/1.1.0) (2022-12-8)
 
-### Bug solving :
+### Issue solving :
 
 * NCurveBehaviour scene blocking. ([ea414e6](https://github.com/NazioLT/NZCore/commit/ea414e640570124c5aa807dcfd6d13a7986a7557))
 * NCurveBehaviour mesh generation errors. ([ea414e6](https://github.com/NazioLT/NZCore/commit/ea414e640570124c5aa807dcfd6d13a7986a7557))
