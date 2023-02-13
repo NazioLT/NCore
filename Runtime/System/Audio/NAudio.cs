@@ -7,7 +7,7 @@ namespace Nazio_LT.Tools.Core
     public class NAudio : ScriptableObject
     {
         //Serializable vars
-        [SerializeField] private AudioClip clip;
+        [SerializeField] private AudioClip[] clip;
 
         [Header("Basic Audio Settings")]
         [SerializeField] private AudioMixerGroup mixerGroup;
@@ -21,7 +21,7 @@ namespace Nazio_LT.Tools.Core
         [SerializeField] private float maxPitchDelta = 0;
 
         //Outputs
-        public AudioClip Clip => clip;
+        public AudioClip Clip => clip[Random.Range(0, clip.Length)];
         public string Name => Clip.name;
         public float Length => Clip.length;
         

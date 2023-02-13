@@ -10,8 +10,6 @@ namespace Nazio_LT.Tools.Core.Internal
 
         public void SetAudio(NAudio _clip)
         {
-            source = GetComponent<AudioSource>();
-
             source.outputAudioMixerGroup = _clip.MixerGroup;
             source.volume = _clip.Volume;
             source.pitch = _clip.Pitch + Random.Range(-_clip.MaxPitchDelta, _clip.MaxPitchDelta);
@@ -19,14 +17,15 @@ namespace Nazio_LT.Tools.Core.Internal
             source.reverbZoneMix = _clip.ReverbZoneMix;
             source.dopplerLevel = _clip.DopplerLevel;
 
-            source.PlayOneShot(_clip.Clip);
-            StartCoroutine(WaitForDestroy(_clip.Length));
+            source.clip = _clip.Clip;
+            source.Play();
         }
 
-        private IEnumerator WaitForDestroy(float _s)
+        private void Awake()
         {
-            yield return new WaitForSeconds(_s);
-            Destroy(gameObject);
+            source = GetComponent<AudioSource>();
         }
+
+        public bool Available => !source.isPlaying;
     }
 }
