@@ -22,9 +22,6 @@ namespace Nazio_LT.Tools.Core
 
         //Outputs
         public AudioClip Clip => clip[Random.Range(0, clip.Length)];
-        public string Name => Clip.name;
-        public float Length => Clip.length;
-        
 
         public AudioMixerGroup MixerGroup => mixerGroup;
         public float Volume => volume;

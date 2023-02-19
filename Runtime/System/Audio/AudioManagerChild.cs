@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Nazio_LT.Tools.Core.Internal
