@@ -4,15 +4,13 @@ namespace Nazio_LT.Tools.Core
 {
     public class SecondOrderDynamicsFollower : MonoBehaviour
     {
-        [SerializeField] private float frequency, damping, impulse;
         [SerializeField] private Transform target;
-
-        SecondOrderDynamics dynamics;
+        [SerializeField] private SecondOrderDynamics dynamics = new SecondOrderDynamics(1, 0.5f, 0, Vector3.zero);
 
         private void Awake()
         {
             transform.position = target.position;
-            dynamics = new SecondOrderDynamics(frequency, damping, impulse, target.position);
+            dynamics.Init(target.position);
         }
 
         private void Update()
