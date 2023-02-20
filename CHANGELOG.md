@@ -1,4 +1,4 @@
-## [1.2.3](https://github.com/NazioLT/NZCore) (2023-02-06)
+## [1.2.3](https://github.com/NazioLT/NZCore) (2023-02-20)
 
 ### New Features : 
 * Second Order Dynamics ([705b3eb](https://github.com/NazioLT/NZCore/commit/705b3ebcec0de0bf49e52b43bb512009df1a8424))
