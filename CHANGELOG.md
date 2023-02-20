@@ -1,4 +1,9 @@
-## [1.2.2](https://github.com/NazioLT/NZCore) (2023-02-06)
+## [1.2.3](https://github.com/NazioLT/NZCore) (2023-02-06)
+
+### Rework : 
+* Audio Manager ([]())
+
+## [1.2.2](https://github.com/NazioLT/NZCore/releases/tag/1.2.2) (2023-02-06)
 
 ### New Features : 
 
