@@ -7,6 +7,12 @@ namespace Nazio_LT.Tools.Core.Internal
 {
     public static class NEditor
     {
+        #region Constants
+
+        public const float SINGLE_LINE = 20f;
+
+        #endregion
+
         public static void DrawHeader(string _label, ref Rect _baseRect, ref float _propertyHeight)
         {
             EditorGUI.LabelField(_baseRect, _label, EditorStyles.boldLabel);
@@ -75,6 +81,9 @@ namespace Nazio_LT.Tools.Core.Internal
             _propertyHeight += _rectHeight;
             _baseRect.y += _rectHeight;
         }
+
+        /// <summary>Recalculate rect size and property total height with property height.</summary>
+        public static void AdaptGUILine(ref Rect _baseRect, ref float _propertyHeight, int _lineCount) => AdaptGUI(ref _baseRect, ref _propertyHeight, SINGLE_LINE * _lineCount);
 
         #endregion
 

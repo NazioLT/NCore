@@ -5,7 +5,7 @@ namespace Nazio_LT.Tools.Core
     public class SecondOrderDynamicsFollower : MonoBehaviour
     {
         [SerializeField] private Transform target;
-        [SerializeField] private SecondOrderDynamics dynamics = new SecondOrderDynamics(1, 0.5f, 0, Vector3.zero);
+        [SerializeField] private SecondOrderDynamics<Vector3> dynamics = new SecondOrderDynamics<Vector3>(1, 0.5f, 0, Vector3.zero);
 
         private void Awake()
         {
@@ -15,7 +15,7 @@ namespace Nazio_LT.Tools.Core
 
         private void Update()
         {
-            transform.position = dynamics.Update(Time.deltaTime, target.position);
+            transform.position = SecondOrderDynamics<Vector3>.Update(Time.deltaTime, dynamics, target.position);
         }
     }
 

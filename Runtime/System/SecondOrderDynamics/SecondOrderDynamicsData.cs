@@ -18,7 +18,9 @@ namespace Nazio_LT.Tools.Core
             UpdateData(_f, _z, _r);
         }
 
-        [SerializeField] private float frequency, damping, impulse;
+        [SerializeField, Range(0, 10f)] private float frequency;
+        [SerializeField, Range(0, 5f)] private float damping;
+        [SerializeField, Range(-5f, 10f)] private float impulse;
 
         private float k1, k2, k3;
 
