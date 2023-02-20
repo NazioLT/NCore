@@ -14,6 +14,7 @@ namespace Nazio_LT.Tools.Core
             k1 = 0;
             k2 = 0;
             k3 = 0;
+            k2Stable = 0;
 
             UpdateData(_f, _z, _r);
         }
@@ -22,13 +23,13 @@ namespace Nazio_LT.Tools.Core
         [SerializeField, Range(0, 5f)] private float damping;
         [SerializeField, Range(-5f, 10f)] private float impulse;
 
-        private float k1, k2, k3;
+        private float k1, k2, k2Stable, k3;
 
         private void UpdateData(float _f, float _z, float _r)
         {
-            if(_f < 0) _f = 0;
-            if(_z < 0) _z = 0;
-            if(_r < 0) _r = 0;
+            if (_f < 0) _f = 0;
+            if (_z < 0) _z = 0;
+            if (_r < 0) _r = 0;
 
             float PI2F = 2 * Mathf.PI * _f;
             //compute constants
@@ -47,6 +48,8 @@ namespace Nazio_LT.Tools.Core
         public float K1 => k1;
         public float K2 => k2;
         public float K3 => k3;
+
+        public float K2Stable(float _t) => Mathf.Max(k2, _t * _t / 2 + _t * k1 / 2, _t * k1);
     }
 
 }

@@ -5,6 +5,7 @@ namespace Nazio_LT.Tools.Core
     public static class SecondOrderDynamicsUtils
     {
         public static Vector3 Update(this SecondOrderDynamics<Vector3> _dynamics, float _t, Vector3 _x) => SecondOrderDynamics<Vector3>.Update(_t, _dynamics, _x);
+        public static Vector2 Update(this SecondOrderDynamics<Vector2> _dynamics, float _t, Vector2 _x) => SecondOrderDynamics<Vector2>.Update(_t, _dynamics, _x);
         public static float Update(this SecondOrderDynamics<float> _dynamics, float _t, float _x) => SecondOrderDynamics<float>.Update(_t, _dynamics, _x);
     }
 
@@ -33,26 +34,42 @@ namespace Nazio_LT.Tools.Core
 
         public static Vector3 Update(float _t, SecondOrderDynamics<Vector3> _dynamics, Vector3 _x)
         {
+            SecondOrderDynamicsData _data = _dynamics.data;
+
             //Estimated Velocity
             Vector3 xd = (_x - _dynamics.xp) / _t;
             _dynamics.xp = _x;
 
-            float k2_stable = Mathf.Max(_dynamics.data.K2, _t * _t / 2 + _t * _dynamics.data.K1 / 2, _t * _dynamics.data.K1);//clamp k2 to guarantee stabity without jitter
             _dynamics.y += _t * _dynamics.yd;//integrate position by velocity
-            _dynamics.yd += _t * (_x + _dynamics.data.K3 * xd - _dynamics.y - _dynamics.data.K1 * _dynamics.yd) / k2_stable;//integrate velocity by acceleration
+            _dynamics.yd += _t * (_x + _data.K3 * xd - _dynamics.y - _data.K1 * _dynamics.yd) / _data.K2Stable(_t);//integrate velocity by acceleration
 
             return _dynamics.y;
         }
 
-        public static float Update(float _t, SecondOrderDynamics<float> _dynamics, float x)
+        public static Vector2 Update(float _t, SecondOrderDynamics<Vector2> _dynamics, Vector2 _x)
         {
-            //Estimated Velocity
-            float xd = (x - _dynamics.xp) / _t;
-            _dynamics.xp = x;
+            SecondOrderDynamicsData _data = _dynamics.data;
 
-            float k2_stable = Mathf.Max(_dynamics.data.K2, _t * _t / 2 + _t * _dynamics.data.K1 / 2, _t * _dynamics.data.K1);//clamp k2 to guarantee stabity without jitter
+            //Estimated Velocity
+            Vector2 xd = (_x - _dynamics.xp) / _t;
+            _dynamics.xp = _x;
+
             _dynamics.y += _t * _dynamics.yd;//integrate position by velocity
-            _dynamics.yd += _t * (x + _dynamics.data.K3 * xd - _dynamics.y - _dynamics.data.K1 * _dynamics.yd) / k2_stable;//integrate velocity by acceleration
+            _dynamics.yd += _t * (_x + _data.K3 * xd - _dynamics.y - _data.K1 * _dynamics.yd) / _data.K2Stable(_t);//integrate velocity by acceleration
+
+            return _dynamics.y;
+        }
+
+        public static float Update(float _t, SecondOrderDynamics<float> _dynamics, float _x)
+        {
+            SecondOrderDynamicsData _data = _dynamics.data;
+
+            //Estimated Velocity
+            float xd = (_x - _dynamics.xp) / _t;
+            _dynamics.xp = _x;
+
+            _dynamics.y += _t * _dynamics.yd;//integrate position by velocity
+            _dynamics.yd += _t * (_x + _data.K3 * xd - _dynamics.y - _data.K1 * _dynamics.yd) / _data.K2Stable(_t);//integrate velocity by acceleration
 
             return _dynamics.y;
         }

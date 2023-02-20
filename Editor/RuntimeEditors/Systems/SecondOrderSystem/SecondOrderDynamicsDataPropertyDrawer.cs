@@ -1,6 +1,4 @@
 #if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -51,7 +49,7 @@ namespace Nazio_LT.Tools.Core.Internal
             };
 
             inputCurve = new AnimationCurve(_inputCurveKeyframes);
-            
+
             systemCurveMinMax = new MinMax();
             SecondOrderDynamics<float> _system = new SecondOrderDynamics<float>(frequency_Prop.floatValue, damping_Prop.floatValue, impulse_Prop.floatValue, 0);
 
