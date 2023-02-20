@@ -1,7 +1,11 @@
 ## [1.2.3](https://github.com/NazioLT/NZCore) (2023-02-06)
 
+### New Features : 
+* Second Order Dynamics ([705b3eb](https://github.com/NazioLT/NZCore/commit/705b3ebcec0de0bf49e52b43bb512009df1a8424))
+
 ### Rework : 
-* Audio Manager ([]())
+* Audio Manager ([094586f](https://github.com/NazioLT/NZCore/commit/094586fa093ad5259d9f50f9b0dd5d638d56d5ca))
+
 
 ## [1.2.2](https://github.com/NazioLT/NZCore/releases/tag/1.2.2) (2023-02-06)
 
