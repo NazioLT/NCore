@@ -2,18 +2,14 @@ using UnityEngine;
 
 namespace Nazio_LT.Tools.Core
 {
-    public abstract class ChildMonoBehaviour<ParentType> : MonoBehaviour
+    public abstract class ChildMonoBehaviour<T> : MonoBehaviour
     {
-        private ParentType parent;
+        public T parent { private set; get; }
 
-        /// <summary>
-        /// Initialise l'objet
-        /// </summary>
-        public virtual void Init(ParentType _core)
+        /// <summary>Initialize the object.</summary>
+        public virtual void Init(T _core)
         {
             parent = _core;
         }
-
-        protected ParentType Parent => parent;
     }
 }

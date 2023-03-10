@@ -20,7 +20,7 @@ namespace Nazio_LT.Tools.Core
             buffers = new List<InputBuffer>(_buffers);
         }
 
-        public List<InputBuffer> buffers { private set; get; }
+        public readonly List<InputBuffer> buffers;
 
         public void ExecuteAll()
         {
