@@ -1,3 +1,6 @@
+#ifndef NCORE_BEZIER
+#define NCORE_BEZIER
+
 float3 ComputeBezier(float3 p0, float3 p1, float3 p2, float3 p3, float t)
 {
     float tSquare = t * t;
@@ -22,3 +25,4 @@ float3 ComputeBezierDerivative(float3 p0, float3 p1, float3 p2, float3 p3, float
 
     return p0P + p1P + p2P + p3P;
 }
+#endif
