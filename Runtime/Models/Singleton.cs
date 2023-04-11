@@ -2,9 +2,7 @@ using UnityEngine;
 
 namespace Nazio_LT.Tools.Core
 {
-    /// <summary>
-    /// The singleton is a design pattern, whose objective is to restrict the instantiation of a class to a single object. The global access to it will be provided.
-    /// </summary>
+    /// <summary>The singleton is a design pattern, whose objective is to restrict the instantiation of a class to a single object. The global access to it will be provided.</summary>
     /// <typeparam name="T">Type of the object inheriting the singleton</typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
@@ -18,12 +16,12 @@ namespace Nazio_LT.Tools.Core
         {
             if (instance != null)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
                 return;
             }
 
             instance = (T)this;
-            if (dontDestroyOnLoad && transform.parent == null) DontDestroyOnLoad(this.gameObject);
+            if (dontDestroyOnLoad && transform.parent == null) DontDestroyOnLoad(gameObject);
         }
 
         public static void DestroyInstance()
@@ -34,7 +32,7 @@ namespace Nazio_LT.Tools.Core
 
         protected static void ExecuteIfInstance(System.Action _callback)
         {
-            if (!instance) throw new System.Exception("No Music Manager instance.");
+            if (!instance) throw new System.Exception($"No instance.");
 
             _callback();
         }
