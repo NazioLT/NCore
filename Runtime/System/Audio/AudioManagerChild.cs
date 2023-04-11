@@ -1,11 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
-namespace Nazio_LT.Tools.Core.Internal
+namespace Nazio_LT.Tools.Core
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioManagerChild : MonoBehaviour
     {
         private AudioSource source;
+
+        private void Awake()
+        {
+            source = GetComponent<AudioSource>();
+        }
 
         public void SetAudio(NAudio _clip)
         {
@@ -20,9 +26,19 @@ namespace Nazio_LT.Tools.Core.Internal
             source.Play();
         }
 
-        private void Awake()
+        public void SetAudioLoop(NAudio _clip, float _timeToStop = float.MaxValue)
         {
-            source = GetComponent<AudioSource>();
+            source.loop = true;
+
+            if(_timeToStop != float.MaxValue) StartCoroutine(StopAfterTime(_timeToStop));
+
+            SetAudio(_clip);
+        }
+
+        private IEnumerator StopAfterTime(float _time)
+        {
+            yield return new WaitForSeconds(_time);
+            source.Stop();
         }
 
         public bool Available => !source.isPlaying;

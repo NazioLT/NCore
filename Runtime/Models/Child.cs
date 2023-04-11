@@ -1,12 +1,10 @@
 namespace Nazio_LT.Tools.Core
 {
+    /// <summary>A child is a class wich add a parent.</summary>
     public abstract class Child<T>
     {
-        private T parent;
+        public Child(T _parent) => parent =_parent;
 
-        /// <summary>Initialise l'objet</summary>
-        public virtual void Init(T _parent) => parent = _parent;
-
-        public T Parent => parent;
+        public readonly T parent;
     }
 }

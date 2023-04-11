@@ -1,4 +1,13 @@
-## [1.2.3](https://github.com/NazioLT/NZCore) (2023-02-20)
+## [1.2.4](https://github.com/NazioLT/NZCore) (2023-04-11)
+
+## New Features : 
+* Playing Long audio in audio manager.([ce3c34c](https://github.com/NazioLT/NZCore/commit/ce3c34c2414ca7ff520cc17357d822cec6489b8f))
+* HLSL Shader library ([16601dd](https://github.com/NazioLT/NZCore/commit/16601dddee6c6a35453821ce2ee1d4095e94ad0f))
+
+## Documentation : 
+* Added more documentation to library functions.
+
+## [1.2.3](https://github.com/NazioLT/NZCore/releases/tag/1.2.3) (2023-02-20)
 
 ### New Features : 
 * Second Order Dynamics ([705b3eb](https://github.com/NazioLT/NZCore/commit/705b3ebcec0de0bf49e52b43bb512009df1a8424))

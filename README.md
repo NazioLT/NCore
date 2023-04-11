@@ -1,4 +1,4 @@
-# NZCore 1.2.3
+# NZCore 1.2.4
 
 NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) wich contains some usefull features for Unity3D.
 
@@ -24,6 +24,4 @@ NZCore is a Unity package created by [Henno Théo](https://github.com/NazioLT) w
 * Spline System with mesh deformation
 * Second Order Dynamics
 
-## Documentation :
-
-Soon
+## [[Documentation Here](https://henno-theo.notion.site/NZCore-1-2-3-4a66cf07cec245c5a773a7722bbba0b2)]
