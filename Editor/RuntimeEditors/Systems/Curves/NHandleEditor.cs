@@ -9,30 +9,30 @@ namespace Nazio_LT.Tools.Core.Internal
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var _forwardHelper = property.FindPropertyRelative("forwardHelper");
-            var _point = property.FindPropertyRelative("point");
-            var _backHelper = property.FindPropertyRelative("backHelper");
+            var forwardHelper = property.FindPropertyRelative("forwardHelper");
+            var point = property.FindPropertyRelative("point");
+            var backHelper = property.FindPropertyRelative("backHelper");
 
-            var _break = property.FindPropertyRelative("broken");
+            var broken = property.FindPropertyRelative("broken");
 
-            var _baseRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            var baseRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
             EditorGUI.BeginProperty(position, label, property);
             var indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            EditorGUI.PropertyField(_baseRect, property);
+            EditorGUI.PropertyField(baseRect, property);
 
             if (property.isExpanded)
             {
-                var _breakRect = new Rect(position.x, position.y + 20, position.width, EditorGUIUtility.singleLineHeight);
-                _break.boolValue = EditorGUI.Toggle(_breakRect, _break.displayName, _break.boolValue);
+                var breakRect = new Rect(position.x, position.y + 20, position.width, EditorGUIUtility.singleLineHeight);
+                broken.boolValue = EditorGUI.Toggle(breakRect, broken.displayName, broken.boolValue);
 
-                var _newRect = new Rect(position.x, position.y + 40f, position.width, EditorGUIUtility.singleLineHeight);
-                string[] _labels = new string[] { "Forward Helper", "Point", "Back Helper" };
-                SerializedProperty[] _props = new SerializedProperty[] { _forwardHelper, _point, _backHelper };
+                var newRect = new Rect(position.x, position.y + 40f, position.width, EditorGUIUtility.singleLineHeight);
+                string[] labels = new string[] { "Forward Helper", "Point", "Back Helper" };
+                SerializedProperty[] props = new SerializedProperty[] { forwardHelper, point, backHelper };
 
-                NEditor.DrawMultiplesGUI(_newRect, 20f, _props, _labels, (_i, _rect, _prop, _label) => _prop.vector3Value = NEditor.Vector3Field(_rect, _prop.vector3Value, _label));
+                NEditor.DrawMultiplesGUI(newRect, 20f, props, labels, (i, rect, prop, label) => prop.vector3Value = NEditor.Vector3Field(rect, prop.vector3Value, label));
             }
 
             EditorGUI.indentLevel = indent;

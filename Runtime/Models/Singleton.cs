@@ -6,35 +6,37 @@ namespace Nazio_LT.Tools.Core
     /// <typeparam name="T">Type of the object inheriting the singleton</typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        public static T instance { protected set; get; }
+        private static T s_instance = null;
 
         [SerializeField] protected bool dontDestroyOnLoad = true;
+
+        public static void DestroyInstance()
+        {
+            Destroy(s_instance);
+            s_instance = null;
+        }
 
         protected virtual void Awake() => TryMakeThisTheInstance();
 
         protected void TryMakeThisTheInstance()
         {
-            if (instance != null)
+            if (s_instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            instance = (T)this;
+            s_instance = (T)this;
             if (dontDestroyOnLoad && transform.parent == null) DontDestroyOnLoad(gameObject);
         }
 
-        public static void DestroyInstance()
+        protected static void ExecuteIfInstance(System.Action callback)
         {
-            Destroy(instance);
-            instance = null;
+            if (!s_instance) throw new System.Exception($"No instance.");
+
+            callback();
         }
 
-        protected static void ExecuteIfInstance(System.Action _callback)
-        {
-            if (!instance) throw new System.Exception($"No instance.");
-
-            _callback();
-        }
+        public static T Instance => s_instance;
     }
 }
