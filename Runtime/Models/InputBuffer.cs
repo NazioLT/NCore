@@ -5,8 +5,8 @@ namespace Nazio_LT.Tools.Core
 {
     public abstract class InputBuffer
     {
-        protected float lastPressedTime = 999f;
-        protected bool canConsumme = false, consummed = true;
+        protected float m_lastPressedTime = 999f;
+        protected bool m_canConsumme = false, m_consummed = true;
 
         private const float TIME_TO_SAVE = 0.2f;
 
@@ -15,50 +15,50 @@ namespace Nazio_LT.Tools.Core
         /// <summary>Reset the object.</summary>
         public void Reset()
         {
-            canConsumme = false;
-            consummed = true;
+            m_canConsumme = false;
+            m_consummed = true;
         }
 
         /// <summary>Consume input if it's available and if the callback return true.</summary>
-        protected void ExecuteIfInputIsAvailable<T>(Func<T, bool> _callback, T _value)
+        protected void ExecuteIfInputIsAvailable<T>(Func<T, bool> callback, T value)
         {
-            if (!available) return;
+            if (!m_available) return;
 
-            if (_callback(_value)) consummed = true;
+            if (callback(value)) m_consummed = true;
         }
 
-        private bool available => !consummed && (canConsumme || (Time.time - lastPressedTime) < TIME_TO_SAVE);
+        private bool m_available => !m_consummed && (m_canConsumme || (Time.time - m_lastPressedTime) < TIME_TO_SAVE);
     }
 
     /// <summary>Save inputs.</summary>
     public class InputBuffer<T> : InputBuffer
     {
-        public InputBuffer(Func<T, bool> _linkedAction)
+        public InputBuffer(Func<T, bool> linkedAction)
         {
-            linkedAction = _linkedAction;
+            this.m_linkedAction = linkedAction;
         }
 
-        private readonly Func<T, bool> linkedAction;
-        private T value = default;
+        private readonly Func<T, bool> m_linkedAction;
+        private T m_value = default;
 
-        public void Input(T _value, bool _performed)
+        public void Input(T value, bool performed)
         {
-            value = _value;
+            m_value = value;
 
-            if (!_performed)
+            if (!performed)
             {
-                lastPressedTime = Time.time;
-                canConsumme = false;
+                m_lastPressedTime = Time.time;
+                m_canConsumme = false;
                 return;
             }
 
-            canConsumme = true;
-            consummed = false;
+            m_canConsumme = true;
+            m_consummed = false;
         }
 
         #region Overrided Methods
 
-        public override void TryExecute() => ExecuteIfInputIsAvailable<T>(linkedAction, value);
+        public override void TryExecute() => ExecuteIfInputIsAvailable<T>(m_linkedAction, m_value);
 
         #endregion
     }

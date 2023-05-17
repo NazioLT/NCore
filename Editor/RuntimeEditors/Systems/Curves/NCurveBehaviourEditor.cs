@@ -7,37 +7,37 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomEditor(typeof(NCurveBehaviour)), CanEditMultipleObjects]
     public class NCurveBehaviourEditor : Editor
     {
-        private SerializedProperty editing_Prop, meshToDeform_Prop, meshType_Prop, curve_Prop, material_Prop,
-                                meshPlacementSettings_Prop;
+        private SerializedProperty m_editing_Prop, m_meshToDeform_Prop, m_meshType_Prop, m_curve_Prop, m_material_Prop,
+                                m_meshPlacementSettings_Prop;
 
-        private NCurve curve;
+        private NCurve m_curve;
 
         private void OnEnable()
         {
-            curve = (target as NCurveBehaviour).Curve;
+            m_curve = (target as NCurveBehaviour).Curve;
 
-            editing_Prop = serializedObject.FindProperty("editing");
-            meshType_Prop = serializedObject.FindProperty("meshType");
-            curve_Prop = serializedObject.FindProperty("curve");
-            meshToDeform_Prop = serializedObject.FindProperty("meshToDeform");
-            material_Prop = serializedObject.FindProperty("material");
-            meshPlacementSettings_Prop = serializedObject.FindProperty("meshPlacementSettings");
+            m_editing_Prop = serializedObject.FindProperty("editing");
+            m_meshType_Prop = serializedObject.FindProperty("meshType");
+            m_curve_Prop = serializedObject.FindProperty("curve");
+            m_meshToDeform_Prop = serializedObject.FindProperty("meshToDeform");
+            m_material_Prop = serializedObject.FindProperty("material");
+            m_meshPlacementSettings_Prop = serializedObject.FindProperty("meshPlacementSettings");
         }
 
         public override void OnInspectorGUI()
         {
-            GUIStyle _editButtonStyle = new GUIStyle(GUI.skin.button);
-            Texture2D _buttTexture = new Texture2D(1, 1);
-            _buttTexture.SetPixel(0, 0, Color.red);
-            _buttTexture.Apply();
-            _editButtonStyle.normal.background = editing_Prop.boolValue ? _buttTexture : GUI.skin.button.normal.background;
-            if (GUILayout.Button(editing_Prop.boolValue ? "Stop Editing Curve" : "Edit Curve", _editButtonStyle)) editing_Prop.boolValue = !editing_Prop.boolValue;
+            GUIStyle editButtonStyle = new GUIStyle(GUI.skin.button);
+            Texture2D buttTexture = new Texture2D(1, 1);
+            buttTexture.SetPixel(0, 0, Color.red);
+            buttTexture.Apply();
+            editButtonStyle.normal.background = m_editing_Prop.boolValue ? buttTexture : GUI.skin.button.normal.background;
+            if (GUILayout.Button(m_editing_Prop.boolValue ? "Stop Editing Curve" : "Edit Curve", editButtonStyle)) m_editing_Prop.boolValue = !m_editing_Prop.boolValue;
 
             EditorGUILayout.Space();
 
-            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { meshToDeform_Prop, material_Prop, meshType_Prop });
+            NEditor.DrawMultipleLayoutProperty(new SerializedProperty[] { m_meshToDeform_Prop, m_material_Prop, m_meshType_Prop });
 
-            if (meshType_Prop.intValue == 1) EditorGUILayout.PropertyField(meshPlacementSettings_Prop);
+            if (m_meshType_Prop.intValue == 1) EditorGUILayout.PropertyField(m_meshPlacementSettings_Prop);
 
             EditorGUILayout.Space();
 
@@ -46,7 +46,7 @@ namespace Nazio_LT.Tools.Core.Internal
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(curve_Prop);
+            EditorGUILayout.PropertyField(m_curve_Prop);
 
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
@@ -56,65 +56,65 @@ namespace Nazio_LT.Tools.Core.Internal
 
         private void OnSceneGUI()
         {
-            if (curve == null)
+            if (m_curve == null)
             {
-                Debug.LogError("PUTE");
+                Debug.LogError("Curve doesn't exist");
                 return;
             }
 
-            if (Target.editing) curve.Update();
+            if (Target.Editing) m_curve.Update();
 
-            for (int i = 0; i < curve.handles.Count; i++)
+            for (int i = 0; i < m_curve.Handles.Count; i++)
             {
-                if (Target.editing) DisplayHandle(i);
-                if (i < curve.handles.Count - 1) DrawCurvePart(i, i + 1);
+                if (Target.Editing) DisplayHandle(i);
+                if (i < m_curve.Handles.Count - 1) DrawCurvePart(i, i + 1);
             }
 
-            if (curve.loop) DrawCurvePart(curve.handles.Count - 1, 0);
+            if (m_curve.Loop) DrawCurvePart(m_curve.Handles.Count - 1, 0);
         }
 
         private void DisplayHandle(int i)
         {
-            NHandle _handle = curve.handles[i];
+            NHandle handle = m_curve.Handles[i];
             Handles.color = Color.white;
 
             //Point
-            Vector3 _point = Handles.DoPositionHandle(_handle.point, Quaternion.identity);
+            Vector3 point = Handles.DoPositionHandle(handle.Point, Quaternion.identity);
 
-            if (_point != _handle.point) _handle.MoveCentralPoint(_point);
+            if (point != handle.Point) handle.MoveCentralPoint(point);
 
-            if ((int)curve.type == 0) return;
+            if ((int)m_curve.Type == 0) return;
 
             //Handles
-            DisplayControlPoint(ref _handle.forwardHelper, _handle.point, true);
-            DisplayControlPoint(ref _handle.backHelper, _handle.point, _handle.broken);
+            DisplayControlPoint(ref handle.ForwardHelper, handle.Point, true);
+            DisplayControlPoint(ref handle.BackHelper, handle.Point, handle.Broken);
 
-            _handle.UpdateHandle(true);
+            handle.UpdateHandle(true);
         }
 
-        private void DisplayControlPoint(ref Vector3 _handlePoint, Vector3 _basePoint, bool _positionHandle)
+        private void DisplayControlPoint(ref Vector3 handlePoint, Vector3 basePoint, bool positionHandle)
         {
-            Handles.DrawLine(_basePoint, _handlePoint, 0.2f);
+            Handles.DrawLine(basePoint, handlePoint, 0.2f);
 
-            if (_positionHandle)
+            if (positionHandle)
             {
-                _handlePoint = Handles.DoPositionHandle(_handlePoint, Quaternion.identity);
+                handlePoint = Handles.DoPositionHandle(handlePoint, Quaternion.identity);
                 return;
             }
 
-            Handles.Button(_handlePoint, Quaternion.identity, 0.2f, 0.2f, Handles.CubeHandleCap);
+            Handles.Button(handlePoint, Quaternion.identity, 0.2f, 0.2f, Handles.CubeHandleCap);
         }
 
-        private void DrawCurvePart(int _startI, int _endI)
+        private void DrawCurvePart(int startI, int endI)
         {
             Handles.color = Color.blue;
-            switch ((int)curve.type)
+            switch ((int)m_curve.Type)
             {
                 case 0://Line Type
-                    Handles.DrawLine(curve.handles[_startI].point, curve.handles[_endI].point, 2f);
+                    Handles.DrawLine(m_curve.Handles[startI].Point, m_curve.Handles[endI].Point, 2f);
                     break;
                 case 1://Bezier Type
-                    Handles.DrawBezier(curve.handles[_startI].point, curve.handles[_endI].point, curve.handles[_startI].forwardHelper, curve.handles[_endI].backHelper, Color.blue, new Texture2D(10, 10), 2f);
+                    Handles.DrawBezier(m_curve.Handles[startI].Point, m_curve.Handles[endI].Point, m_curve.Handles[startI].ForwardHelper, m_curve.Handles[endI].BackHelper, Color.blue, new Texture2D(10, 10), 2f);
                     break;
             }
         }

@@ -4,56 +4,56 @@ namespace Nazio_LT.Tools.Core
 {
     public struct CurveMeshDeformerMainSettings
     {
-        public CurveMeshDeformerMainSettings(Mesh _meshToDeform, Transform _parent, NCurve _curve, Material _material)
+        public CurveMeshDeformerMainSettings(Mesh meshToDeform, Transform parent, NCurve curve, Material material)
         {
-            meshToDeform = _meshToDeform;
-            transform = _parent;
-            curve = _curve;
-            material = _material;
+            MeshToDeform = meshToDeform;
+            Transform = parent;
+            Curve = curve;
+            Material = material;
         }
 
-        public readonly Mesh meshToDeform;
-        public readonly Transform transform;
-        public readonly NCurve curve;
-        public readonly Material material;
+        public readonly Mesh MeshToDeform;
+        public readonly Transform Transform;
+        public readonly NCurve Curve;
+        public readonly Material Material;
     }
 
     public enum CurveMeshType { Along, Point }
 
     public abstract class CurveMeshDeformer
     {
-        public CurveMeshDeformer(CurveMeshDeformerMainSettings _mainSettings)
+        public CurveMeshDeformer(CurveMeshDeformerMainSettings mainSettings)
         {
-            settings = _mainSettings;
+            m_settings = mainSettings;
         }
 
-        protected CurveMeshDeformerMainSettings settings;
+        protected CurveMeshDeformerMainSettings m_settings;
 
         public abstract void Generate();
 
-        protected GameObject CreateSubMesh(Transform _parent, out MeshRenderer _mr, out MeshFilter _mf)
+        protected GameObject CreateSubMesh(Transform parent, out MeshRenderer meshRenderer, out MeshFilter meshFilter)
         {
-            GameObject _sub = new GameObject("Spline Sub Mesh");
-            _sub.transform.parent = _parent;
-            _mr = _sub.AddComponent<MeshRenderer>();
-            _mf = _sub.AddComponent<MeshFilter>();
+            GameObject sub = new GameObject("Spline Sub Mesh");
+            sub.transform.parent = parent;
+            meshRenderer = sub.AddComponent<MeshRenderer>();
+            meshFilter = sub.AddComponent<MeshFilter>();
 
-            return _sub;
+            return sub;
         }
 
-        protected Mesh Mesh => settings.meshToDeform;
-        protected Transform transform => settings.transform;
-        protected NCurve Curve => settings.curve;
-        protected Material Material => settings.material;
+        protected Mesh m_mesh => m_settings.MeshToDeform;
+        protected Transform m_transform => m_settings.Transform;
+        protected NCurve m_curve => m_settings.Curve;
+        protected Material m_material => m_settings.Material;
 
-        public static CurveMeshDeformer Factory(CurveMeshType _type, CurveMeshDeformerMainSettings _mainSettings, CurveMeshDeformerPointSettings _placementSettings)
+        public static CurveMeshDeformer Factory(CurveMeshType type, CurveMeshDeformerMainSettings mainSettings, CurveMeshDeformerPointSettings placementSettings)
         {
-            switch (_type)
+            switch (type)
             {
                 case CurveMeshType.Along:
-                    return new CurveMeshDeformerAlong(_mainSettings);
+                    return new CurveMeshDeformerAlong(mainSettings);
                 case CurveMeshType.Point:
-                    return new CurveMeshDeformerPoint(_mainSettings, _placementSettings);
+                    return new CurveMeshDeformerPoint(mainSettings, placementSettings);
             }
 
             return null;

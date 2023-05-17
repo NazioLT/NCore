@@ -7,17 +7,17 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomPropertyDrawer(typeof(FoldableOutSerializedObject<>))]
     public class FoldableOutSerializedObjectPropertyDrawer : NPropertyDrawer
     {
-        private SerializedProperty scriptableObject_Prop;
+        private SerializedProperty m_scriptableObject_Prop;
 
-        protected override void DefineProps(SerializedProperty _property)
+        protected override void DefineProps(SerializedProperty property)
         {
-            scriptableObject_Prop = _property.FindPropertyRelative("scriptableObject");
+            m_scriptableObject_Prop = property.FindPropertyRelative("scriptableObject");
         }
 
-        protected override void DrawGUI(Rect _position, SerializedProperty _property, GUIContent _label, ref float _propertyHeight, ref Rect _baseRect)
+        protected override void DrawGUI(Rect position, SerializedProperty property, GUIContent label, ref float propertyHeight, ref Rect baseRect)
         {
-            EditorGUI.PropertyField(_position, scriptableObject_Prop, new GUIContent(_property.displayName));
-            _propertyHeight += 20f;
+            EditorGUI.PropertyField(position, m_scriptableObject_Prop, new GUIContent(property.displayName));
+            propertyHeight += 20f;
         }
     }
 }

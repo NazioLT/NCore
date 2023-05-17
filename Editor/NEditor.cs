@@ -13,106 +13,106 @@ namespace Nazio_LT.Tools.Core.Internal
 
         #endregion
 
-        public static void DrawHeader(string _label, ref Rect _baseRect, ref float _propertyHeight)
+        public static void DrawHeader(string label, ref Rect baseRect, ref float propertyHeight)
         {
-            EditorGUI.LabelField(_baseRect, _label, EditorStyles.boldLabel);
-            NEditor.AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+            EditorGUI.LabelField(baseRect, label, EditorStyles.boldLabel);
+            NEditor.AdaptGUI(ref baseRect, ref propertyHeight, 20f);
         }
 
         #region Globals
 
-        public static void DrawMultiplesGUI(Rect _baseRect, float _sizeY, SerializedProperty[] _props, string[] _labels, Action<int, Rect, SerializedProperty, string> _callback)
+        public static void DrawMultiplesGUI(Rect baseRect, float sizeY, SerializedProperty[] props, string[] labels, Action<int, Rect, SerializedProperty, string> callback)
         {
-            for (int i = 0; i < _props.Length; i++)
+            for (int i = 0; i < props.Length; i++)
             {
-                var _rect = new Rect(_baseRect.x, _baseRect.y + i * _sizeY, _baseRect.width, EditorGUIUtility.singleLineHeight);
-                _callback(i, _rect, _props[i], _labels[i]);
+                var rect = new Rect(baseRect.x, baseRect.y + i * sizeY, baseRect.width, EditorGUIUtility.singleLineHeight);
+                callback(i, rect, props[i], labels[i]);
             }
         }
 
-        public static void DrawMultipleLayoutProperty(SerializedProperty[] _props)
+        public static void DrawMultipleLayoutProperty(SerializedProperty[] props)
         {
-            foreach (var _prop in _props)
+            foreach (var prop in props)
             {
-                EditorGUILayout.PropertyField(_prop);
+                EditorGUILayout.PropertyField(prop);
             }
         }
 
-        public static void DrawMultipleGUIClassic(Rect _baseRect, float _sizeY, SerializedProperty[] _props) => DrawMultiplesGUI(_baseRect, _sizeY, _props, GetPropLabels(_props), (_i, _rect, _prop, _label) => EditorGUI.PropertyField(_rect, _prop));
+        public static void DrawMultipleGUIClassic(Rect baseRect, float sizeY, SerializedProperty[] props) => DrawMultiplesGUI(baseRect, sizeY, props, GetPropLabels(props), (i, rect, prop, label) => EditorGUI.PropertyField(rect, prop));
 
         #endregion
 
         #region NewFields
 
-        public static Vector3 Vector3Field(Rect _position, Vector3 _value, string _label)
+        public static Vector3 Vector3Field(Rect position, Vector3 value, string label)
         {
-            var _labelRect = new Rect(_position.x, _position.y, _position.width / 5f, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(_labelRect, _label);
-            var _pointRect = new Rect(_position.x + _position.width / 5f, _position.y, _position.width * (4f / 5f), EditorGUIUtility.singleLineHeight);
-            return EditorGUI.Vector3Field(_pointRect, GUIContent.none, _value);
+            var labelRect = new Rect(position.x, position.y, position.width / 5f, EditorGUIUtility.singleLineHeight);
+            EditorGUI.LabelField(labelRect, label);
+            var pointRect = new Rect(position.x + position.width / 5f, position.y, position.width * (4f / 5f), EditorGUIUtility.singleLineHeight);
+            return EditorGUI.Vector3Field(pointRect, GUIContent.none, value);
         }
 
         /// <summary>Draw bool property, and then display properties only if bool property is true.</summary>
-        public static void DrawDisplayIf(SerializedProperty _conditionProperty, SerializedProperty[] _otherProperties, ref Rect _baseRect, ref float _propertyHeight, bool _spaceAtTheEnd)
+        public static void DrawDisplayIf(SerializedProperty conditionProperty, SerializedProperty[] otherProperties, ref Rect baseRect, ref float propertyHeight, bool spaceAtTheEnd)
         {
-            _conditionProperty.boolValue = EditorGUI.Toggle(_baseRect, _conditionProperty.displayName, _conditionProperty.boolValue);
-            AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+            conditionProperty.boolValue = EditorGUI.Toggle(baseRect, conditionProperty.displayName, conditionProperty.boolValue);
+            AdaptGUI(ref baseRect, ref propertyHeight, 20f);
 
-            DisplayIf(() => _conditionProperty.boolValue, _otherProperties, ref _baseRect, ref _propertyHeight, _spaceAtTheEnd);
+            DisplayIf(() => conditionProperty.boolValue, otherProperties, ref baseRect, ref propertyHeight, spaceAtTheEnd);
         }
 
         /// <summary>Display properties only if condition is true.</summary>
-        public static void DisplayIf(Func<bool> _condition, SerializedProperty[] _otherProperties, ref Rect _baseRect, ref float _propertyHeight, bool _spaceAtTheEnd)
+        public static void DisplayIf(Func<bool> condition, SerializedProperty[] otherProperties, ref Rect baseRect, ref float propertyHeight, bool spaceAtTheEnd)
         {
-            if (!_condition()) return;
+            if (!condition()) return;
 
-            foreach (var _prop in _otherProperties)
+            foreach (var prop in otherProperties)
             {
-                EditorGUI.PropertyField(_baseRect, _prop);
-                AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+                EditorGUI.PropertyField(baseRect, prop);
+                AdaptGUI(ref baseRect, ref propertyHeight, 20f);
             }
 
-            if (_spaceAtTheEnd) AdaptGUI(ref _baseRect, ref _propertyHeight, 20f);
+            if (spaceAtTheEnd) AdaptGUI(ref baseRect, ref propertyHeight, 20f);
         }
 
         /// <summary>Recalculate rect size and property total height with property height.</summary>
-        public static void AdaptGUI(ref Rect _baseRect, ref float _propertyHeight, float _rectHeight)
+        public static void AdaptGUI(ref Rect baseRect, ref float propertyHeight, float rectHeight)
         {
-            _propertyHeight += _rectHeight;
-            _baseRect.y += _rectHeight;
+            propertyHeight += rectHeight;
+            baseRect.y += rectHeight;
         }
 
         /// <summary>Recalculate rect size and property total height with property height.</summary>
-        public static void AdaptGUILine(ref Rect _baseRect, ref float _propertyHeight, int _lineCount) => AdaptGUI(ref _baseRect, ref _propertyHeight, SINGLE_LINE * _lineCount);
+        public static void AdaptGUILine(ref Rect baseRect, ref float propertyHeight, int lineCount = 1) => AdaptGUI(ref baseRect, ref propertyHeight, SINGLE_LINE * lineCount);
 
         #endregion
 
-        public static string[] GetPropLabels(SerializedProperty[] _props)
+        public static string[] GetPropLabels(SerializedProperty[] props)
         {
-            string[] _result = new string[_props.Length];
+            string[] _result = new string[props.Length];
 
-            for (var i = 0; i < _props.Length; i++) _result[i] = _props[i].displayName;
+            for (var i = 0; i < props.Length; i++) _result[i] = props[i].displayName;
 
             return _result;
         }
 
         /// <summary>Will draw a scriptable object fold out settings.</summary>
-        public static void DrawScriptableObjectSettingsEditor(UnityEngine.Object _settings, System.Action _onSettingUpdated, ref bool _foldOut, ref Editor _settingsEditor)
+        public static void DrawScriptableObjectSettingsEditor(UnityEngine.Object settings, System.Action onSettingUpdated, ref bool foldOut, ref Editor settingsEditor)
         {
-            if (_settings == null) return;
+            if (settings == null) return;
 
-            _foldOut = EditorGUILayout.InspectorTitlebar(_foldOut, _settings);
+            foldOut = EditorGUILayout.InspectorTitlebar(foldOut, settings);
 
-            using (var _check = new EditorGUI.ChangeCheckScope())
+            using (var check = new EditorGUI.ChangeCheckScope())
             {
-                if (!_foldOut) return;
+                if (!foldOut) return;
 
-                Editor.CreateCachedEditor(_settings, null, ref _settingsEditor);
-                _settingsEditor.OnInspectorGUI();
+                Editor.CreateCachedEditor(settings, null, ref settingsEditor);
+                settingsEditor.OnInspectorGUI();
 
-                if (!_check.changed) return;
+                if (!check.changed) return;
 
-                if (_onSettingUpdated != null) _onSettingUpdated();
+                if (onSettingUpdated != null) onSettingUpdated();
             }
         }
     }

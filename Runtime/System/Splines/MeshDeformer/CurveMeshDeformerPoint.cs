@@ -5,45 +5,45 @@ namespace Nazio_LT.Tools.Core
     [System.Serializable]
     public struct CurveMeshDeformerPointSettings
     {
-        [SerializeField] private float distance;
-        [SerializeField] private bool genLast;
+        [SerializeField] private float m_distance;
+        [SerializeField] private bool m_genLast;
 
-        public float Distance => distance > 0 ? distance : NMath.EPSILON;
-        public bool GenLast => genLast;
+        public float Distance => m_distance > 0 ? m_distance : NMath.EPSILON;
+        public bool GenLast => m_genLast;
     }
 
     public class CurveMeshDeformerPoint : CurveMeshDeformer
     {
-        public CurveMeshDeformerPoint(CurveMeshDeformerMainSettings _mainSettings, CurveMeshDeformerPointSettings _placementSettings) : base(_mainSettings)
+        public CurveMeshDeformerPoint(CurveMeshDeformerMainSettings mainSettings, CurveMeshDeformerPointSettings placementSettings) : base(mainSettings)
         {
-            placementSettings = _placementSettings;
+            m_placementSettings = placementSettings;
         }
 
-        protected CurveMeshDeformerPointSettings placementSettings;
+        protected CurveMeshDeformerPointSettings m_placementSettings;
 
         public override void Generate()
         {
-            Curve.Update();
+            m_curve.Update();
 
-            int _objToPlace = (int)(settings.curve.curveLength / placementSettings.Distance) + 1;
-            float _factor = 1f / (float)(_objToPlace - 1);
+            int objToPlace = (int)(m_settings.Curve.CurveLength / m_placementSettings.Distance) + 1;
+            float factor = 1f / (float)(objToPlace - 1);
 
-            for (var i = 0; i < _objToPlace; i++)
+            for (var i = 0; i < objToPlace; i++)
             {
-                PlaceMesh(i * placementSettings.Distance);
+                PlaceMesh(i * m_placementSettings.Distance);
             }
 
-            if (placementSettings.GenLast) PlaceMesh(settings.curve.curveLength);
+            if (m_placementSettings.GenLast) PlaceMesh(m_settings.Curve.CurveLength);
         }
 
-        private void PlaceMesh(float _dst)
+        private void PlaceMesh(float dst)
         {
-            GameObject _sub = CreateSubMesh(transform, out MeshRenderer _mr, out MeshFilter _mf);
+            GameObject sub = CreateSubMesh(m_transform, out MeshRenderer mr, out MeshFilter mf);
 
-            _mf.mesh = settings.meshToDeform;
+            mf.mesh = m_settings.MeshToDeform;
 
-            _sub.transform.position = Curve.ComputePointDistance(_dst);
-            _mr.material = Material;
+            sub.transform.position = m_curve.ComputePointDistance(dst);
+            mr.material = m_material;
         }
     }
 }

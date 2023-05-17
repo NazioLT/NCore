@@ -4,12 +4,14 @@ namespace Nazio_LT.Tools.Core
 {
     public abstract class ChildMonoBehaviour<T> : MonoBehaviour
     {
-        public T parent { private set; get; }
+        private T m_parent;
 
         /// <summary>Initialize the object.</summary>
-        public virtual void Init(T _core)
+        public virtual void Init(T parent)
         {
-            parent = _core;
+            m_parent = parent;
         }
+
+        public T Parent => m_parent;
     }
 }

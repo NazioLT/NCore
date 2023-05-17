@@ -8,34 +8,34 @@ namespace Nazio_LT.Tools.Core.Internal
 {
     public static class CreateUtilty
     {
-        public static void CreatePrefab(string _path, bool _asPrefab)
+        public static void CreatePrefab(string path, bool asPrefab)
         {
-            GameObject _new = PrefabUtility.InstantiatePrefab(Resources.Load(_path)) as GameObject;
-            if (!_asPrefab) PrefabUtility.UnpackPrefabInstance(_new, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
-            Place(_new);
+            GameObject newObj = PrefabUtility.InstantiatePrefab(Resources.Load(path)) as GameObject;
+            if (!asPrefab) PrefabUtility.UnpackPrefabInstance(newObj, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+            Place(newObj);
         }
 
-        public static void CreateSample(string _name, params Type[] _types)
+        public static void CreateSample(string name, params Type[] types)
         {
-            GameObject _new = ObjectFactory.CreateGameObject(_name, _types);
-            Place(_new);
+            GameObject newObj = ObjectFactory.CreateGameObject(name, types);
+            Place(newObj);
         }
 
-        public static void Place(GameObject _obj)
+        public static void Place(GameObject obj)
         {
-            SceneView _lastView = SceneView.lastActiveSceneView;
-            _obj.transform.position = _lastView ? _lastView.pivot : Vector3.zero;
-            _obj.transform.SetParent(Selection.activeTransform);
+            SceneView lastView = SceneView.lastActiveSceneView;
+            obj.transform.position = lastView ? lastView.pivot : Vector3.zero;
+            obj.transform.SetParent(Selection.activeTransform);
 
-            StageUtility.PlaceGameObjectInCurrentStage(_obj);
-            GameObjectUtility.EnsureUniqueNameForSibling(_obj);
+            StageUtility.PlaceGameObjectInCurrentStage(obj);
+            GameObjectUtility.EnsureUniqueNameForSibling(obj);
 
-            Undo.RegisterCreatedObjectUndo(_obj, $"Create Object : {_obj.name}");
-            Selection.activeGameObject = _obj;
+            Undo.RegisterCreatedObjectUndo(obj, $"Create Object : {obj.name}");
+            Selection.activeGameObject = obj;
 
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
 
-            _obj.transform.localScale = Vector3.one;
+            obj.transform.localScale = Vector3.one;
         }
     }
 }

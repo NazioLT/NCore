@@ -6,38 +6,38 @@ namespace Nazio_LT.Tools.Core
     [System.Serializable]
     public sealed class NHandle
     {
-        public Vector3 point;
-        public Vector3 forwardHelper;
-        public Vector3 backHelper;
+        public Vector3 Point;
+        public Vector3 ForwardHelper;
+        public Vector3 BackHelper;
 
-        public bool broken;
+        public bool Broken;
 
-        public void UpdateHandle(bool _forward)
+        public void UpdateHandle(bool forward)
         {
-            if (_forward)
+            if (forward)
             {
-                UpdateHandle(ref forwardHelper, ref backHelper);
+                UpdateHandle(ref ForwardHelper, ref BackHelper);
                 return;
             }
 
-            UpdateHandle(ref backHelper, ref forwardHelper);
+            UpdateHandle(ref BackHelper, ref ForwardHelper);
         }
-        private void UpdateHandle(ref Vector3 _controlPoint, ref Vector3 _otherPoint)
+        private void UpdateHandle(ref Vector3 controlPoint, ref Vector3 otherPoint)
         {
-            if (broken) return;
+            if (Broken) return;
 
-            Vector3 _controlDelta = _controlPoint - point;
-            _otherPoint = point - _controlDelta;
+            Vector3 controlDelta = controlPoint - Point;
+            otherPoint = Point - controlDelta;
         }
 
-        public void MoveCentralPoint(Vector3 _newPos)
+        public void MoveCentralPoint(Vector3 newPos)
         {
-            Vector3 _deltaForward = forwardHelper - point;
-            Vector3 _deltaBackward = backHelper - point;
+            Vector3 deltaForward = ForwardHelper - Point;
+            Vector3 deltaBackward = BackHelper - Point;
 
-            point = _newPos;
-            forwardHelper = point + _deltaForward;
-            backHelper = point + _deltaBackward;
+            Point = newPos;
+            ForwardHelper = Point + deltaForward;
+            BackHelper = Point + deltaBackward;
         }
     }
 
@@ -45,46 +45,47 @@ namespace Nazio_LT.Tools.Core
     public sealed class NCurve
     {
         public enum CurveType { Linear = 0, Bezier = 1 }
-        [SerializeField] public CurveType type;
-        [SerializeField] public bool loop;
-        [SerializeField] public List<NHandle> handles = new List<NHandle>();
-        [SerializeField] private float inspectorHeight;
-        public float[] simplifiedCurveDst;
-        public float curveLength { private set; get; }
+
+        [SerializeField] public CurveType Type;
+        [SerializeField] public bool Loop;
+        [SerializeField] private List<NHandle> m_handles = new List<NHandle>();
+        [SerializeField] private float m_inspectorHeight;
+        public float[] SimplifiedCurveDst;
+        private float m_curveLength;
 
         private const int PARAMETERIZATION_PRECISION = 100;
 
-        public Vector3 ComputePoint(float _t, bool _loop)
+        public Vector3 ComputePoint(float t, bool loop)
         {
-            if (_t == 0f || (_t == 1f && _loop)) _t = 0.001f;
-            float _computedT = _t / Factor;
-            int _curveID = (int)_computedT;
+            if (t == 0f || (t == 1f && loop)) t = 0.001f;
+            float computedT = t / m_factor;
+            int curveID = (int)computedT;
 
-            return GetPointFunc()(handles[_curveID], handles[GetNextID(_curveID)], _computedT - _curveID);
+            return GetPointFunc()(m_handles[curveID], m_handles[GetNextID(curveID)], computedT - curveID);
         }
 
-        public Vector3 ComputePoint(float _t) => ComputePoint(_t, loop);
+        public Vector3 ComputePoint(float t) => ComputePoint(t, Loop);
 
-        public Vector3 ComputePointDistance(float _distance, bool _loop)
+        public Vector3 ComputePointDistance(float distance, bool loop)
         {
-            float _t = _distance == curveLength ? 1f : DistanceToT(_distance);
-            return ComputePoint(_t, _loop);
+            float t = distance == CurveLength ? 1f : DistanceToT(distance);
+            return ComputePoint(t, loop);
         }
 
-        public Vector3 ComputePointDistance(float _distance) => ComputePointDistance(_distance, loop);
+        public Vector3 ComputePointDistance(float distance) => ComputePointDistance(distance, Loop);
 
-        public float DistanceToT(float _distance) => NMath.CumulativeValuesToT(simplifiedCurveDst, _distance);
+        public float DistanceToT(float distance) => NMath.CumulativeValuesToT(SimplifiedCurveDst, distance);
 
-        public Vector3 ComputePointUniform(float _t, bool _loop) => ComputePointDistance(_t * curveLength, _loop);
-        public Vector3 ComputePointUniform(float _t) => ComputePointDistance(_t * curveLength, loop);
+        public Vector3 ComputePointUniform(float t, bool loop) => ComputePointDistance(t * CurveLength, loop);
+        public Vector3 ComputePointUniform(float t) => ComputePointDistance(t * CurveLength, Loop);
 
-        public void DirectionUniform(float _t, out Vector3 _forward, out Vector3 _up, out Vector3 _right) => Direction(DistanceToT(_t * curveLength), out _forward, out _up, out _right);
+        public void DirectionUniform(float t, out Vector3 forward, out Vector3 up, out Vector3 right) => Direction(DistanceToT(t * CurveLength), out forward, out up, out right);
 
-        public void Direction(float _t, out Vector3 _forward, out Vector3 _up, out Vector3 _right)
+        public void Direction(float t, out Vector3 forward, out Vector3 up, out Vector3 right)
         {
-            _forward = Forward(_t).normalized;
-            _up = Up(_t).normalized;
-            _right = Vector3.Cross(_forward, _up).normalized;
+            forward = Forward(t).normalized;
+            up = Up(t).normalized;
+            right = Vector3.Cross(forward, up).normalized;
         }
 
         public void Update()
@@ -92,79 +93,80 @@ namespace Nazio_LT.Tools.Core
             SimplifyCurve();
         }
 
-        public Vector3 Forward(float _t)
+        public Vector3 Forward(float t)
         {
-            _t = _t - (int)_t;
-            float _computedT = _t / Factor;
-            int _curveID = (int)_computedT;
+            t = t - (int)t;
+            float computedT = t / m_factor;
+            int curveID = (int)computedT;
 
-            return NMath.BezierDerivative(handles[_curveID], handles[GetNextID(_curveID)], _computedT - _curveID);
+            return NMath.BezierDerivative(m_handles[curveID], m_handles[GetNextID(curveID)], computedT - curveID);
         }
 
-        public Vector3 Up(float _t) => Vector3.up;
+        public Vector3 Up(float t) => Vector3.up;
 
         private void SimplifyCurve()
         {
-            if (handles.Count == 0) return;
+            if (m_handles.Count == 0) return;
 
-            simplifiedCurveDst = new float[Parameterization + 1];
+            SimplifiedCurveDst = new float[m_parameterization + 1];
 
-            float _factor = 1f / (float)Parameterization;
-            Vector3 _previousPoint = ComputePoint(0f, loop);
-            simplifiedCurveDst[0] = 0;
+            float factor = 1f / (float)m_parameterization;
+            Vector3 previousPoint = ComputePoint(0f, Loop);
+            SimplifiedCurveDst[0] = 0;
 
-            for (var i = 1; i < Parameterization + 1; i++)
+            for (var i = 1; i < m_parameterization + 1; i++)
             {
-                Vector3 _newPoint = ComputePoint(i * _factor, loop);
-                float _relativeDst = Vector3.Distance(_previousPoint, _newPoint);
-                simplifiedCurveDst[i] = simplifiedCurveDst[i - 1] + _relativeDst;
+                Vector3 newPoint = ComputePoint(i * factor, Loop);
+                float relativeDst = Vector3.Distance(previousPoint, newPoint);
+                SimplifiedCurveDst[i] = SimplifiedCurveDst[i - 1] + relativeDst;
 
                 //Debug.Log(simplifiedCurveDst[i] + " : " + i + ": " + i * _factor);
 
-                _previousPoint = _newPoint;
+                previousPoint = newPoint;
             }
 
-            curveLength = simplifiedCurveDst[Parameterization];
+            m_curveLength = SimplifiedCurveDst[m_parameterization];
         }
 
         private System.Func<NHandle, NHandle, float, Vector3> GetPointFunc()
         {
-            switch (type)
+            switch (Type)
             {
                 case CurveType.Bezier:
                     return (_h1, _h2, _t) => NMath.BezierLerp(_h1, _h2, _t);
             }
 
-            return (_h1, _h2, _t) => Vector3.Lerp(_h1.point, _h2.point, _t);
+            return (_h1, _h2, _t) => Vector3.Lerp(_h1.Point, _h2.Point, _t);
         }
 
         private System.Func<NHandle, NHandle, float, Vector3> GetPointDerivative()
         {
-            switch (type)
+            switch (Type)
             {
                 case CurveType.Bezier:
                     return (_h1, _h2, _t) => NMath.BezierDerivative(_h1, _h2, _t);
             }
 
-            return (_h1, _h2, _t) => (_h1.point - _h1.point).normalized;
+            return (_h1, _h2, _t) => (_h1.Point - _h1.Point).normalized;
         }
 
-        private int GetNextID(int _value)
+        private int GetNextID(int value)
         {
-            if (_value == handles.Count - 1) return 0;
+            if (value == m_handles.Count - 1) return 0;
 
-            return _value + 1;
+            return value + 1;
         }
 
-        private int GetPreID(int _value)
+        private int GetPreID(int value)
         {
-            if (_value == 0) return handles.Count - 1;
+            if (value == 0) return m_handles.Count - 1;
 
-            return _value + 1;
+            return value + 1;
         }
 
-        private float Factor => 1f / (float)(loop ? handles.Count : handles.Count - 1);
-        private int Parameterization => PARAMETERIZATION_PRECISION * (loop ? handles.Count : handles.Count - 1);
-        public List<NHandle> Handles => handles;
+        public List<NHandle> Handles => m_handles;
+        public float CurveLength => m_curveLength;
+        private float m_factor => 1f / (float)(Loop ? m_handles.Count : m_handles.Count - 1);
+        private int m_parameterization => PARAMETERIZATION_PRECISION * (Loop ? m_handles.Count : m_handles.Count - 1);
     }
 }

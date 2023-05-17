@@ -6,30 +6,25 @@ namespace Nazio_LT.Tools.Core
     public class NCurveBehaviour : MonoBehaviour
     {
         //For Editor
-        [SerializeField] private Mesh meshToDeform;
-        [SerializeField] private Material material;
-        [SerializeField] public bool editing;
-        [SerializeField] private CurveMeshType meshType;
-        [SerializeField] private CurveMeshDeformerPointSettings meshPlacementSettings;
+        [SerializeField] private Mesh m_meshToDeform;
+        [SerializeField] private Material m_material;
+        [SerializeField] public bool Editing;
+        [SerializeField] private CurveMeshType m_meshType;
+        [SerializeField] private CurveMeshDeformerPointSettings m_meshPlacementSettings;
 
-        [SerializeField] private NCurve curve;
-
-        private void Awake()
-        {
-            curve.Update();
-        }
+        [SerializeField] private NCurve m_curve;
 
         public void Gen()
         {
             DeleteMeshes();
             transform.position = Vector3.zero;
 
-            if (curve.handles.Count == 0) throw new System.Exception("Cannot Generate the mesh. No handles.");
+            if (m_curve.Handles.Count == 0) throw new System.Exception("Cannot Generate the mesh. No handles.");
 
-            if (meshToDeform == null) throw new System.Exception("Cannot Generate the mesh. No mesh to deform.");
+            if (m_meshToDeform == null) throw new System.Exception("Cannot Generate the mesh. No mesh to deform.");
 
-            CurveMeshDeformerMainSettings _mainSettings = new CurveMeshDeformerMainSettings(meshToDeform, transform, curve, material);
-            CurveMeshDeformer _deformer = CurveMeshDeformer.Factory(meshType, _mainSettings, meshPlacementSettings);
+            CurveMeshDeformerMainSettings _mainSettings = new CurveMeshDeformerMainSettings(m_meshToDeform, transform, m_curve, m_material);
+            CurveMeshDeformer _deformer = CurveMeshDeformer.Factory(m_meshType, _mainSettings, m_meshPlacementSettings);
             _deformer.Generate();
         }
 
@@ -43,6 +38,11 @@ namespace Nazio_LT.Tools.Core
             }
         }
 
-        public NCurve Curve => curve;
+        private void Awake()
+        {
+            m_curve.Update();
+        }
+
+        public NCurve Curve => m_curve;
     }
 }

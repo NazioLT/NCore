@@ -7,29 +7,29 @@ namespace Nazio_LT.Tools.Core
     public class NAudio : ScriptableObject
     {
         //Serializable vars
-        [SerializeField] private AudioClip[] clip;
+        [SerializeField] private AudioClip[] m_clip;
 
         [Header("Basic Audio Settings")]
-        [SerializeField] private AudioMixerGroup mixerGroup;
-        [SerializeField, Range(0f, 1f)] private float volume = 1f;
-        [SerializeField, Range(-3f, 3f)] private float pitch = 1f;
-        [SerializeField, Range(-1f, 1f)] private float stereoPan = 0f;
-        [SerializeField, Range(0f, 1.1f)] private float reverbZoneMix = 1f;
-        [SerializeField, Range(0f, 5f)] private float dopplerLevel = 1f;
+        [SerializeField] private AudioMixerGroup m_mixerGroup;
+        [SerializeField, Range(0f, 1f)] private float m_volume = 1f;
+        [SerializeField, Range(-3f, 3f)] private float m_pitch = 1f;
+        [SerializeField, Range(-1f, 1f)] private float m_stereoPan = 0f;
+        [SerializeField, Range(0f, 1.1f)] private float m_reverbZoneMix = 1f;
+        [SerializeField, Range(0f, 5f)] private float m_dopplerLevel = 1f;
 
         [Header("Advanced Audio Settings")]
-        [SerializeField] private float maxPitchDelta = 0;
+        [SerializeField] private float m_maxPitchDelta = 0;
 
         //Outputs
-        public AudioClip Clip => clip[Random.Range(0, clip.Length)];
+        public AudioClip Clip => m_clip[Random.Range(0, m_clip.Length)];
 
-        public AudioMixerGroup MixerGroup => mixerGroup;
-        public float Volume => volume;
-        public float Pitch => pitch;
-        public float StereoPan => stereoPan;
-        public float ReverbZoneMix => reverbZoneMix;
-        public float DopplerLevel => dopplerLevel;
+        public AudioMixerGroup MixerGroup => m_mixerGroup;
+        public float Volume => m_volume;
+        public float Pitch => m_pitch;
+        public float StereoPan => m_stereoPan;
+        public float ReverbZoneMix => m_reverbZoneMix;
+        public float DopplerLevel => m_dopplerLevel;
 
-        public float MaxPitchDelta => maxPitchDelta;
+        public float MaxPitchDelta => m_maxPitchDelta;
     }
 }

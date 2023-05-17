@@ -9,102 +9,104 @@ namespace Nazio_LT.Tools.Core
 
     public class Heap<T> where T : IHeapableObject<T>
     {
-        public Heap(int _size)
+        public Heap(int size)
         {
-            elements = new T[_size];
+            m_elements = new T[size];
         }
 
-        private T[] elements;
-        public int count { private set; get; } = 0;
+        private T[] m_elements;
+        private int m_count = 0;
 
-        public void Add(T _item)
+        public void Add(T item)
         {
-            _item.HeapIndex = count;
-            elements[count] = _item;
-            SortUp(_item);
-            count++;
+            item.HeapIndex = m_count;
+            m_elements[m_count] = item;
+            SortUp(item);
+            m_count++;
         }
 
         public T RemoveFirst()
         {
-            T _result = elements[0];
-            count--;
-            elements[0] = elements[count];
-            elements[0].HeapIndex = 0;
-            SortDown(elements[0]);
+            T result = m_elements[0];
+            m_count--;
+            m_elements[0] = m_elements[m_count];
+            m_elements[0].HeapIndex = 0;
+            SortDown(m_elements[0]);
 
-            return _result;
+            return result;
         }
 
-        public bool Contains(T _item) => Equals(elements[_item.HeapIndex], _item);
-        public void UpdateItem(T _item) => SortUp(_item);
+        public bool Contains(T item) => Equals(m_elements[item.HeapIndex], item);
+        public void UpdateItem(T item) => SortUp(item);
 
-        private void SortDown(T _item)
+
+        public T GetItem(int id) => m_elements[id];
+
+        public T GetFirst()
+        {
+            if (m_elements.Length >= 1) return m_elements[0];
+            return default(T);
+        }
+
+        private void SortDown(T item)
         {
             while (true)
             {
-                int _leftChildID = GetChildID(_item.HeapIndex, false);
-                int _rightChildID = GetChildID(_item.HeapIndex, true);
-                int _swapID = 0;
+                int leftChildID = GetChildID(item.HeapIndex, false);
+                int rightChildID = GetChildID(item.HeapIndex, true);
+                int swapID = 0;
 
-                if (_leftChildID >= count) return;
+                if (leftChildID >= m_count) return;
 
-                _swapID = _leftChildID;
+                swapID = leftChildID;
 
-                if (_rightChildID < count)
+                if (rightChildID < m_count)
                 {
-                    if (elements[_leftChildID].CompareTo(elements[_rightChildID]) < 0)
+                    if (m_elements[leftChildID].CompareTo(m_elements[rightChildID]) < 0)
                     {
-                        _swapID = _rightChildID;
+                        swapID = rightChildID;
                     }
                 }
 
-                if (_item.CompareTo(elements[_swapID]) >= 0) return;
+                if (item.CompareTo(m_elements[swapID]) >= 0) return;
 
-                SwapItem(elements[_swapID], _item);
+                SwapItem(m_elements[swapID], item);
             }
         }
 
         /// <summary>
         /// Remonte un item jusqu'a ce que
         /// </summary>
-        /// <param name="_item"></param>
-        private void SortUp(T _item)
+        /// <param name="item"></param>
+        private void SortUp(T item)
         {
-            int _parentID = GetParentID(_item.HeapIndex);
+            int parentID = GetParentID(item.HeapIndex);
 
             while (true)
             {
-                T _parent = elements[_parentID];
+                T parent = m_elements[parentID];
 
-                if (_item.CompareTo(_parent) <= 0) break;
+                if (item.CompareTo(parent) <= 0) break;
 
-                SwapItem(_parent, _item);
-                _parentID = GetParentID(_item.HeapIndex);
+                SwapItem(parent, item);
+                parentID = GetParentID(item.HeapIndex);
             }
         }
 
-        private void SwapItem(T _a, T _b)
+        private void SwapItem(T a, T b)
         {
-            elements[_a.HeapIndex] = _b;
-            elements[_b.HeapIndex] = _a;
+            m_elements[a.HeapIndex] = b;
+            m_elements[b.HeapIndex] = a;
 
-            int _aID = _a.HeapIndex;
-            _a.HeapIndex = _b.HeapIndex;
-            _b.HeapIndex = _aID;
+            int aID = a.HeapIndex;
+            a.HeapIndex = b.HeapIndex;
+            b.HeapIndex = aID;
         }
 
-        public T GetItem(int _id) => elements[_id];
+        private int GetParentID(int id) => (id - 1) / 2;
+        private int GetChildID(int id, bool rightChild) => id * 2 + (rightChild ? 2 : 1);
 
-        private int GetParentID(int _id) => (_id - 1) / 2;
-        private int GetChildID(int _id, bool _rightChild) => _id * 2 + (_rightChild ? 2 : 1);
-
-        public T GetFirst()
-        {
-            if (elements.Length >= 1) return elements[0];
-            return default(T);
-        }
-
-        public bool IsEmpty => count <= 0;
+        public bool IsEmpty => m_count <= 0;
+        public int Count => m_count;
     }
 }

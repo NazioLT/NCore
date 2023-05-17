@@ -4,75 +4,75 @@ namespace Nazio_LT.Tools.Core
 {
     public class CurveMeshDeformerAlong : CurveMeshDeformer
     {
-        public CurveMeshDeformerAlong(CurveMeshDeformerMainSettings _mainSettings) : base(_mainSettings) { }
+        public CurveMeshDeformerAlong(CurveMeshDeformerMainSettings mainSettings) : base(mainSettings) { }
 
         public override void Generate()
         {
             //Analyse le Mesh
-            Bounds _meshBounds = Mesh.bounds;
-            Vector3 _meshOrigin = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.min.z));
-            Vector3 _meshEnd = transform.TransformPoint(new Vector3(_meshBounds.center.x, _meshBounds.min.y, _meshBounds.max.z));
+            Bounds meshBounds = m_mesh.bounds;
+            Vector3 meshOrigin = m_transform.TransformPoint(new Vector3(meshBounds.center.x, meshBounds.min.y, meshBounds.min.z));
+            Vector3 meshEnd = m_transform.TransformPoint(new Vector3(meshBounds.center.x, meshBounds.min.y, meshBounds.max.z));
 
-            float _zDst = Mathf.Abs(_meshEnd.z - _meshOrigin.z);
-            int _objNumber = (int)(Curve.curveLength / _zDst);
+            float zDst = Mathf.Abs(meshEnd.z - meshOrigin.z);
+            int objNumber = (int)(m_curve.CurveLength / zDst);
 
-            float _tPart = 1f / (float)_objNumber;
-            float _startT = 0f;
+            float tPart = 1f / (float)objNumber;
+            float startT = 0f;
 
             //Crée les meshs
-            for (var j = 0; j < _objNumber; j++)
+            for (var j = 0; j < objNumber; j++)
             {
-                if (!CreateChildMesh(_meshOrigin, _meshEnd, _zDst, _startT, _tPart)) break;
-                _startT += _tPart;
+                if (!CreateChildMesh(meshOrigin, meshEnd, zDst, startT, tPart)) break;
+                startT += tPart;
             }
         }
 
-        private bool CreateChildMesh(Vector3 _origin, Vector3 _end, float _zDst, float _startT, float _tPart)
+        private bool CreateChildMesh(Vector3 origin, Vector3 end, float zDst, float startT, float tPart)
         {
-            GameObject _sub = CreateSubMesh(transform, out MeshRenderer _mr, out MeshFilter _mf);
+            GameObject sub = CreateSubMesh(m_transform, out MeshRenderer mr, out MeshFilter mf);
 
-            Vector3[] _vertices = Mesh.vertices;
+            Vector3[] vertices = m_mesh.vertices;
             Mesh objMesh = new Mesh();
-            for (var i = 0; i < _vertices.Length; i++)
+            for (var i = 0; i < vertices.Length; i++)
             {
-                _vertices[i] = DeformVertex(_vertices[i], _origin, _end, _zDst, _startT, _tPart);
+                vertices[i] = DeformVertex(vertices[i], origin, end, zDst, startT, tPart);
             }
 
-            objMesh.vertices = _vertices;
-            objMesh.uv = Mesh.uv;
-            objMesh.triangles = Mesh.triangles;
+            objMesh.vertices = vertices;
+            objMesh.uv = m_mesh.uv;
+            objMesh.triangles = m_mesh.triangles;
             objMesh.RecalculateNormals();
             objMesh.RecalculateBounds();
 
-            if (objMesh.bounds.size.magnitude < _zDst / 1.5f)//Vrmt petit puisque si deformé normalement la taille augmente
+            if (objMesh.bounds.size.magnitude < zDst / 1.5f)//Vrmt petit puisque si deformé normalement la taille augmente
             {
-                GameObject.DestroyImmediate(_sub);
+                GameObject.DestroyImmediate(sub);
                 return false;
             }
 
-            _mr.material = Material;
-            _mf.mesh = objMesh;
+            mr.material = m_material;
+            mf.mesh = objMesh;
 
             return true;
         }
 
-        private Vector3 DeformVertex(Vector3 _vertex, Vector3 _start, Vector3 _end, float _zDst, float _startT, float _tPart)
+        private Vector3 DeformVertex(Vector3 vertex, Vector3 start, Vector3 end, float zDst, float startT, float tPart)
         {
-            float _vDst = Mathf.Abs(_vertex.z - _start.z);
-            float _localT = _vDst / _zDst;
-            float _curveT = Mathf.Clamp(_startT + (_localT * _tPart), 0f, 1f);
+            float vDst = Mathf.Abs(vertex.z - start.z);
+            float localT = vDst / zDst;
+            float curveT = Mathf.Clamp(startT + (localT * tPart), 0f, 1f);
 
-            Vector3 _refPoint = Vector3.Lerp(_start, _end, _localT);
-            Vector3 _deformationDelta = _vertex - _refPoint;
+            Vector3 refPoint = Vector3.Lerp(start, end, localT);
+            Vector3 deformationDelta = vertex - refPoint;
 
-            settings.curve.DirectionUniform(_curveT, out Vector3 _forward, out Vector3 _up, out Vector3 _right);
+            m_settings.Curve.DirectionUniform(curveT, out Vector3 forward, out Vector3 up, out Vector3 right);
 
-            Vector3 _orientedDelta = Vector3.zero;
-            _orientedDelta -= _forward * _deformationDelta.z;
-            _orientedDelta += _up * _deformationDelta.y;
-            _orientedDelta -= _right * _deformationDelta.x;
+            Vector3 orientedDelta = Vector3.zero;
+            orientedDelta -= forward * deformationDelta.z;
+            orientedDelta += up * deformationDelta.y;
+            orientedDelta -= right * deformationDelta.x;
 
-            return _orientedDelta + Curve.ComputePointUniform(_curveT, false);
+            return orientedDelta + m_curve.ComputePointUniform(curveT, false);
         }
     }
 }

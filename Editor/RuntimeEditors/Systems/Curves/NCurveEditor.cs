@@ -7,48 +7,48 @@ namespace Nazio_LT.Tools.Core.Internal
     [CanEditMultipleObjects, CustomPropertyDrawer(typeof(NCurve))]
     public class NCurveEditor : PropertyDrawer
     {
-        private bool isEditing = false;
+        private bool m_isEditing = false;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
             var indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
-            float _propHeight = 0f;
+            float propHeight = 0f;
 
-            var _baseRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.PropertyField(_baseRect, property, new GUIContent(property.displayName), false);
-            _propHeight += 20f;
+            var baseRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PropertyField(baseRect, property, new GUIContent(property.displayName), false);
+            propHeight += 20f;
 
-            _baseRect = new Rect(position.x + 20f, position.y + 20f, position.width - 20f, EditorGUIUtility.singleLineHeight);
-            if (property.isExpanded) DisplayOther(ref _propHeight, _baseRect, property);
+            baseRect = new Rect(position.x + 20f, position.y + 20f, position.width - 20f, EditorGUIUtility.singleLineHeight);
+            if (property.isExpanded) DisplayOther(ref propHeight, baseRect, property);
 
-            property.FindPropertyRelative("inspectorHeight").floatValue = _propHeight;
+            property.FindPropertyRelative("inspectorHeight").floatValue = propHeight;
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
         }
 
-        private void DisplayOther(ref float _height, Rect _basePosition, SerializedProperty _property)
+        private void DisplayOther(ref float height, Rect basePosition, SerializedProperty property)
         {
-            var _handle_Prop = _property.FindPropertyRelative("handles");
-            var _loop_Prop = _property.FindPropertyRelative("loop");
-            var _type_Prop = _property.FindPropertyRelative("type");
-            var _isEditing_Prop = _property.FindPropertyRelative("isEditing");
-            float _baseHeight = 0;
+            var handle_Prop = property.FindPropertyRelative("handles");
+            var loop_Prop = property.FindPropertyRelative("loop");
+            var type_Prop = property.FindPropertyRelative("type");
+            var isEditing_Prop = property.FindPropertyRelative("isEditing");
+            float baseHeight = 0;
 
-            var _baseRect = new Rect(_basePosition.x, _basePosition.y + _baseHeight, _basePosition.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.PropertyField(_baseRect, _loop_Prop);
-            _baseHeight += 20f;
+            var baseRect = new Rect(basePosition.x, basePosition.y + baseHeight, basePosition.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PropertyField(baseRect, loop_Prop);
+            baseHeight += 20f;
 
-            _baseRect = new Rect(_basePosition.x, _basePosition.y + _baseHeight, _basePosition.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.PropertyField(_baseRect, _type_Prop);
-            _baseHeight += 20f;
+            baseRect = new Rect(basePosition.x, basePosition.y + baseHeight, basePosition.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PropertyField(baseRect, type_Prop);
+            baseHeight += 20f;
 
-            _baseRect = new Rect(_basePosition.x, _basePosition.y + _baseHeight, _basePosition.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.PropertyField(_baseRect, _handle_Prop);
-            _baseHeight += (_handle_Prop.isExpanded ? EditorGUI.GetPropertyHeight(_handle_Prop, true) : 20f);
+            baseRect = new Rect(basePosition.x, basePosition.y + baseHeight, basePosition.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PropertyField(baseRect, handle_Prop);
+            baseHeight += (handle_Prop.isExpanded ? EditorGUI.GetPropertyHeight(handle_Prop, true) : 20f);
 
-            _height += _baseHeight;
+            height += baseHeight;
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => property.FindPropertyRelative("inspectorHeight").floatValue;

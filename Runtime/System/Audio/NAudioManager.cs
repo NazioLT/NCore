@@ -6,74 +6,74 @@ namespace Nazio_LT.Tools.Core
     [AddComponentMenu("Nazio_LT/Core/NAudioManager")]
     public class NAudioManager : Singleton<NAudioManager>
     {
-        [SerializeField, Range(1, 32)] private int audioPoolLength = 1;
-        [SerializeField] private bool createAudioIfFullyAssigned = true;
-        private List<AudioManagerChild> audioPool;
+        [SerializeField, Range(1, 32)] private int m_audioPoolLength = 1;
+        [SerializeField] private bool m_createAudioIfFullyAssigned = true;
+        private List<AudioManagerChild> m_audioPool;
 
-        public void PlayAudioOneShot(NAudio _clip)
+        public void PlayAudioOneShot(NAudio clip)
         {
-            if (_clip == null) return;
+            if (clip == null) return;
 
-            if (!IsAudioAvailableInPool(out AudioManagerChild _audioSource))
+            if (!IsAudioAvailableInPool(out AudioManagerChild audioSource))
             {
                 Debug.LogWarningFormat("No audio pool available");
                 return;
             }
 
-            _audioSource.SetAudio(_clip);
+            audioSource.SetAudio(clip);
         }
 
-        public AudioManagerChild AssignAudioForTime(NAudio _clip, float _time)
+        public AudioManagerChild AssignAudioForTime(NAudio clip, float time)
         {
-            if (_clip == null) return null;
+            if (clip == null) return null;
 
-            if (!IsAudioAvailableInPool(out AudioManagerChild _audioSource))
+            if (!IsAudioAvailableInPool(out AudioManagerChild audioSource))
             {
                 Debug.LogWarningFormat("No audio pool available");
                 return null;
             }
 
-            _audioSource.SetAudioLoop(_clip, _time);
+            audioSource.SetAudioLoop(clip, time);
 
-            return _audioSource;
+            return audioSource;
         }
 
         private void Start()
         {
-            audioPool = new();
-            for (var i = 0; i < audioPoolLength; i++)
+            m_audioPool = new();
+            for (var i = 0; i < m_audioPoolLength; i++)
             {
-                audioPool.Add(CreateChild(i));
+                m_audioPool.Add(CreateChild(i));
             }
         }
 
-        private bool IsAudioAvailableInPool(out AudioManagerChild _audio)
+        private bool IsAudioAvailableInPool(out AudioManagerChild audio)
         {
-            _audio = null;
-            foreach (var _audioItem in audioPool)//Audio disponible
+            audio = null;
+            foreach (var audioItem in m_audioPool)//Audio disponible
             {
-                if (_audioItem.Available)
+                if (audioItem.Available)
                 {
-                    _audio = _audioItem;
+                    audio = audioItem;
                     return true;
                 }
             }
 
-            if (createAudioIfFullyAssigned)
+            if (m_createAudioIfFullyAssigned)
             {
-                audioPool.Add(CreateChild(audioPool.Count));
+                m_audioPool.Add(CreateChild(m_audioPool.Count));
                 return true;
             }
 
             return false;
         }
 
-        private AudioManagerChild CreateChild(int _id)
+        private AudioManagerChild CreateChild(int id)
         {
-            GameObject _obj = new GameObject($"NAudio - {_id}");
-            _obj.transform.parent = transform;
+            GameObject obj = new GameObject($"NAudio - {id}");
+            obj.transform.parent = transform;
 
-            return _obj.AddComponent<AudioManagerChild>();
+            return obj.AddComponent<AudioManagerChild>();
         }
     }
 }
