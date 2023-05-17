@@ -1,4 +1,4 @@
-## [1.3.0](https://github.com/NazioLT/NZCore) (2023-04-11)
+## [1.2.5](https://github.com/NazioLT/NZCore) (2023-05-18)
 
 ## Reworking Nomenclature
 
