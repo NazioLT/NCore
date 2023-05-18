@@ -1,3 +1,8 @@
+## [1.2.6](https://github.com/NazioLT/NZCore) (2023-05-18)
+
+## Rework : 
+* Singleton Hotfix.
+
 ## [1.2.5](https://github.com/NazioLT/NZCore) (2023-05-18)
 
 ## Reworking Nomenclature
