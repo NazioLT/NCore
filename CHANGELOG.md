@@ -4,7 +4,8 @@
 
 ## [1.2.6](https://github.com/NazioLT/NCore/releases/tag/1.2.6) (2023-05-18)
 
-## Reworking Nomenclature
+## Rework : 
+* Singleton Hotfix.
 
 ## [1.2.5](https://github.com/NazioLT/NCore/releases/tag/1.2.5) (2023-05-18)
 

@@ -29,6 +29,8 @@ namespace Nazio_LT.Tools.Core
             s_instance = (T)this;
             if (dontDestroyOnLoad && transform.parent == null) DontDestroyOnLoad(gameObject);
         }
+        
+        protected void SetInstance(T instance) => s_instance = instance;
 
         protected static void ExecuteIfInstance(System.Action callback)
         {
