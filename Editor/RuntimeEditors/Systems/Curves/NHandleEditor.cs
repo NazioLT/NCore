@@ -9,11 +9,11 @@ namespace Nazio_LT.Tools.Core.Internal
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var forwardHelper = property.FindPropertyRelative("forwardHelper");
-            var point = property.FindPropertyRelative("point");
-            var backHelper = property.FindPropertyRelative("backHelper");
+            var forwardHelper = property.FindPropertyRelative("ForwardHelper");
+            var point = property.FindPropertyRelative("Point");
+            var backHelper = property.FindPropertyRelative("BackHelper");
 
-            var broken = property.FindPropertyRelative("broken");
+            var broken = property.FindPropertyRelative("Broken");
 
             var baseRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 

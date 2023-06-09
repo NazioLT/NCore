@@ -11,7 +11,7 @@ namespace Nazio_LT.Tools.Core.Internal
 
         protected override void DefineProps(SerializedProperty property)
         {
-            m_scriptableObject_Prop = property.FindPropertyRelative("scriptableObject");
+            m_scriptableObject_Prop = property.FindPropertyRelative("m_scriptableObject");
         }
 
         protected override void DrawGUI(Rect position, SerializedProperty property, GUIContent label, ref float propertyHeight, ref Rect baseRect)

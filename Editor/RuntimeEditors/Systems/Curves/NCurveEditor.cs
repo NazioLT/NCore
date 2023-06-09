@@ -23,17 +23,16 @@ namespace Nazio_LT.Tools.Core.Internal
             baseRect = new Rect(position.x + 20f, position.y + 20f, position.width - 20f, EditorGUIUtility.singleLineHeight);
             if (property.isExpanded) DisplayOther(ref propHeight, baseRect, property);
 
-            property.FindPropertyRelative("inspectorHeight").floatValue = propHeight;
+            property.FindPropertyRelative("m_inspectorHeight").floatValue = propHeight;
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
         }
 
         private void DisplayOther(ref float height, Rect basePosition, SerializedProperty property)
         {
-            var handle_Prop = property.FindPropertyRelative("handles");
-            var loop_Prop = property.FindPropertyRelative("loop");
-            var type_Prop = property.FindPropertyRelative("type");
-            var isEditing_Prop = property.FindPropertyRelative("isEditing");
+            var handle_Prop = property.FindPropertyRelative("m_handles ");
+            var loop_Prop = property.FindPropertyRelative("Loop");
+            var type_Prop = property.FindPropertyRelative("Type");
             float baseHeight = 0;
 
             var baseRect = new Rect(basePosition.x, basePosition.y + baseHeight, basePosition.width, EditorGUIUtility.singleLineHeight);

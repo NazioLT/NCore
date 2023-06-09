@@ -1,6 +1,6 @@
 {
     "name": "com.nazio_lt.ncore",
-    "version": "1.2.5",
+    "version": "1.2.7",
     "displayName": "Nazio_LT Core",
     "description": "Nazio_LT's core package.",
     "unity": "2021.3",
