@@ -15,9 +15,9 @@ namespace Nazio_LT.Tools.Core.Internal
 
         protected override void DefineProps(SerializedProperty property)
         {
-            m_frequency_Prop = property.FindPropertyRelative("frequency");
-            m_damping_Prop = property.FindPropertyRelative("damping");
-            m_impulse_Prop = property.FindPropertyRelative("impulse");
+            m_frequency_Prop = property.FindPropertyRelative("m_frequency");
+            m_damping_Prop = property.FindPropertyRelative("m_damping");
+            m_impulse_Prop = property.FindPropertyRelative("m_impulse");
         }
 
         protected override void DrawGUI(Rect position, SerializedProperty property, GUIContent label, ref float propertyHeight, ref Rect baseRect)

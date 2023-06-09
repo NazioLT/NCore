@@ -1,13 +1,17 @@
-## [1.2.6](https://github.com/NazioLT/NZCore) (2023-05-18)
+## [1.2.7](https://github.com/NazioLT/NZCore) (2023-06-09)
+
+## Fixed Editor Reference Issue
+
+## [1.2.6](https://github.com/NazioLT/NCore/releases/tag/1.2.6) (2023-05-18)
 
 ## Rework : 
 * Singleton Hotfix.
 
-## [1.2.5](https://github.com/NazioLT/NZCore) (2023-05-18)
+## [1.2.5](https://github.com/NazioLT/NCore/releases/tag/1.2.5) (2023-05-18)
 
 ## Reworking Nomenclature
 
-## [1.2.4](https://github.com/NazioLT/NZCore) (2023-04-11)
+## [1.2.4](https://github.com/NazioLT/NCore/releases/tag/1.2.4) (2023-04-11)
 
 ## New Features : 
 * Playing Long audio in audio manager.([ce3c34c](https://github.com/NazioLT/NZCore/commit/ce3c34c2414ca7ff520cc17357d822cec6489b8f))

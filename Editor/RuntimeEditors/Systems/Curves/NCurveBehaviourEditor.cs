@@ -16,12 +16,12 @@ namespace Nazio_LT.Tools.Core.Internal
         {
             m_curve = (target as NCurveBehaviour).Curve;
 
-            m_editing_Prop = serializedObject.FindProperty("editing");
-            m_meshType_Prop = serializedObject.FindProperty("meshType");
-            m_curve_Prop = serializedObject.FindProperty("curve");
-            m_meshToDeform_Prop = serializedObject.FindProperty("meshToDeform");
-            m_material_Prop = serializedObject.FindProperty("material");
-            m_meshPlacementSettings_Prop = serializedObject.FindProperty("meshPlacementSettings");
+            m_editing_Prop = serializedObject.FindProperty("Editing");
+            m_meshType_Prop = serializedObject.FindProperty("m_meshType");
+            m_curve_Prop = serializedObject.FindProperty("m_curve");
+            m_meshToDeform_Prop = serializedObject.FindProperty("m_meshToDeform");
+            m_material_Prop = serializedObject.FindProperty("m_material");
+            m_meshPlacementSettings_Prop = serializedObject.FindProperty("m_meshPlacementSettings");
         }
 
         public override void OnInspectorGUI()
