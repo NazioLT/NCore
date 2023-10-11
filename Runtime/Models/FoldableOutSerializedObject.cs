@@ -5,15 +5,15 @@ namespace Nazio_LT.Tools.Core
     [System.Serializable]
     public struct FoldableOutSerializedObject<T> where T : ScriptableObject
     {
-        public FoldableOutSerializedObject(System.Action _updateCallback)
+        public FoldableOutSerializedObject(System.Action updateCallback)
         {
-            scriptableObject = default;
-            foldOut = false;
+            m_scriptableObject = default;
+            FoldOut = false;
         }
 
-        [SerializeField] private T scriptableObject;
-        [SerializeField, HideInInspector] public bool foldOut;
+        [SerializeField] private T m_scriptableObject;
+        [SerializeField, HideInInspector] public bool FoldOut;
 
-        public T ScriptableObject => scriptableObject;
+        public T ScriptableObject => m_scriptableObject;
     }
 }

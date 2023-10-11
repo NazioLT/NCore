@@ -4,74 +4,74 @@ namespace Nazio_LT.Tools.Core
 {
     public static class SecondOrderDynamicsUtils
     {
-        public static Vector3 Update(this SecondOrderDynamics<Vector3> _dynamics, float _t, Vector3 _x) => SecondOrderDynamics<Vector3>.Update(_t, _dynamics, _x);
-        public static Vector2 Update(this SecondOrderDynamics<Vector2> _dynamics, float _t, Vector2 _x) => SecondOrderDynamics<Vector2>.Update(_t, _dynamics, _x);
-        public static float Update(this SecondOrderDynamics<float> _dynamics, float _t, float _x) => SecondOrderDynamics<float>.Update(_t, _dynamics, _x);
+        public static Vector3 Update(this SecondOrderDynamics<Vector3> dynamics, float t, Vector3 x) => SecondOrderDynamics<Vector3>.Update(t, dynamics, x);
+        public static Vector2 Update(this SecondOrderDynamics<Vector2> dynamics, float t, Vector2 x) => SecondOrderDynamics<Vector2>.Update(t, dynamics, x);
+        public static float Update(this SecondOrderDynamics<float> dynamics, float t, float x) => SecondOrderDynamics<float>.Update(t, dynamics, x);
     }
 
     [System.Serializable]
     public class SecondOrderDynamics<T>
     {
-        public SecondOrderDynamics(float _f, float _z, float _r, T _initialPosition)
+        public SecondOrderDynamics(float f, float z, float r, T initialPosition)
         {
             //Init variables
-            Init(_initialPosition);
+            Init(initialPosition);
 
-            data = new SecondOrderDynamicsData(_f, _z, _r);
+            m_data = new SecondOrderDynamicsData(f, z, r);
         }
 
-        [SerializeField] private SecondOrderDynamicsData data;
+        [SerializeField] private SecondOrderDynamicsData m_data;
 
-        private T xp;//Previous Input
-        private T y, yd;//State variables
+        private T m_xp;//Previous Input
+        private T m_y, m_yd;//State variables
 
-        public void Init(T _initialPosition)
+        public void Init(T initialPosition)
         {
-            xp = _initialPosition;
-            y = _initialPosition;
-            yd = (T)default;
+            m_xp = initialPosition;
+            m_y = initialPosition;
+            m_yd = (T)default;
         }
 
-        public static Vector3 Update(float _t, SecondOrderDynamics<Vector3> _dynamics, Vector3 _x)
+        public static Vector3 Update(float t, SecondOrderDynamics<Vector3> dynamics, Vector3 x)
         {
-            SecondOrderDynamicsData _data = _dynamics.data;
+            SecondOrderDynamicsData data = dynamics.m_data;
 
             //Estimated Velocity
-            Vector3 xd = (_x - _dynamics.xp) / _t;
-            _dynamics.xp = _x;
+            Vector3 xd = (x - dynamics.m_xp) / t;
+            dynamics.m_xp = x;
 
-            _dynamics.y += _t * _dynamics.yd;//integrate position by velocity
-            _dynamics.yd += _t * (_x + _data.K3 * xd - _dynamics.y - _data.K1 * _dynamics.yd) / _data.K2Stable(_t);//integrate velocity by acceleration
+            dynamics.m_y += t * dynamics.m_yd;//integrate position by velocity
+            dynamics.m_yd += t * (x + data.K3 * xd - dynamics.m_y - data.K1 * dynamics.m_yd) / data.K2Stable(t);//integrate velocity by acceleration
 
-            return _dynamics.y;
+            return dynamics.m_y;
         }
 
-        public static Vector2 Update(float _t, SecondOrderDynamics<Vector2> _dynamics, Vector2 _x)
+        public static Vector2 Update(float t, SecondOrderDynamics<Vector2> dynamics, Vector2 x)
         {
-            SecondOrderDynamicsData _data = _dynamics.data;
+            SecondOrderDynamicsData data = dynamics.m_data;
 
             //Estimated Velocity
-            Vector2 xd = (_x - _dynamics.xp) / _t;
-            _dynamics.xp = _x;
+            Vector2 xd = (x - dynamics.m_xp) / t;
+            dynamics.m_xp = x;
 
-            _dynamics.y += _t * _dynamics.yd;//integrate position by velocity
-            _dynamics.yd += _t * (_x + _data.K3 * xd - _dynamics.y - _data.K1 * _dynamics.yd) / _data.K2Stable(_t);//integrate velocity by acceleration
+            dynamics.m_y += t * dynamics.m_yd;//integrate position by velocity
+            dynamics.m_yd += t * (x + data.K3 * xd - dynamics.m_y - data.K1 * dynamics.m_yd) / data.K2Stable(t);//integrate velocity by acceleration
 
-            return _dynamics.y;
+            return dynamics.m_y;
         }
 
-        public static float Update(float _t, SecondOrderDynamics<float> _dynamics, float _x)
+        public static float Update(float t, SecondOrderDynamics<float> dynamics, float x)
         {
-            SecondOrderDynamicsData _data = _dynamics.data;
+            SecondOrderDynamicsData data = dynamics.m_data;
 
             //Estimated Velocity
-            float xd = (_x - _dynamics.xp) / _t;
-            _dynamics.xp = _x;
+            float xd = (x - dynamics.m_xp) / t;
+            dynamics.m_xp = x;
 
-            _dynamics.y += _t * _dynamics.yd;//integrate position by velocity
-            _dynamics.yd += _t * (_x + _data.K3 * xd - _dynamics.y - _data.K1 * _dynamics.yd) / _data.K2Stable(_t);//integrate velocity by acceleration
+            dynamics.m_y += t * dynamics.m_yd;//integrate position by velocity
+            dynamics.m_yd += t * (x + data.K3 * xd - dynamics.m_y - data.K1 * dynamics.m_yd) / data.K2Stable(t);//integrate velocity by acceleration
 
-            return _dynamics.y;
+            return dynamics.m_y;
         }
     }
 

@@ -5,26 +5,26 @@ namespace Nazio_LT.Tools.Core
     /// <summary>Contains multiple input buffers.</summary>
     public class InputBufferList
     {
-        public InputBufferList(InputBufferList _base, InputBufferList _additionnal)
+        public InputBufferList(InputBufferList other, InputBufferList additionnal)
         {
-            buffers = new List<InputBuffer>(NUtils.Merge<InputBuffer>(_additionnal.buffers.ToArray(), _base.buffers.ToArray()));
+            buffers = new List<InputBuffer>(NUtils.Merge<InputBuffer>(additionnal.buffers.ToArray(), other.buffers.ToArray()));
         }
 
-        public InputBufferList(InputBufferList _base, InputBuffer[] _buffers)
+        public InputBufferList(InputBufferList other, InputBuffer[] buffers)
         {
-            buffers = new List<InputBuffer>(NUtils.Merge<InputBuffer>(_buffers, _base.buffers.ToArray()));
+            this.buffers = new List<InputBuffer>(NUtils.Merge<InputBuffer>(buffers, other.buffers.ToArray()));
         }
 
-        public InputBufferList(InputBuffer[] _buffers)
+        public InputBufferList(InputBuffer[] buffers)
         {
-            buffers = new List<InputBuffer>(_buffers);
+            this.buffers = new List<InputBuffer>(buffers);
         }
 
         public readonly List<InputBuffer> buffers;
 
         public void ExecuteAll()
         {
-            foreach (var _buffer in buffers) _buffer.TryExecute();
+            foreach (var buffer in buffers) buffer.TryExecute();
         }
     }
 }

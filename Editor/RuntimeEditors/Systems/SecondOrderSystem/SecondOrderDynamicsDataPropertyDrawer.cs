@@ -7,65 +7,65 @@ namespace Nazio_LT.Tools.Core.Internal
     [CustomPropertyDrawer(typeof(SecondOrderDynamicsData))]
     public class SecondOrderDynamicsDataPropertyDrawer : NPropertyDrawer
     {
-        private SerializedProperty frequency_Prop, damping_Prop, impulse_Prop;
-        private AnimationCurve inputCurve, systemCurve;
-        private MinMax systemCurveMinMax;
+        private SerializedProperty m_frequency_Prop, m_damping_Prop, m_impulse_Prop;
+        private AnimationCurve m_inputCurve, m_systemCurve;
+        private MinMax m_systemCurveMinMax;
 
-        private const int KEYCOUNT = 200;
+        private const int KEYCOUNT = 50;
 
-        protected override void DefineProps(SerializedProperty _property)
+        protected override void DefineProps(SerializedProperty property)
         {
-            frequency_Prop = _property.FindPropertyRelative("frequency");
-            damping_Prop = _property.FindPropertyRelative("damping");
-            impulse_Prop = _property.FindPropertyRelative("impulse");
+            m_frequency_Prop = property.FindPropertyRelative("m_frequency");
+            m_damping_Prop = property.FindPropertyRelative("m_damping");
+            m_impulse_Prop = property.FindPropertyRelative("m_impulse");
         }
 
-        protected override void DrawGUI(Rect _position, SerializedProperty _property, GUIContent _label, ref float _propertyHeight, ref Rect _baseRect)
+        protected override void DrawGUI(Rect position, SerializedProperty property, GUIContent label, ref float propertyHeight, ref Rect baseRect)
         {
-            NEditor.DrawMultipleGUIClassic(_position, 20f, new SerializedProperty[] { frequency_Prop, damping_Prop, impulse_Prop });
-            NEditor.AdaptGUILine(ref _position, ref _propertyHeight, 3);
+            NEditor.DrawMultipleGUIClassic(position, 20f, new SerializedProperty[] { m_frequency_Prop, m_damping_Prop, m_impulse_Prop });
+            NEditor.AdaptGUILine(ref position, ref propertyHeight, 3);
 
             if (EditorGUI.EndChangeCheck())
             {
                 UpdateCurves();
             }
 
-            Rect _curveRect = new Rect(_position.x, _position.y, _position.width, 8 * NEditor.SINGLE_LINE);
-            Rect _curveBounds = new Rect(0, systemCurveMinMax.Min, 1f, systemCurveMinMax.Max);
+            Rect curveRect = new Rect(position.x, position.y, position.width, 8 * NEditor.SINGLE_LINE);
+            Rect curveBounds = new Rect(0, m_systemCurveMinMax.Min, 1f, m_systemCurveMinMax.Max);
 
-            EditorGUIUtility.DrawCurveSwatch(_curveRect, inputCurve, null, Color.white, new Color(0, 0, 0, 0), _curveBounds);
-            EditorGUIUtility.DrawCurveSwatch(_curveRect, systemCurve, null, Color.cyan, new Color(0, 0, 0, 0), _curveBounds);
+            EditorGUIUtility.DrawCurveSwatch(curveRect, m_inputCurve, null, Color.white, new Color(0, 0, 0, 0), curveBounds);
+            EditorGUIUtility.DrawCurveSwatch(curveRect, m_systemCurve, null, Color.cyan, new Color(0, 0, 0, 0), curveBounds);
 
-            NEditor.AdaptGUILine(ref _position, ref _propertyHeight, 8);
+            NEditor.AdaptGUILine(ref position, ref propertyHeight, 8);
         }
 
         private void UpdateCurves()
         {
-            Keyframe[] _inputCurveKeyframes = new Keyframe[]{
+            Keyframe[] inputCurveKeyframes = new Keyframe[]{
                 new Keyframe(0f,0f),
                 new Keyframe(0.099f, 0f),
                 new Keyframe(0.1f,1f),
                 new Keyframe(1f,1f)
             };
 
-            inputCurve = new AnimationCurve(_inputCurveKeyframes);
+            m_inputCurve = new AnimationCurve(inputCurveKeyframes);
 
-            systemCurveMinMax = new MinMax();
-            SecondOrderDynamics<float> _system = new SecondOrderDynamics<float>(frequency_Prop.floatValue, damping_Prop.floatValue, impulse_Prop.floatValue, 0);
+            m_systemCurveMinMax = new MinMax();
+            SecondOrderDynamics<float> system = new SecondOrderDynamics<float>(m_frequency_Prop.floatValue, m_damping_Prop.floatValue, m_impulse_Prop.floatValue, 0);
 
-            Keyframe[] _systemCurveKeyframes = new Keyframe[KEYCOUNT];
-            float _step = 1f / (float)KEYCOUNT;
-            float _t = 0;
+            Keyframe[] systemCurveKeyframes = new Keyframe[KEYCOUNT];
+            float step = 1f / (float)KEYCOUNT;
+            float t = 0;
             for (int i = 0; i < KEYCOUNT; i++)
             {
-                _t += _step;
-                float _y = _system.Update(_step, inputCurve.Evaluate(_t));
+                t += step;
+                float _y = system.Update(step, m_inputCurve.Evaluate(t));
 
-                _systemCurveKeyframes[i] = new Keyframe(_t, _y);
-                systemCurveMinMax.AddValue(_y);
+                systemCurveKeyframes[i] = new Keyframe(t, _y);
+                m_systemCurveMinMax.AddValue(_y);
             }
 
-            systemCurve = new AnimationCurve(_systemCurveKeyframes);
+            m_systemCurve = new AnimationCurve(systemCurveKeyframes);
         }
     }
 }
